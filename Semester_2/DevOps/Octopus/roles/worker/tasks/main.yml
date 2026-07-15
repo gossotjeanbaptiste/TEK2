@@ -1,0 +1,46 @@
+---
+- name: Installer Java (JDK) et Maven
+  apt:
+    name:
+      - default-jdk
+      - maven
+    state: present
+
+- name: Créer le répertoire pour le Worker
+  file:
+    path: /opt/worker
+    state: directory
+    mode: '0755'
+
+- name: Désarchiver le code du Worker
+  unarchive:
+    src: ../../worker.tar
+    dest: /opt/worker
+
+- name: Compiler le projet Java avec Maven
+  command: mvn clean package
+  args:
+    chdir: /opt/worker/worker
+    creates: /opt/worker/worker/target/worker-jar-with-dependencies.jar
+
+- name: Copier le fichier de service systemd pour le Worker
+  copy:
+    src: worker.service
+    dest: /etc/systemd/system/worker.service
+    mode: '0644'
+  register: worker_service_status # <-- On enregistre le statut ici
+
+- name: Recharger systemd et redémarrer Worker si le service a changé
+  systemd:
+    name: worker
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+  when: worker_service_status.changed
+
+- name: S'assurer que Worker tourne (si pas de changement)
+  systemd:
+    name: worker
+    state: started
+    enabled: yes
+  when: not worker_service_status.changed

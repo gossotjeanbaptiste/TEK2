@@ -1,0 +1,3 @@
+pyserial
+pygame
+git+https://github.com/LiamBindle/PyVESC.git

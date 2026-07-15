@@ -1,0 +1,513 @@
+@import url('general.css');
+@import url('variables.css');
+
+/* Page de réclamation */
+.reclamation-section {
+    background: var(--white-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-2xl) var(--spacing-2xl);
+    margin: var(--spacing-xl) auto;
+    max-width: var(--max-width-section);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+}
+
+.reclamation-intro {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.reclamation-intro .section-title {
+    color: var(--primary-color);
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+}
+
+.reclamation-intro .section-title::after {
+    content: '';
+    display: block;
+    width: var(--divider-width);
+    height: var(--divider-height);
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    margin: var(--spacing-md) auto 0;
+    border-radius: var(--border-radius-small);
+}
+
+.reclamation-intro-text {
+    font-size: var(--font-size-lg);
+    color: var(--text-color);
+    line-height: 1.7;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+/* Processus de réclamation */
+.reclamation-complaint-process {
+    background: var(--light-gray);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-md) 0;
+}
+
+.reclamation-process-title {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-lg);
+}
+
+.reclamation-process-title::before {
+    content: '⚙️';
+    display: block;
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--spacing-xs);
+}
+
+.reclamation-process-steps {
+    display: grid;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+/* Centrage du dernier élément quand il y a un nombre impair */
+.reclamation-process-steps:has(.reclamation-process-step:nth-child(5):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.reclamation-process-steps .reclamation-process-step:nth-child(5):last-child {
+    grid-column: 1 / -1;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+:root[data-theme="dark"] .reclamation-process-step {
+    border-top: 4px solid var(--primary-dark-color);
+}
+
+.reclamation-process-step {
+    background: var(--white-color);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid var(--accent-color);
+}
+
+.reclamation-process-step:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg), 0 10px 30px rgba(29,53,87,0.15);
+}
+
+:root[data-theme="dark"] .reclamation-step-number {
+    background: var(--dark-gradient);
+    color: var(--text-color-rgb);
+}
+
+
+.reclamation-step-number {
+    position: absolute;
+    top: -20px;
+    left: 20px; /* 200px to have the things centered, the fifth will not be well centered*/
+    background: var(--primary-gradient);
+    color: var(--white-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    box-shadow: var(--shadow-md);
+}
+
+.reclamation-step-content {
+    text-align: center;
+    margin-top: var(--spacing-md);
+}
+
+.reclamation-step-content h4 {
+    color: var(--primary-color);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-md);
+}
+
+.reclamation-step-content p {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-base);
+}
+
+.reclamation-step-icon {
+    font-size: var(--font-size-4xl);
+    margin-top: var(--spacing-md);
+    opacity: 0.8;
+}
+
+/* Informations importantes */
+.reclamation-important-info {
+    display: flex;
+    justify-content: center;
+    margin: var(--spacing-xl) 0;
+}
+
+:root[data-theme="dark"] .reclamation-closure-info {
+    background: var(--dark-gradient);
+    color: var(--text-color-rgb);
+}
+
+.reclamation-closure-info {
+    background: var(--primary-gradient);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-2xl);
+    color: var(--white-color);
+    text-align: center;
+    max-width: var(--max-width-text);
+    position: relative;
+    overflow: hidden;
+}
+
+.reclamation-closure-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="waves" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M0,10 Q5,0 10,10 Q15,20 20,10" stroke="white" stroke-width="0.5" fill="none" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23waves)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.reclamation-info-icon {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-md);
+    position: relative;
+    z-index: 1;
+}
+
+:root[data-theme="dark"] .reclamation-closure-info h3 {
+    color: var(--text-color-rgb);
+}
+
+.reclamation-closure-info h3 {
+    color: var(--white-color);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-md);
+    position: relative;
+    z-index: 1;
+}
+
+:root[data-theme="dark"] .reclamation-closure-info p {
+    color: var(--text-color-rgb);
+}
+
+.reclamation-closure-info p {
+    color: var(--white-color);
+    line-height: 1.6;
+    font-size: var(--font-size-base);
+    opacity: 0.95;
+    position: relative;
+    z-index: 1;
+}
+
+/* Garanties qualité */
+.reclamation-quality-guarantees {
+    background: var(--light-gray);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-md) 0;
+}
+
+.reclamation-guarantees-title {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-2xl);
+    position: relative;
+}
+
+.reclamation-guarantees-title::before {
+    content: '🛡️';
+    display: block;
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--spacing-xs);
+}
+
+.reclamation-guarantees-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+/* Centrage du dernier élément quand il y a un nombre impair */
+.reclamation-guarantees-grid:has(.reclamation-guarantee-item:nth-child(3):last-child) {
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+}
+
+:root[data-theme="dark"] .reclamation-guarantee-item {
+    border-top: 4px solid var(--primary-dark-color);
+}
+
+.reclamation-guarantee-item {
+    background: var(--white-color);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid var(--accent-color);
+}
+
+.reclamation-guarantee-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg), 0 10px 30px rgba(29,53,87,0.15);
+}
+
+.reclamation-guarantee-icon {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-md);
+    display: block;
+}
+
+.reclamation-guarantee-item h4 {
+    color: var(--primary-color);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-md);
+}
+
+.reclamation-guarantee-item p {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* Call-to-action contact */
+:root[data-theme="dark"] .reclamation-contact-cta {
+    border: 2px solid var(--primary-dark-color);
+}
+
+.reclamation-contact-cta {
+    background: var(--light-gray);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-2xl);
+    text-align: center;
+    border: 2px solid var(--accent-color);
+    position: relative;
+}
+
+.reclamation-contact-cta h3 {
+    color: var(--primary-color);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-lg);
+}
+
+.reclamation-contact-cta p {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+:root[data-theme="dark"] .reclamation-contact-button {
+    background: var(--dark-gradient);
+    color: var(--text-color-rgb);
+}
+
+.reclamation-contact-button {
+    background: var(--primary-gradient);
+    color: var(--white-color);
+    border: none;
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+    display: inline-block;
+    margin: var(--spacing-md) 0;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.reclamation-contact-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg), 0 8px 25px var(--primary-shadow-hover);
+}
+
+.reclamation-contact-button:active {
+    transform: translateY(0);
+}
+
+.reclamation-contact-info {
+    margin-top: 1rem;
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.reclamation-contact-link {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.reclamation-contact-link:hover {
+    color: var(--accent-color);
+}
+
+/* ===== STYLES RESPONSIVES ===== */
+
+/* Écrans moyens */
+@media (max-width: 992px) {
+    .reclamation-section {
+        padding: 2.5rem 2rem;
+        gap: 2.5rem;
+    }
+    
+    .reclamation-intro .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .reclamation-complaint-steps {
+        padding: 2.2rem;
+    }
+}
+
+/* Tablettes et petits écrans - Passage en une colonne à 768px */
+@media (max-width: 768px) {
+    .reclamation-section {
+        padding: 2rem 1.5rem;
+        gap: 2rem;
+    }
+
+    .reclamation-intro .section-title {
+        font-size: 2rem;
+    }
+
+    .reclamation-complaint-process,
+    .reclamation-quality-guarantees {
+        padding: 2rem;
+    }
+
+    .reclamation-process-title,
+    .reclamation-guarantees-title {
+        font-size: 1.6rem;
+    }
+
+    .reclamation-process-steps,
+    .reclamation-process-steps:has(.reclamation-process-step:nth-child(5):last-child) {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .reclamation-process-step,
+    .reclamation-process-steps .reclamation-process-step:nth-child(5):last-child {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    /* Force la grille des garanties en une colonne dès 768px */
+    .reclamation-guarantees-grid,
+    .reclamation-guarantees-grid:has(.reclamation-guarantee-item:nth-child(3):last-child) {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+        justify-items: stretch;
+    }
+
+    .reclamation-guarantee-item {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .reclamation-contact-cta {
+        padding: 2rem;
+    }
+
+    .reclamation-contact-button {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* Mobiles */
+@media (max-width: 480px) {
+    .reclamation-section {
+        padding: 1.5rem 1rem;
+        gap: 1.5rem;
+        margin: 1rem auto;
+    }
+
+    .reclamation-intro .section-title {
+        font-size: 1.8rem;
+    }
+
+    .reclamation-intro-text {
+        font-size: 1rem;
+    }
+
+    .reclamation-complaint-process,
+    .reclamation-quality-guarantees,
+    .reclamation-contact-cta {
+        padding: 1.5rem;
+    }
+
+    .reclamation-process-title,
+    .reclamation-guarantees-title {
+        font-size: 1.4rem;
+    }
+
+    .reclamation-process-steps,
+    .reclamation-process-steps:has(.reclamation-process-step:nth-child(5):last-child) {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .reclamation-guarantees-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .reclamation-process-step,
+    .reclamation-process-steps .reclamation-process-step:nth-child(5):last-child,
+    .reclamation-guarantee-item {
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .reclamation-step-content h4,
+    .reclamation-guarantee-item h4 {
+        font-size: 1.1rem;
+    }
+
+    .reclamation-contact-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        letter-spacing: 0.3px;
+    }
+
+    .reclamation-closure-info {
+        padding: 2rem 1.5rem;
+    }
+}
+

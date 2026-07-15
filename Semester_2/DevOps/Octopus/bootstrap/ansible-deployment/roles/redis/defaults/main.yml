@@ -1,0 +1,14 @@
+---
+# Default variables for the redis role
+
+# Redis port
+redis_port: 6379
+
+# Redis bind address
+redis_bind: 127.0.0.1
+
+# Redis package version (empty = latest)
+redis_version: ""
+
+# Redis configuration file path
+redis_config_path: /etc/redis/redis.conf

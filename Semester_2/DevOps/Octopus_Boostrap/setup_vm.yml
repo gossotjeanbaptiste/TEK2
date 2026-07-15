@@ -1,0 +1,27 @@
+---
+- name: Configuration initiale des VMs Debian 13
+  hosts: debian_vms
+  become: yes # Permet de passer en mode "sudo" pour installer des paquets
+  
+  tasks:
+    - name: Mettre à jour le cache Apt
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: S'assurer que OpenSSH Server est installé
+      apt:
+        name: openssh-server
+        state: present
+
+    - name: Démarrer et activer le service SSH
+      systemd:
+        name: ssh
+        state: started
+        enabled: yes
+
+    - name: Déposer la clé SSH publique
+      ansible.posix.authorized_key:
+        user: debian # L'utilisateur sur la VM qui recevra la clé
+        state: present
+        key: "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}" # Chemin vers VOTRE clé publique sur votre machine locale

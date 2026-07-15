@@ -1,0 +1,245 @@
+@import url('general.css');
+@import url('variables.css');
+@import url('dark-mode.css');
+
+/* ===== SECTION TARIFS ===== */
+.tarifs-section {
+    padding: var(--spacing-2xl) 0;
+    min-height: 50vh;
+}
+
+.formation-selector-wrapper {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.tarifs-section label {
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-sm);
+    display: block;
+    color: var(--primary-color);
+}
+
+.tarifs-section select {
+    width: 100%;
+    max-width: var(--max-width-card);
+    padding: var(--spacing-sm);
+    border: var(--border-medium);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-base);
+    background-color: var(--white-color);
+    cursor: pointer;
+    transition: var(--transition-colors);
+}
+
+.tarifs-section select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: var(--shadow-focus);
+}
+
+.tarifs-section select:hover {
+    border-color: var(--primary-color);
+}
+
+#tarif-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+/* ===== TABLEAUX TARIFS ===== */
+.tarifs-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    margin: 2rem 0;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+:root[data-theme="dark"] .tarifs-table th {
+    background: var(--dark-gradient);
+    color: var(--text-color-rgb);
+}
+
+.tarifs-table th {
+    background: var(--primary-gradient);
+    color: var(--white-color);
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.tarifs-table td {
+    padding: 1.2rem;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.tarifs-table tr:nth-child(even) {
+    background-color: var(--light-gray);
+}
+
+/* ===== LISTES DANS LES TABLEAUX ===== */
+.table-list {
+    margin: 0.5rem 0 0 0;
+    padding-left: 1.2rem;
+    list-style: none;
+}
+
+.table-list li {
+    position: relative;
+    padding: 0.2rem 0;
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    line-height: 1.4;
+}
+
+.table-list li:before {
+    content: '✓';
+    position: absolute;
+    left: -1.2rem;
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .tarifs-section select {
+        max-width: 350px;
+    }
+    
+    .tarifs-table {
+        font-size: 0.95rem;
+    }
+    
+    .tarifs-table th {
+        font-size: 1.1rem;
+        padding: 0.9rem;
+    }
+    
+    .tarifs-table td {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .tarifs-section {
+        padding: 2rem 0;
+    }
+    
+    .tarifs-section select {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    #tarif-details {
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    
+    .tarifs-table {
+        font-size: 0.9rem;
+        margin: 1.5rem 0;
+    }
+    
+    .tarifs-table th {
+        font-size: 1.1rem;
+        padding: 0.8rem;
+    }
+    
+    .tarifs-table td {
+        padding: 1rem;
+        vertical-align: top;
+    }
+    
+    .tarifs-table td:first-child {
+        width: 65%;
+    }
+    
+    .tarifs-table td:last-child {
+        width: 35%;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    
+    .table-list {
+        padding-left: 1rem;
+        margin: 0;
+    }
+    
+    .table-list li {
+        font-size: 0.85rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    /* Améliorer l'espacement sur mobile */
+    .formation-selector-wrapper {
+        padding: 1.5rem 1rem;
+        margin: 1.5rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .tarifs-section {
+        padding: 1.5rem 0;
+    }
+    
+    .tarifs-section select {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+    }
+    
+    #tarif-details {
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .tarifs-table {
+        font-size: 0.8rem;
+    }
+    
+    .tarifs-table th {
+        font-size: 1rem;
+        padding: 0.6rem;
+    }
+    
+    .tarifs-table td {
+        padding: 0.8rem;
+    }
+    
+    .tarifs-table td:first-child {
+        width: 60%;
+    }
+    
+    .tarifs-table td:last-child {
+        width: 40%;
+        font-size: 0.9rem;
+    }
+    
+    .table-list li {
+        font-size: 0.8rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .formation-selector-wrapper {
+        padding: 1rem;
+    }
+}
+

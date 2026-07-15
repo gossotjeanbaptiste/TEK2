@@ -1,0 +1,16 @@
+[Unit]
+Description=Poll Flask Web Application
+After=network.target
+
+[Service]
+WorkingDirectory=/opt/poll/poll
+ExecStart=/usr/bin/python3 app.py
+Restart=always
+# On force l'exécution en root pour écouter sur le port 80
+User=root
+Group=root
+# Variables d'environnement optionnelles si ton app en a besoin (ex: Redis)
+Environment=REDIS_HOST=192.168.56.101
+
+[Install]
+WantedBy=multi-user.target

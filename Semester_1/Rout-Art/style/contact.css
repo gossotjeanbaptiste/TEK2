@@ -1,0 +1,260 @@
+@import url('general.css');
+@import url('variables.css');
+@import url('dark-mode.css');
+
+/* ===== SECTION CONTACT ===== */
+.contact-section {
+    padding: var(--spacing-xl) 0;
+}
+
+/* ===== GRILLE CONTACT ===== */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-top: var(--spacing-xl);
+    max-width: var(--ultra-max-width-content);
+    margin: var(--spacing-xl) auto 0;
+    align-items: start;
+}
+
+.contact-form-wrapper,
+.contact-info-wrapper {
+    background: var(--white-color);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    width: 100%;
+    height: fit-content;
+}
+
+/* ===== TABLEAUX HORAIRES ===== */
+.horaires-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    margin: 2rem 0;
+}
+
+.horaires-table th,
+.horaires-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+:root[data-theme="dark"] .horaires-table thead th {
+    background: var(--dark-gradient);
+    color: var(--text-color-rgb);
+}
+
+.horaires-table thead th {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    font-weight: 600;
+    text-align: center;
+}
+
+.horaires-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.horaires-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.horaires-table td {
+    vertical-align: top;
+}
+
+.horaires-table tbody tr td:last-child {
+    border-left: 1px solid #eee;
+}
+
+.horaires-table tbody tr td {
+    line-height: 1.6;
+}
+
+.horaires-table tbody tr:nth-child(even) td {
+    background-color: var(--light-gray);
+}
+
+/* ===== CARTE ET COORDONNÉES ===== */
+.map-container {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 350px;
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm);
+}
+
+.address-details p {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.address-details p i {
+    margin-right: 0.5rem;
+    color: var(--accent-color);
+    width: 20px;
+}
+
+.address-details a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.address-details a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+/* ===== LIENS SOCIAUX ===== */
+.social-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.social-links a img {
+    width: 30px;
+    height: 30px;
+    transition: opacity 0.3s ease;
+}
+
+.social-links a:hover img {
+    opacity: 0.7;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) and (min-width: 1001px) {
+    .contact-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+    
+    .contact-info-wrapper {
+        grid-column: 1 / -1;
+        max-width: 60%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 1000px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .contact-info-wrapper {
+        grid-column: auto;
+        max-width: 100%;
+        margin: 0;
+    }
+}
+
+@media (max-width: 992px) {
+    .contact-grid {
+        gap: 1.5rem;
+    }
+    
+    .contact-form-wrapper,
+    .contact-info-wrapper {
+        padding: 2rem;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        font-size: 0.95rem;
+    }
+    
+    .horaires-table th,
+    .horaires-table td {
+        padding: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-form-wrapper,
+    .contact-info-wrapper {
+        padding: 2rem;
+    }
+    
+    .map-container iframe {
+        height: 300px;
+    }
+    
+    .address-details p {
+        font-size: 1rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .address-details p i {
+        margin-right: 0;
+        margin-bottom: 0.3rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .contact-grid {
+        gap: 1rem;
+    }
+    
+    .contact-form-wrapper,
+    .contact-info-wrapper {
+        padding: 1.5rem;
+    }
+    
+    .map-container iframe {
+        height: 250px;
+    }
+    
+    .horaires-table th,
+    .horaires-table td {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .social-links a img {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-section {
+        padding: 1rem 0;
+    }
+    
+    .contact-form-wrapper,
+    .contact-info-wrapper {
+        padding: 1rem;
+    }
+    
+    .horaires-table th,
+    .horaires-table td {
+        padding: 0.6rem;
+        font-size: 0.85rem;
+    }
+    
+    .address-details p {
+        font-size: 0.9rem;
+    }
+}
+

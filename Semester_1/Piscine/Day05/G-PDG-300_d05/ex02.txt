@@ -1,0 +1,34 @@
+Lumic: I must save Mondas with my IQ of 201.
+1um1c: Master unit activated.
+Voga: I must save Mondas with my IQ of 192.
+V064: Unit activated.
+1um1c: Pain, pain, pain...
+1um1c: Pain, pain, pain...
+1um1c: Pain, pain, pain...
+1um1c: Pain, pain, pain...
+---
+1um1c: Upgrading human 'Voga'.
+Voga: My IQ is now 384.
+IQ of unit doubled, increased to 384.
+No inhibitor installed.
+1um1c: Upgrading unit 'V064'.
+1um1c: Upgrading human 'Voga'.
+Voga: My IQ is now 768.
+IQ of unit doubled, increased to 768.
+No inhibitor installed.
+1um1c: Activating inhibitor.
+---
+1um1c: Upgrading human 'Voga'.
+Voga: My IQ is now 1536.
+IQ of unit doubled, increased to 1536.
+1um1c: Inhibitor already activated.
+1um1c: Upgrading unit 'V064'.
+1um1c: Upgrading human 'Voga'.
+Voga: My IQ is now 3072.
+IQ of unit doubled, increased to 3072.
+1um1c: Inhibitor already activated.
+1um1c: Inhibitor already activated.
+V064: Unit deactivated.
+Voga: I failed to save my world...
+1um1c: Master unit deactivated.
+Lumic: I failed to save my world...

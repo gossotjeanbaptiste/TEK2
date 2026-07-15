@@ -1,0 +1,4 @@
+.venv
+bootstrap
+.local-tools/
+__pycache__/

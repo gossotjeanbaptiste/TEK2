@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thuun - Cours Quotidien</title>
+    <link href="https://db.onlinewebfonts.com/c/46f1b844c25934e9c98dad60d32caf71?family=Nord" rel="stylesheet" type="text/css"/>
+    <style>
+        /* Page daily courses */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #d0e2f4;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'New Nord Wide', 'Heavy', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-weight: 900;
+            font-size: 24px;
+            line-height: 100%;
+            letter-spacing: 0%;
+            text-align: center;
+        }
+
+        .daily-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            max-height: 100vh;
+        }
+
+        /* Header minimaliste */
+        .daily-header {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .daily-header img {
+            width: 480px;
+            height: auto;
+        }
+
+        .daily-header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #0a2463;
+            font-weight: 700;
+        }
+
+        /* Main content */
+        .daily-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0  px 20px 40px 20px;
+            position: relative;
+            overflow: hidden;
+            z-index: 3;
+        }
+
+        /* Decorative background shape */
+        .daily-bg-shape {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 40%;
+            background: #DB7C3B;
+            clip-path: polygon(0 30%, 100% 30%, 100% 100%, 0 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Floating wave */
+        .floating-wave {
+            position: fixed;
+            bottom: 160px;
+            left: 0px;
+            width: 200%;
+            height: 80px;
+            z-index: 1;
+            pointer-events: none;
+            overflow: visible;
+        }
+        
+        .wave-svg {
+            width: 200%;
+            height: 100%;
+            display: block;
+        }
+
+        .wave-fill {
+            animation: moveWave 8s linear infinite;
+        }
+
+        @keyframes moveWave {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-2400px);
+            }
+        }
+
+        /* Decorative circles */
+        .deco-circle {
+            position: fixed;
+            background: #DB7C3B;
+            border-radius: 50%;
+            z-index: 0;
+            animation: float linear infinite;
+            pointer-events: none;
+        }
+
+        .deco-circle-1 {
+            width: 34px;
+            height: 35px;
+            bottom: 35%;
+            left: 15%;
+            animation-duration: 2s;
+        }
+
+        .deco-circle-2 {
+            width: 15px;
+            height: 15px;
+            top: 25%;
+            left: 50%;
+            animation-duration: 2.5s;
+            animation-direction: reverse;
+        }
+
+        .deco-circle-3 {
+            width: 39px;
+            height: 41px;
+            top: 15%;
+            right: 10%;
+            animation-duration: 2.2s;
+        }
+
+        .deco-circle-4 {
+            width: 39px;
+            height: 41px;
+            bottom: 20%;
+            left: 10%;
+            animation-duration: 2.7s;
+            animation-direction: reverse;
+        }
+
+        .deco-circle-5 {
+            width: 20px;
+            height: 21px;
+            top: 5%;
+            right: 5%;
+            animation-duration: 2.3s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(20px);
+            }
+        }
+
+        /* Daily course container */
+        .daily-course-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .daily-course-card {
+            width: 280px;
+            height: 280px;
+            perspective: 1000px;
+            cursor: pointer;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .daily-course-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .daily-course-card.flipped .daily-course-inner {
+            transform: rotateY(180deg);
+        }
+
+        .daily-course-front,
+        .daily-course-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .daily-course-front {
+            background: white;
+            color: #0a2463;
+        }
+
+        .daily-course-back {
+            background: #DB7C3B;
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .daily-course-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .daily-course-description {
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .daily-course-answer {
+            font-size: 14px;
+            line-height: 1.6;
+            font-weight: 600;
+        }
+
+        .daily-course-meta {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .meta-tag {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .daily-course-front .meta-tag {
+            background: #f0f0f0;
+            color: #DB7C3B;
+        }
+
+        .daily-course-back .meta-tag {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .click-hint {
+            font-size: 11px;
+            color: #999;
+            margin-top: 15px;
+            font-weight: 600;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* Back button */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .daily-course-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+
+        .video-btn {
+            color: white;
+            background: #DB7C3B;
+            border: none;
+            padding: 10px 20px;
+            margin: -20px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .video-btn:hover {
+            background: #E89761;
+            transform: scale(1.05);
+        }
+
+        /* Bottom nav circles */
+        .bottom-circles {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 420px;
+        }
+
+        .circle-nav {
+            width: 95px;
+            height: 95px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 20px;
+            border: none;
+            gap: 2px;
+        }
+
+        .circle-nav-label {
+            font-size: 9px;
+            color: #DB7C3B;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.1;
+            width: 100%;
+            padding: 0 4px;
+        }
+
+        .circle-nav:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Footer */
+        .daily-footer {
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #f0f0f0;
+            background: white;
+            z-index: 3;
+        }
+
+        .daily-footer p {
+            margin: 5px 0;
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .daily-course-card {
+                width: 240px;
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="daily-container">
+        <!-- Background elements -->
+        <div class="floating-wave wave-1">
+            <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#DB7C3B"/>
+            </svg>
+        </div>
+        <div class="floating-wave wave-2">
+            <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#E89761"/>
+            </svg>
+        </div>
+        <div class="floating-wave wave-3">
+            <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#F0B896"/>
+            </svg>
+        </div>
+        <div class="daily-bg-shape"></div>
+        <div class="deco-circle deco-circle-1"></div>
+        <div class="deco-circle deco-circle-2"></div>
+        <div class="deco-circle deco-circle-3"></div>
+        <div class="deco-circle deco-circle-4"></div>
+        <div class="deco-circle deco-circle-5"></div>
+
+        <!-- Back button -->
+        <button class="back-btn" onclick="window.location.href='courses.html'" title="Retour">‹</button>
+
+        <!-- Header -->
+        <div class="daily-header">
+            <img src="images/logotuunbanque-03.svg" alt="Thuun Logo">
+        </div>
+
+        <!-- Main content -->
+        <div class="daily-main">
+            <div class="daily-course-container">
+                <h2 style="color: #0a2463; margin-bottom: 20px;">Cours du jour</h2>
+                <div class="daily-course-card" id="dailyCard">
+                    <div class="daily-course-inner">
+                        <div class="daily-course-front">
+                            <div class="daily-course-title" id="dailyTitle">Chargement...</div>
+                            <div class="daily-course-description" id="dailyDescription"></div>
+                            <div class="daily-course-meta">
+                                <span class="meta-tag" id="dailyLevel"></span>
+                                <span class="meta-tag" id="dailyDuration"></span>
+                            </div>
+                            <div class="click-hint">👆 Clique pour voir la réponse</div>
+                        </div>
+                        <div class="daily-course-back">
+                            <div class="daily-course-answer" id="dailyAnswer"></div>
+                            <div class="daily-course-meta">
+                                <span class="meta-tag" id="dailyLevelBack"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="daily-course-actions">
+                    <button class="video-btn" onclick="openDailyVideo()">▶ Vidéo</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom navigation circles -->
+        <div class="bottom-circles">
+            <button class="circle-nav" onclick="window.location.href='account.html'" title="Compte">
+                <img src="images/picto_banque-02.svg" alt="Compte" style="width: 40px; height: 40px;">
+                <div class="circle-nav-label">Compte</div>
+            </button>
+            <button class="circle-nav" onclick="window.location.href='courses.html'" title="Cours quotidien">
+                <img src="images/picto_banque-04.svg" alt="Cours" style="width: 40px; height: 40px;">
+                <div class="circle-nav-label">Cours</div>
+            </button>
+            <button class="circle-nav" onclick="window.location.href='advisor.html'" title="Conseiller">
+                <img src="images/picto_banque-01.svg" alt="Conseiller" style="width: 40px; height: 40px;">
+                <div class="circle-nav-label">Conseiller</div>
+            </button>
+            <button class="circle-nav" onclick="window.location.href='shop.html'" title="Offre à la demande">
+                <img src="images/picto_banque-03.svg" alt="Offres" style="width: 40px; height: 40px;">
+                <div class="circle-nav-label">Offres</div>
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="daily-footer">
+            <p>&copy; 2026 Tuun. Tous droits réservés.</p>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="modal" id="videoModal" style="display: none; position: fixed; z-index: 20; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); padding: 20px; box-sizing: border-box;">
+        <div style="background: white; padding: 20px; border-radius: 16px; max-width: 90%; max-height: 80vh; overflow-y: auto; position: relative; margin: auto;">
+            <button onclick="closeVideoModal()" style="position: absolute; right: 15px; top: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #999;">✕</button>
+            <div style="width: 100%; aspect-ratio: 16/9; background: black; border-radius: 12px; margin-bottom: 15px;">
+                <video id="videoPlayer" controls style="width: 100%; height: 100%; object-fit: contain;">
+                    <source src="" type="video/mp4">
+                    Votre navigateur ne supporte pas la lecture vidéo.
+                </video>
+            </div>
+            <h3 id="videoTitle"></h3>
+            <p id="videoDescription"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        let coursesData = [];
+        let dailyCoursesData = {};
+        let currentDailyIndex = {};
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Loading daily courses...');
+            loadCoursesData();
+            setupDailyCardClick();
+        });
+
+        function setupDailyCardClick() {
+            const card = document.getElementById('dailyCard');
+            if (card) {
+                card.addEventListener('click', () => {
+                    card.classList.toggle('flipped');
+                });
+            }
+        }
+
+        async function loadCoursesData() {
+            try {
+                const response = await fetch(`${API_URL}/courses`);
+                const result = await response.json();
+
+                if (result.success) {
+                    coursesData = result.data;
+                } else {
+                    coursesData = getDummyCourses();
+                }
+
+                initializeDailyCoursesAndDisplay();
+            } catch (error) {
+                console.error('Erreur:', error);
+                coursesData = getDummyCourses();
+                initializeDailyCoursesAndDisplay();
+            }
+        }
+
+        function initializeDailyCoursesAndDisplay() {
+            const user = JSON.parse(localStorage.getItem('thuun_user'));
+            const userAge = user?.userAge || 12;
+            const ageCategory = getAgeCategory(userAge);
+
+            const ageCategories = ['12-14', '15-18', '18-25'];
+            
+            ageCategories.forEach(ageCat => {
+                const dailyCourses = coursesData.filter(c => 
+                    c.ageCategory === ageCat && c.category === 'Cours du jour'
+                );
+                if (dailyCourses.length > 0) {
+                    dailyCoursesData[ageCat] = dailyCourses;
+                    currentDailyIndex[ageCat] = 0;
+                }
+            });
+
+            displayDailyCard();
+        }
+
+        function displayDailyCard() {
+            const user = JSON.parse(localStorage.getItem('thuun_user'));
+            const userAge = user?.userAge || 12;
+            const ageCategory = getAgeCategory(userAge);
+
+            const courses = dailyCoursesData[ageCategory] || [];
+            if (courses.length === 0) return;
+
+            const index = currentDailyIndex[ageCategory] || 0;
+            const course = courses[index];
+
+            document.getElementById('dailyTitle').textContent = course.nom;
+            document.getElementById('dailyDescription').textContent = course.description;
+            document.getElementById('dailyLevel').textContent = course.niveau;
+            document.getElementById('dailyDuration').textContent = course.duree;
+            document.getElementById('dailyLevelBack').textContent = course.niveau;
+            document.getElementById('dailyAnswer').textContent = course.quiz?.[0]?.reponse || 'Réponse à découvrir';
+
+            document.getElementById('dailyCard').classList.remove('flipped');
+        }
+
+        function openDailyVideo() {
+            const user = JSON.parse(localStorage.getItem('thuun_user'));
+            const userAge = user?.userAge || 12;
+            const ageCategory = getAgeCategory(userAge);
+            const courses = dailyCoursesData[ageCategory] || [];
+            if (courses.length === 0) return;
+
+            const index = currentDailyIndex[ageCategory] || 0;
+            const course = courses[index];
+
+            if (!course.videoUrl || course.videoUrl === '#') {
+                alert('Vidéo non disponible pour ce cours');
+                return;
+            }
+
+            const modal = document.getElementById('videoModal');
+            if (!modal) {
+                alert('Modal vidéo non trouvée');
+                return;
+            }
+
+            const videoPlayer = document.getElementById('videoPlayer');
+            if (videoPlayer) {
+                videoPlayer.src = course.videoUrl;
+                videoPlayer.load();
+            }
+
+            document.getElementById('videoTitle').textContent = course.nom;
+            document.getElementById('videoDescription').textContent = course.description;
+            modal.classList.add('active');
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            if (modal) {
+                modal.classList.remove('active');
+                const videoPlayer = document.getElementById('videoPlayer');
+                if (videoPlayer) {
+                    videoPlayer.pause();
+                    videoPlayer.src = '';
+                }
+            }
+        }
+
+        function getAgeCategory(age) {
+            if (age < 15) return '12-14';
+            if (age < 19) return '15-18';
+            return '18-25';
+        }
+
+        function getDummyCourses() {
+            return [
+                {
+                    id: '1',
+                    nom: 'Comprendre l\'épargne',
+                    description: 'Apprends comment économiser et faire grandir ton argent de poche.',
+                    niveau: 'Débutant',
+                    duree: '5 min',
+                    ageCategory: '12-14',
+                    category: 'Cours du jour',
+                    instructor: 'Sarah Martin',
+                    videoUrl: 'https://example.com/video1.mp4',
+                    quiz: [
+                        { question: 'Qu\'est-ce que l\'épargne?', reponse: 'C\'est de l\'argent économisé pour l\'avenir' },
+                        { question: 'Pourquoi épargner?', reponse: 'Pour réaliser ses rêves et se préparer à l\'avenir' }
+                    ]
+                },
+                {
+                    id: '4',
+                    nom: 'Gérer son premier salaire',
+                    description: 'Guide complet pour gérer ton argent quand tu commences à travailler.',
+                    niveau: 'Intermédiaire',
+                    duree: '8 min',
+                    ageCategory: '15-18',
+                    category: 'Cours du jour',
+                    instructor: 'Pierre Dubois',
+                    videoUrl: 'https://example.com/video4.mp4',
+                    quiz: [
+                        { question: 'Quel est le premier pas?', reponse: 'Ouvrir un compte bancaire personnel' }
+                    ]
+                },
+                {
+                    id: '6',
+                    nom: 'Planification financière avancée',
+                    description: 'Stratégies pour gérer tes finances à long terme.',
+                    niveau: 'Avancé',
+                    duree: '12 min',
+                    ageCategory: '18-25',
+                    category: 'Cours du jour',
+                    instructor: 'Marc Chevrier',
+                    videoUrl: 'https://example.com/video6.mp4',
+                    quiz: [
+                        { question: 'Qu\'est-ce qu\'une diversification?', reponse: 'Répartir ses investissements dans différents domaines' }
+                    ]
+                }
+            ];
+        }
+    </script>
+</body>
+</html>

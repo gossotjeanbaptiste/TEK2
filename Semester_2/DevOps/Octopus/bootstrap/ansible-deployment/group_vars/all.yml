@@ -1,0 +1,11 @@
+---
+# Global variables for the deployment
+
+app_port: 3000
+redis_hostname: "{{ hostvars[groups['redis'] | first].ansible_host | default(groups['redis'] | first) }}"
+
+# Exemple de variable chiffrée (remplacez le bloc par la sortie de
+# `ansible-vault encrypt_string 'octopus-secrets' --name 'octopus_password'`)
+# octopus_password: !vault |
+#     $ANSIBLE_VAULT;1.1;AES256
+#     <...bloc chiffré collé ici...>

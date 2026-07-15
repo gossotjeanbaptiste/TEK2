@@ -1,0 +1,585 @@
+@import url('general.css');
+@import url('variables.css');
+
+/* Page de garantie financière */
+.garantie-section {
+    background: var(--white-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-2xl) var(--spacing-2xl);
+    margin: var(--spacing-xl) auto;
+    max-width: var(--max-width-section);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+}
+
+.garantie-intro {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.garantie-intro .section-title {
+    color: var(--primary-color);
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+}
+
+.garantie-intro .section-title::after {
+    content: '';
+    display: block;
+    width: var(--divider-width);
+    height: var(--divider-height);
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    margin: var(--spacing-md) auto 0;
+    border-radius: var(--border-radius-small);
+}
+
+.garantie-intro-text {
+    font-size: var(--font-size-lg);
+    color: var(--text-color);
+    margin-top: var(--spacing-md);
+    max-width: var(--max-width-text);
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.9;
+}
+
+/* Section partenaire */
+.garantie-partner-section {
+    margin: var(--spacing-xl) 0;
+}
+
+.garantie-partner-card {
+    background: var(--light-gray);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-md) 0;
+}
+
+.garantie-partner-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.garantie-partner-icon {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-md);
+    display: block;
+}
+
+.garantie-partner-header h3 {
+    color: var(--primary-color);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-md);
+}
+
+.garantie-logo-groupama-wrapper {
+    background: var(--white-color);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    margin: var(--spacing-xl) 0;
+    text-align: center;
+}
+
+.garantie-logo-groupama {
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.garantie-partner-desc {
+    color: var(--text-color);
+    font-size: var(--font-size-base);
+    opacity: 0.8;
+    margin: 0;
+    text-align: center;
+}
+
+/* Section explication */
+:root[data-theme="dark"] .garantie-guarantee-explanation {
+    background: var(--dark-gradient);
+    color: var(--text-color-rgb);
+}
+
+.garantie-guarantee-explanation {
+    background: var(--primary-gradient);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-2xl) var(--spacing-2xl);
+    color: var(--white-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.garantie-guarantee-explanation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.garantie-explanation-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+    z-index: 1;
+}
+
+.garantie-header-icon {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-md);
+    display: block;
+}
+
+:root[data-theme="dark"] .garantie-explanation-header h3 {
+    color: var(--text-color-rgb);
+}
+
+.garantie-explanation-header h3 {
+    color: var(--white-color);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-md);
+}
+
+:root[data-theme="dark"] .garantie-header-desc {
+    color: var(--text-color-rgb);
+}
+
+.garantie-header-desc {
+    color: var(--white-color);
+    font-size: var(--font-size-base);
+    opacity: 0.9;
+    margin: 0;
+}
+
+.garantie-explanation-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+    max-width: var(--max-width-text);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+:root[data-theme="dark"] .garantie-explanation-card {
+    border-left: 4px solid var(--text-color);
+}
+
+.garantie-explanation-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 4px solid var(--white-color);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-xl);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.garantie-explanation-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.garantie-explanation-card .garantie-card-icon {
+    font-size: var(--font-size-4xl);
+    display: block;
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    line-height: 2;
+}
+
+:root[data-theme="dark"] .garantie-card-content h4 {
+    color: var(--text-color-rgb);
+}
+
+:root[data-theme="dark"] .garantie-card-content p {
+    color: var(--text-color-rgb);
+}
+
+.garantie-card-content h4 {
+    color: var(--white-color);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-md);
+}
+
+.garantie-card-content p {
+    color: var(--white-color);
+    opacity: 0.9;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Section avantages */
+:root[data-theme="dark"] .garantie-benefits-section {
+    background: var(--dark-gradient);
+}
+
+.garantie-benefits-section {
+    background: var(--primary-gradient);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-md) 0 var(--spacing-md) 0;
+}
+
+:root[data-theme="dark"] .garantie-benefits-title {
+    color: var(--text-color-rgb);
+}
+
+.garantie-benefits-title {
+    text-align: center;
+    color: var(--white-color);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-xl);
+}
+
+.garantie-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+/* Centrage du dernier élément pour benefits-grid avec 3 éléments */
+.garantie-benefits-grid:has(.garantie-benefit-card:nth-child(3):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.garantie-benefits-grid:has(.garantie-benefit-card:nth-child(3):last-child) .garantie-benefit-card:nth-child(3) {
+    grid-column: 1 / -1;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+:root[data-theme="dark"] .garantie-benefit-card {
+    background: var(--light-gray);
+    border-left: 4px solid var(--primary-dark-color);
+}
+
+.garantie-benefit-card {
+    background: var(--white-color);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-xl);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    border-left: 4px solid var(--accent-color);
+    transition: all 0.3s ease;
+}
+
+.garantie-benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.garantie-benefit-icon {
+    font-size: var(--font-size-4xl);
+    display: block;
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    line-height: 2;
+}
+
+.garantie-benefit-card h4 {
+    color: var(--primary-color);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-md);
+}
+
+.garantie-benefit-card p {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Section situations couvertes */
+.garantie-coverage-section {
+    margin-bottom: var(--spacing-xl);
+    background: var(--white-color);
+    border-radius: var(--border-radius-lg);
+}
+
+.garantie-coverage-title {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-xl);
+}
+
+.garantie-coverage-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Centrage du dernier élément pour coverage-list avec nombre impair */
+.garantie-coverage-list:has(.garantie-coverage-item:nth-child(odd):last-child) .garantie-coverage-item:last-child {
+    grid-column: 1 / -1;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+:root[data-theme="dark"] .garantie-coverage-item {
+    background: var(--light-gray);
+    border-left: 4px solid var(--primary-dark-color);
+}
+
+.garantie-coverage-item {
+    background: var(--white-color);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-xl);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    border-left: 4px solid var(--accent-color);
+    transition: all 0.3s ease;
+}
+
+.garantie-coverage-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.garantie-coverage-icon {
+    font-size: var(--font-size-4xl);
+    display: block;
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    line-height: 2;
+}
+
+.garantie-coverage-content h4 {
+    color: var(--primary-color);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-md);
+}
+
+.garantie-coverage-content p {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Section contact */
+.garantie-contact-section {
+    display: flex;
+    justify-content: center;
+    margin: var(--spacing-xl) 0;
+}
+
+:root[data-theme="dark"] .garantie-contact-card {
+    background: var(--light-gray);
+    border: 2px solid var(--primary-dark-color);
+}
+
+.garantie-contact-card {
+    background: var(--light-gray);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-2xl);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    border: 2px solid var(--accent-color);
+}
+
+.garantie-contact-icon {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-md);
+    display: block;
+}
+
+.garantie-contact-card h3 {
+    color: var(--primary-color);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-md);
+}
+
+.garantie-contact-card p {
+    color: var(--text-color);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-xl);
+}
+
+:root[data-theme="dark"] .guarantee-contact-button {
+    background: var(--dark-gradient);
+    color: var(--text-color-rgb);
+}
+
+.guarantee-contact-button {
+    padding: var(--spacing-lg) var(--spacing-2xl);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--primary-gradient);
+    color: var(--white-color);
+    border: none;
+}
+
+.guarantee-contact-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg), 0 8px 25px var(--primary-shadow-hover);
+}
+
+/* ===== STYLES RESPONSIVES ===== */
+
+/* Écrans moyens */
+@media (max-width: 992px) {
+    .garantie-section {
+        padding: 2.5rem 2rem;
+        gap: 2.5rem;
+    }
+    
+    .garantie-intro .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .garantie-coverage-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.8rem;
+    }
+    
+    .garantie-benefit-list {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.8rem;
+    }
+}
+
+/* Tablettes et petits écrans */
+@media (max-width: 768px) {
+    .garantie-section {
+        padding: 2rem 1.5rem;
+        gap: 2rem;
+    }
+
+    .garantie-intro .section-title {
+        font-size: 2rem;
+    }
+
+    .garantie-partner-card,
+    .garantie-guarantee-explanation,
+    .garantie-benefits-section {
+        padding: 2rem;
+    }
+
+    .garantie-explanation-header h3,
+    .garantie-benefits-title,
+    .garantie-coverage-title {
+        font-size: 1.6rem;
+    }
+
+    .garantie-benefits-grid,
+    .garantie-benefits-grid:has(.garantie-benefit-card:nth-child(3):last-child) {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .garantie-benefit-card,
+    .garantie-benefits-grid:has(.garantie-benefit-card:nth-child(3):last-child) .garantie-benefit-card:nth-child(3) {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .garantie-coverage-list {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .garantie-contact-card {
+        padding: 2rem;
+    }
+
+    .guarantee-contact-button {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* Mobiles */
+@media (max-width: 480px) {
+    .garantie-section {
+        padding: 1.5rem 1rem;
+        gap: 1.5rem;
+        margin: 1rem auto;
+    }
+
+    .garantie-intro .section-title {
+        font-size: 1.8rem;
+    }
+
+    .garantie-intro-text {
+        font-size: 1rem;
+    }
+
+    .garantie-partner-card,
+    .garantie-guarantee-explanation,
+    .garantie-benefits-section,
+    .garantie-contact-card {
+        padding: 1.5rem;
+    }
+
+    .garantie-partner-header h3,
+    .garantie-explanation-header h3,
+    .garantie-benefits-title,
+    .garantie-coverage-title,
+    .garantie-contact-card h3 {
+        font-size: 1.4rem;
+    }
+
+    .garantie-logo-groupama {
+        max-width: 200px;
+    }
+
+    .garantie-explanation-content {
+        gap: 1.5rem;
+    }
+
+    .garantie-explanation-card,
+    .garantie-benefit-card,
+    .garantie-coverage-item {
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .garantie-benefits-grid:has(.garantie-benefit-card:nth-child(3):last-child) .garantie-benefit-card:nth-child(3) {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .guarantee-contact-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        letter-spacing: 0.3px;
+    }
+}
+

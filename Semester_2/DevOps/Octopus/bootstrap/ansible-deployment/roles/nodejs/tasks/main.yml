@@ -1,0 +1,50 @@
+---
+# Node.js role tasks
+# Installs Node.js and NPM on web servers
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install dependencies for NodeSource repository
+  apt:
+    name:
+      - curl
+      - gnupg
+      - ca-certificates
+    state: present
+
+- name: Add NodeSource GPG key
+  apt_key:
+    url: "{{ nodejs_apt_key_url }}"
+    state: present
+
+- name: Add NodeSource repository
+  apt_repository:
+    repo: "{{ nodejs_apt_repo_url }}"
+    state: present
+    update_cache: yes
+
+- name: Install Node.js and npm
+  apt:
+    name:
+      - nodejs
+    state: present
+    update_cache: yes
+
+- name: Verify Node.js installation
+  command: node --version
+  register: nodejs_version_output
+  changed_when: false
+
+- name: Verify npm installation
+  command: npm --version
+  register: npm_version_output
+  changed_when: false
+
+- name: Display Node.js and npm versions
+  debug:
+    msg:
+      - "Node.js version: {{ nodejs_version_output.stdout }}"
+      - "npm version: {{ npm_version_output.stdout }}"

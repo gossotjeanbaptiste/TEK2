@@ -1,0 +1,20 @@
+---
+# Default variables for the deploy role
+
+# Application name
+app_name: my-awesome-app
+
+# Application deployment directory
+app_deploy_path: /opt/my-awesome-app
+
+# Application source path (local)
+app_source_path: "../G-DOP-400_bootstrap_octopus_applications/B-DOP-400_bootstrap_octopus_applications"
+
+# Application user
+app_user: node
+
+# Application group
+app_group: node
+
+# Application port
+app_port: 3000

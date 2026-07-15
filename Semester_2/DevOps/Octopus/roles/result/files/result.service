@@ -1,0 +1,11 @@
+[Service]
+WorkingDirectory=/opt/result/result
+ExecStart=/usr/bin/node server.js
+Restart=always
+# Variables d'environnement pour PostgreSQL
+Environment=POSTGRES_HOST=192.168.56.102
+Environment=POSTGRES_USER=paul
+Environment=POSTGRES_PASSWORD=democracyIsFragile
+Environment=POSTGRES_DB=paul
+Environment=POSTGRES_PORT=5432
+Environment=PORT=80

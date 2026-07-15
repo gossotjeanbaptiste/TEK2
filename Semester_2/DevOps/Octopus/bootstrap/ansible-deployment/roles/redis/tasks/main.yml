@@ -1,0 +1,37 @@
+---
+# Redis role tasks
+# Installs and configures Redis on cache servers
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install Redis server
+  apt:
+    name: redis-server
+    state: present
+    update_cache: yes
+
+- name: Ensure Redis service is started and enabled
+  service:
+    name: redis-server
+    state: started
+    enabled: yes
+
+- name: Verify Redis is running on port {{ redis_port }}
+  wait_for:
+    host: localhost
+    port: "{{ redis_port }}"
+    state: started
+    timeout: 30
+
+- name: Get Redis info for verification
+  community.general.redis_info:
+    host: localhost
+    port: "{{ redis_port }}"
+  register: redis_info
+
+- name: Display Redis version
+  debug:
+    msg: "Redis version: {{ redis_info.redis_version }}"

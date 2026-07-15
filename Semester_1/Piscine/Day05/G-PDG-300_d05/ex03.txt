@@ -1,0 +1,23 @@
+Korving: I must save Mondas with my IQ of 164.
+Voga: I must save Mondas with my IQ of 89.
+Lumic: I must save Mondas with my IQ of 201.
+A new Cyberfoundry has opened.
+Building a new Cyberman from 'Korving'.
+K02v1n6: Unit activated.
+Building a new Cyberleader from 'Lumic'.
+1um1c: Master unit activated.
+Not enough energy to build a new Cyberman.
+Not enough energy to build a new Cyberleader.
+Recycling Cyberman 'K02v1n6'.
+K02v1n6: Unit deactivated.
+Recycling Cyberleader '1um1c'.
+1um1c: Master unit deactivated.
+Nothing to recycle.
+Building a new Cyberman from 'Voga'.
+V064: Unit activated.
+Recycling Cyberman 'V064'.
+V064: Unit deactivated.
+A Cyberfoundry has closed.
+Lumic: I failed to save my world...
+Voga: I failed to save my world...
+Korving: I failed to save my world...

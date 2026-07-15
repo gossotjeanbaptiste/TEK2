@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thuun - Mon Compte</title>
+    <link href="https://db.onlinewebfonts.com/c/46f1b844c25934e9c98dad60d32caf71?family=Nord" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Page compte - design iPhone 16 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #d0e2f4;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'New Nord Wide', 'Nord', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-weight: 900;
+            font-size: 24px;
+            line-height: 100%;
+            letter-spacing: 0%;
+            text-align: center;
+        }
+
+        .account-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            max-height: 100vh;
+        }
+
+        /* Header minimaliste */
+        .account-header {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .account-header img {
+            width: 480px;
+            height: auto;
+        }
+
+        .account-header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #0a2463;
+            font-weight: 700;
+        }
+
+        /* Main content - pas de scroll */
+        .account-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px 20px 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative background shape */
+        .account-bg-shape {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 40%;
+            background: #DB7C3B;
+            clip-path: polygon(0 30%, 100% 30%, 100% 100%, 0 100%);
+            z-index: 0;
+        }
+
+        /* Floating wave */
+        .floating-wave {
+            position: absolute;
+            bottom: 160px;
+            left: 0px;
+            width: 200%;
+            height: 80px;
+            z-index: 1;
+            pointer-events: none;
+            overflow: visible;
+        }
+        
+        .wave-svg {
+            width: 200%;
+            height: 100%;
+            display: block;
+        }
+
+        .wave-fill {
+            animation: moveWave 8s linear infinite;
+        }
+
+        .wave-1 .wave-fill {
+            animation: moveWave 8s linear infinite;
+            opacity: 1;
+        }
+
+        .wave-2 .wave-fill {
+            animation: moveWave 10s linear infinite;
+            opacity: 1;
+            animation-delay: -2s;
+        }
+
+        .wave-3 .wave-fill {
+            animation: moveWave 12s linear infinite;
+            opacity: 1;
+            animation-delay: -4s;
+        }
+
+        .wave-3 {
+            z-index: 0;
+        }
+
+        .wave-2 {
+            z-index: 1;
+        }
+
+        .wave-1 {
+            z-index: 2;
+        }
+
+        @keyframes moveWave {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-2400px);
+            }
+        }
+
+        /* Decorative circles */
+        .deco-circle {
+            position: absolute;
+            background: #DB7C3B;
+            border-radius: 50%;
+            z-index: 0;
+            animation: float linear infinite;
+        }
+
+        .deco-circle-1 {
+            width: 34px;
+            height: 35px;
+            bottom: 35%;
+            left: 15%;
+            animation-duration: 2s;
+        }
+
+        .deco-circle-2 {
+            width: 15px;
+            height: 15px;
+            top: 25%;
+            left: 50%;
+            animation-duration: 2.5s;
+            animation-direction: reverse;
+        }
+
+        .deco-circle-3 {
+            width: 39px;
+            height: 41px;
+            top: 15%;
+            right: 10%;
+            animation-duration: 2.2s;
+        }
+
+        .deco-circle-4 {
+            width: 39px;
+            height: 41px;
+            bottom: 20%;
+            left: 10%;
+            animation-duration: 2.7s;
+            animation-direction: reverse;
+        }
+
+        .deco-circle-5 {
+            width: 20px;
+            height: 21px;
+            top: 5%;
+            right: 5%;
+            animation-duration: 2.3s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(20px);
+            }
+        }
+
+        /* Balance affichée en gros */
+        .balance-display {
+            text-align: center;
+            z-index: 2;
+            margin-bottom: 10px;
+            margin-top: 20px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .balance-amount {
+            font-family: 'New Nord Wide', 'Heavy', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-size: 128px;
+            font-weight: 900;
+            color: rgba(0, 0, 0, 0.249);
+            line-height: 1;
+            margin: 0;
+            letter-spacing: 0%;
+        }
+
+        .balance-label {
+            font-size: 14px;
+            color: #6666665a;
+            margin-top: 8px;
+            font-weight: 900;
+            font-family: 'New Nord Wide', 'Heavy', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        /* User info cards */
+        .user-info {
+            z-index: 2;
+            width: 100%;
+            max-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 60px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        .info-card:nth-child(1) { animation-delay: 0.1s; opacity: 0; }
+        .info-card:nth-child(2) { animation-delay: 0.2s; opacity: 0; }
+        .info-card:nth-child(3) { animation-delay: 0.3s; opacity: 0; }
+        .info-card:nth-child(4) { animation-delay: 0.4s; opacity: 0; }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'New Nord Wide', 'Heavy', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-weight: 900;
+        }
+
+        .info-value {
+            font-size: 16px;
+            color: #0a2463;
+            font-weight: 900;
+            font-family: 'New Nord Wide', 'Heavy', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        /* Footer */
+        .account-footer {
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #f0f0f0;
+            background: white;
+            z-index: 3;
+            font-family: 'New Nord Wide', 'Heavy', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-weight: 900;
+        }
+
+        .account-footer p {
+            margin: 5px 0;
+            font-size: 12px;
+            color: #999;
+            font-family: 'New Nord Wide', 'Heavy', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-weight: 900;
+        }
+
+        .account-footer .footer-credit {
+            font-size: 11px;
+            color: #bbb;
+            font-family: 'New Nord Wide', 'Heavy', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-weight: 900;
+        }
+
+        /* Bottom nav circles */
+        .bottom-circles {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 420px;
+        }
+
+        .circle-nav {
+            width: 95px;
+            height: 95px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 20px;
+            border: none;
+            gap: 2px;
+        }
+
+        .circle-nav-label {
+            font-size: 9px;
+            color: #DB7C3B;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.1;
+            width: 100%;
+            padding: 0 4px;
+        }
+
+        .circle-nav:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Logout button */
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 30px;
+            background: #DB7C3B;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .logout-btn:hover {
+            background: #E89761;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .balance-amount {
+                font-size: 80px;
+            }
+
+            .account-main {
+                padding: 20px 15px;
+            }
+
+            .bottom-circles {
+                gap: 8px;
+            }
+
+            .circle-nav {
+                width: 80px;
+                height: 80px;
+                font-size: 16px;
+            }
+
+            .circle-nav-label {
+                font-size: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="account-container">
+        <!-- Header -->
+        <div class="account-header">
+            <img src="images/logotuunbanque-03.svg" alt="Thuun Logo">
+        </div>
+
+        <!-- Main content -->
+        <div class="account-main">
+            <!-- Decorative elements -->
+            <div class="floating-wave wave-1">
+                <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#DB7C3B"/>
+                </svg>
+            </div>
+            <div class="floating-wave wave-2">
+                <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#E89761"/>
+                </svg>
+            </div>
+            <div class="floating-wave wave-3">
+                <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#F0B896"/>
+                </svg>
+            </div>
+            <div class="account-bg-shape" id="bg-shape"></div>
+            <div class="deco-circle deco-circle-1"></div>
+            <div class="deco-circle deco-circle-2"></div>
+            <div class="deco-circle deco-circle-3"></div>
+            <div class="deco-circle deco-circle-4"></div>
+            <div class="deco-circle deco-circle-5"></div>
+
+            <!-- Balance display -->
+            <div class="balance-display">
+                <div class="balance-amount" id="balance-amount">Chargement...</div>
+                <div class="balance-label">Solde actuel</div>
+                <div class="balance-label" style="font-size: 12px; color: #99999987; margin-top: 8px;">Max atteint: <span id="balance-max">---</span></div>
+            </div>
+
+            <!-- User info -->
+            <div class="user-info">
+                <div class="info-card">
+                    <span class="info-label">Nom</span>
+                    <span class="info-value" id="user-lastname">Dupont</span>
+                </div>
+                <div class="info-card">
+                    <span class="info-label">Prénom</span>
+                    <span class="info-value" id="user-firstname">Jean</span>
+                </div>
+                <div class="info-card">
+                    <span class="info-label">Email</span>
+                    <span class="info-value" id="user-email">jean@example.com</span>
+                </div>
+            </div>
+
+            <!-- Logout button -->
+            <button class="logout-btn" onclick="handleLogout()">
+                Se déconnecter
+            </button>
+
+            <!-- Bottom navigation circles -->
+            <div class="bottom-circles">
+                <button class="circle-nav" onclick="window.location.href='account.html'" title="Compte">
+                    <img src="images/picto_banque-02.svg" alt="Compte" style="width: 40px; height: 40px;">
+                    <div class="circle-nav-label">Compte</div>
+                </button>
+                <button class="circle-nav" onclick="window.location.href='courses.html'" title="Cours quotidien">
+                    <img src="images/picto_banque-04.svg" alt="Cours" style="width: 40px; height: 40px;">
+                    <div class="circle-nav-label">Cours</div>
+                </button>
+                <button class="circle-nav" onclick="window.location.href='advisor.html'" title="Conseiller">
+                    <img src="images/picto_banque-01.svg" alt="Conseiller" style="width: 40px; height: 40px;">
+                    <div class="circle-nav-label">Conseiller</div>
+                </button>
+                <button class="circle-nav" onclick="window.location.href='shop.html'" title="Offre à la demande">
+                    <img src="images/picto_banque-03.svg" alt="Offres" style="width: 40px; height: 40px;">
+                    <div class="circle-nav-label">Offres</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="account-footer">
+            <p>&copy; 2026 Tuun. Tous droits réservés.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Fonction pour mettre à jour les vagues en fonction du solde
+        function updateWaves(currentSolde, maxSolde) {
+            if (!maxSolde || maxSolde <= 0) return;
+            
+            // Calculer le ratio (0 à 1)
+            const ratio = Math.min(Math.max(currentSolde / maxSolde, 0), 1);
+            
+            // Hauteur: 50% à 150% (0.5x à 1.5x)
+            const baseHeight = 80;
+            const minHeight = baseHeight * 0.5;
+            const maxHeight = baseHeight * 1.5;
+            const waveHeight = minHeight + (ratio * (maxHeight - minHeight));
+            
+            // Vitesse: 14s à 6s (plus rapide quand solde est haut)
+            const minSpeed = 6;
+            const maxSpeed = 14;
+            const speed = maxSpeed - (ratio * (maxSpeed - minSpeed));
+            
+            // Appliquer les changements
+            const wave1 = document.querySelector('.wave-1');
+            const wave2 = document.querySelector('.wave-2');
+            const wave3 = document.querySelector('.wave-3');
+            
+            if (wave1) {
+                wave1.style.setProperty('height', waveHeight + 'px', 'important');
+                const fill1 = wave1.querySelector('.wave-fill');
+                if (fill1) fill1.style.animationDuration = speed + 's';
+            }
+            
+            if (wave2) {
+                wave2.style.setProperty('height', waveHeight + 'px', 'important');
+                const fill2 = wave2.querySelector('.wave-fill');
+                if (fill2) fill2.style.animationDuration = (speed + 2) + 's';
+            }
+            
+            if (wave3) {
+                wave3.style.setProperty('height', (waveHeight * 1.5) + 'px', 'important');
+                const fill3 = wave3.querySelector('.wave-fill');
+                if (fill3) fill3.style.animationDuration = (speed + 4) + 's';
+            }
+        }
+
+        // Charger les infos utilisateur
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOMContentLoaded triggered');
+            setTimeout(loadUserInfo, 100);
+        });
+
+        async function loadUserInfo() {
+            console.log('loadUserInfo called');
+            const user = JSON.parse(localStorage.getItem(USER_KEY) || '{}');
+            const token = localStorage.getItem(TOKEN_KEY);
+
+            console.log('User from localStorage:', user);
+            console.log('Token:', token ? 'présent' : 'absent');
+
+            if (!token || !user.email) {
+                console.warn('Pas de token ou email, redirection...');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Afficher les infos de base immédiatement avec le solde du localStorage
+            document.getElementById('user-email').textContent = user.email || 'Non disponible';
+            
+            // Afficher le nom et prénom
+            const prenom = user.prenom || 'Non disponible';
+            const nom = user.nom || 'Non disponible';
+            document.getElementById('user-firstname').textContent = prenom;
+            document.getElementById('user-lastname').textContent = nom;
+            
+            // Afficher le solde du localStorage s'il existe
+            let currentSolde = 0;
+            let maxSolde = 0;
+            if (user.solde !== undefined && user.solde !== null) {
+                let soldeValue = user.solde;
+                // Convertir en nombre si c'est une string
+                if (typeof soldeValue === 'string') {
+                    soldeValue = parseFloat(soldeValue);
+                }
+                currentSolde = soldeValue;
+                const soldeFormate = soldeValue.toFixed(2);
+                const soldeDisplay = soldeFormate.replace('.', ',') + ' €';
+                document.getElementById('balance-amount').textContent = soldeDisplay;
+                console.log('Solde affiché:', soldeDisplay, '(valeur:', soldeValue, ')');
+            } else {
+                console.warn('Pas de solde trouvé dans:', user);
+                document.getElementById('balance-amount').textContent = '0,00 €';
+            }
+
+            // Afficher le solde max si présent
+            if (user.solde_max !== undefined && user.solde_max !== null) {
+                let soldeMaxValue = user.solde_max;
+                if (typeof soldeMaxValue === 'string') {
+                    soldeMaxValue = parseFloat(soldeMaxValue);
+                }
+                maxSolde = soldeMaxValue;
+                const soldeMaxFormate = soldeMaxValue.toFixed(2);
+                const soldeMaxDisplay = soldeMaxFormate.replace('.', ',') + ' €';
+                document.getElementById('balance-max').textContent = soldeMaxDisplay;
+            }
+
+            // Mettre à jour les vagues avec les données du localStorage
+            updateWaves(currentSolde, maxSolde);
+
+            // Récupérer le profil complet depuis l'API pour les données à jour
+            try {
+                const response = await fetch(`${API_URL}/auth/profile`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const userData = data.user;
+                    console.log('Profil reçu de l\'API:', userData);
+
+                    // Mettre à jour avec les données de l'API (données les plus fraîches)
+                    if (userData.solde !== undefined && userData.solde !== null) {
+                        let soldeValue = userData.solde;
+                        if (typeof soldeValue === 'string') {
+                            soldeValue = parseFloat(soldeValue);
+                        }
+                        const soldeFormate = soldeValue.toFixed(2);
+                        const soldeDisplay = soldeFormate.replace('.', ',') + ' €';
+                        document.getElementById('balance-amount').textContent = soldeDisplay;
+                        console.log('Solde mis à jour depuis API:', soldeDisplay);
+                    }
+
+                    // Mettre à jour le solde max depuis l'API
+                    if (userData.solde_max !== undefined && userData.solde_max !== null) {
+                        let soldeMaxValue = userData.solde_max;
+                        if (typeof soldeMaxValue === 'string') {
+                            soldeMaxValue = parseFloat(soldeMaxValue);
+                        }
+                        const soldeMaxFormate = soldeMaxValue.toFixed(2);
+                        const soldeMaxDisplay = soldeMaxFormate.replace('.', ',') + ' €';
+                        document.getElementById('balance-max').textContent = soldeMaxDisplay;
+                        console.log('Solde max depuis API:', soldeMaxDisplay);
+                    }
+
+                    // Mettre à jour le localStorage
+                    user.solde = userData.solde;
+                    user.solde_max = userData.solde_max;
+                    localStorage.setItem(USER_KEY, JSON.stringify(user));
+
+                    if (userData.prenom) {
+                        document.getElementById('user-firstname').textContent = userData.prenom;
+                    }
+                    if (userData.nom) {
+                        document.getElementById('user-lastname').textContent = userData.nom;
+                    }
+                    if (userData.email) {
+                        document.getElementById('user-email').textContent = userData.email;
+                    }
+
+                    // Mettre à jour les vagues avec les données de l'API
+                    let apiSolde = userData.solde;
+                    let apiMaxSolde = userData.solde_max;
+                    if (typeof apiSolde === 'string') apiSolde = parseFloat(apiSolde);
+                    if (typeof apiMaxSolde === 'string') apiMaxSolde = parseFloat(apiMaxSolde);
+                    updateWaves(apiSolde, apiMaxSolde);
+                } else {
+                    console.error('Erreur API:', response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error('Erreur lors du chargement du profil:', error);
+            }
+        }
+
+        // Fonction de navigation
+        function navigateTo(page) {
+            if (typeof playClickSound === 'function') {
+                playClickSound();
+            }
+            const pages = {
+                'courses': 'courses.html',
+                'home': 'home.html',
+                'advisor': 'advisor.html'
+            };
+            if (pages[page]) {
+                window.location.href = pages[page];
+            }
+        }
+
+        // Gestion déconnexion
+        function handleLogout() {
+            localStorage.removeItem(TOKEN_KEY);
+            localStorage.removeItem(USER_KEY);
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

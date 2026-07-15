@@ -1,0 +1,52 @@
+A new Cyberfoundry has opened.
+Cyberlegion #1: Humanity will be upgraded.
+Cyberlegion #1: Impossible, we can't fail.
+A Cyberfoundry has closed.
+A new Cyberfoundry has opened.
+Cyberlegion #2: Humanity will be upgraded.
+Citizen 66: I must save Mondas with my IQ of 228.
+Building a new Cyberleader from 'Citizen 66'.
+C171z3n_66: Master unit activated.
+Cyberlegion #2: 'C171z3n_66' is now our Cyberleader.
+Citizen 81: I must save Mondas with my IQ of 169.
+Building a new Cyberman from 'Citizen 81'.
+C171z3n_81: Unit activated.
+C171z3n_66: Upgrading unit 'C171z3n_81'.
+C171z3n_66: Upgrading human 'Citizen 81'.
+Citizen 81: My IQ is now 338.
+IQ of unit doubled, increased to 338.
+C171z3n_66: Inhibitor already activated.
+Cyberlegion #2: 'C171z3n_81' has joined our Cyberlegion.
+Citizen 12: I must save Mondas with my IQ of 134.
+Building a new Cyberman from 'Citizen 12'.
+C171z3n_12: Unit activated.
+C171z3n_66: Upgrading unit 'C171z3n_12'.
+C171z3n_66: Upgrading human 'Citizen 12'.
+Citizen 12: My IQ is now 268.
+IQ of unit doubled, increased to 268.
+C171z3n_66: Inhibitor already activated.
+Cyberlegion #2: 'C171z3n_12' has joined our Cyberlegion.
+Citizen 21: I must save Mondas with my IQ of 156.
+Building a new Cyberman from 'Citizen 21'.
+C171z3n_21: Unit activated.
+C171z3n_66: Upgrading unit 'C171z3n_21'.
+C171z3n_66: Upgrading human 'Citizen 21'.
+Citizen 21: My IQ is now 312.
+IQ of unit doubled, increased to 312.
+C171z3n_66: Inhibitor already activated.
+Cyberlegion #2: 'C171z3n_21' has joined our Cyberlegion.
+Citizen 35: I must save Mondas with my IQ of 159.
+Not enough energy to build a new Cyberman.
+Cyberlegion #2: 'Citizen 35' can't be assimilated. 'Citizen 35' will be deleted.
+Citizen 35: I failed to save my world...
+3
+Cyberlegion #2: Impossible, we can't fail.
+C171z3n_66: Master unit deactivated.
+Citizen 66: I failed to save my world...
+C171z3n_81: Unit deactivated.
+Citizen 81: I failed to save my world...
+C171z3n_12: Unit deactivated.
+Citizen 12: I failed to save my world...
+C171z3n_21: Unit deactivated.
+Citizen 21: I failed to save my world...
+A Cyberfoundry has closed.

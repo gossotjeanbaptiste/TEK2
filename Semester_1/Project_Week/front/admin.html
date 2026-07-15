@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Thuun</title>
+    <link href="https://db.onlinewebfonts.com/c/46f1b844c25934e9c98dad60d32caf71?family=Nord" rel="stylesheet" type="text/css"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'New Nord Wide', 'Nord', Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            font-weight: 900;
+            font-size: 24px;
+            line-height: 100%;
+            letter-spacing: 0%;
+            text-align: center;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #0a2463;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #0a2463;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background: #0a2463;
+            color: white;
+            font-weight: bold;
+        }
+
+        table tr:hover {
+            background: #f9f9f9;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="password"],
+        textarea {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="password"] {
+            min-width: 120px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button {
+            padding: 8px 12px;
+            margin: 0 4px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .btn-save {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-save:hover {
+            background: #218838;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+        }
+
+        .btn-edit {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: #0056b3;
+        }
+
+        .btn-add {
+            background: #17a2b8;
+            color: white;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+        }
+
+        .btn-add:hover {
+            background: #117a8b;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            min-width: 100px;
+            color: #333;
+        }
+
+        .edit-row {
+            background: #fffbea;
+        }
+
+        .actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .error {
+            color: #dc3545;
+            padding: 10px;
+            background: #f8d7da;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .success {
+            color: #155724;
+            padding: 10px;
+            background: #d4edda;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 16px;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: #0a2463;
+            border-bottom-color: #0a2463;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <button class="logout-btn" onclick="logout()">Déconnexion</button>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <img src="images/logotuunbanque-03.svg" alt="Thuun Logo" style="width: 140px; height: auto;">
+        </div>
+        <h1>🔧 Panel Admin - Thuun</h1>
+        <div id="message"></div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('users')">Utilisateurs</button>
+            <button class="tab-btn" onclick="switchTab('courses')">Cours</button>
+        </div>
+
+        <!-- TAB UTILISATEURS -->
+        <div id="users" class="tab-content active">
+            <h2>Gestion des Utilisateurs</h2>
+            
+            <button class="btn-add" onclick="showAddUserForm()">+ Ajouter un utilisateur</button>
+
+            <div id="addUserForm" style="display: none; background: #f9f9f9; padding: 20px; border-radius: 4px; margin-bottom: 20px;">
+                <h3>Nouveau Utilisateur</h3>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="newUserEmail" placeholder="email@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe:</label>
+                    <input type="password" id="newUserPassword" placeholder="••••••••">
+                </div>
+                <div class="form-group">
+                    <label>Nom:</label>
+                    <input type="text" id="newUserNom" placeholder="Dupont">
+                </div>
+                <div class="form-group">
+                    <label>Prénom:</label>
+                    <input type="text" id="newUserPrenom" placeholder="Jean">
+                </div>
+                <div class="form-group">
+                    <label>Âge:</label>
+                    <input type="number" id="newUserAge" placeholder="Âge" value="18" min="1" max="120">
+                </div>
+                <div class="form-group">
+                    <label>Solde:</label>
+                    <input type="number" id="newUserSolde" value="0" step="0.01">
+                </div>
+                <button class="btn-save" onclick="addUser()">Créer</button>
+                <button onclick="hideAddUserForm()" style="background: #6c757d; color: white;">Annuler</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Âge</th>
+                        <th>Solde (€)</th>
+                        <th>Solde Max (€)</th>
+                        <th>Créé le</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTable">
+                    <tr><td colspan="9" style="text-align: center;">Chargement...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TAB COURSES -->
+        <div id="courses" class="tab-content">
+            <h2>Gestion des Cours</h2>
+
+            <button class="btn-add" onclick="showAddCourseForm()">+ Ajouter un cours</button>
+
+            <div id="addCourseForm" style="display: none; background: #f9f9f9; padding: 20px; border-radius: 4px; margin-bottom: 20px;">
+                <h3>Nouveau Cours</h3>
+                <div class="form-group">
+                    <label>Nom:</label>
+                    <input type="text" id="newCourseName" placeholder="Nom du cours">
+                </div>
+                <div class="form-group">
+                    <label>Description:</label>
+                    <textarea id="newCourseDescription" placeholder="Description du cours"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Catégorie d'âge:</label>
+                    <select id="newCourseAgeCategory" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                        <option value="12-14">12-14</option>
+                        <option value="15-18">15-18</option>
+                        <option value="18-25">18-25</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Catégorie:</label>
+                    <input type="text" id="newCourseCategory" placeholder="Catégorie">
+                </div>
+                <div class="form-group">
+                    <label>Durée:</label>
+                    <input type="text" id="newCourseDuration" placeholder="10:30">
+                </div>
+                <div class="form-group">
+                    <label>Niveau:</label>
+                    <select id="newCourseLevel" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                        <option value="Débutant">Débutant</option>
+                        <option value="Intermédiaire">Intermédiaire</option>
+                        <option value="Avancé">Avancé</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Instructeur:</label>
+                    <input type="text" id="newCourseInstructor" placeholder="Nom de l'instructeur">
+                </div>
+                <button class="btn-save" onclick="addCourse()">Créer</button>
+                <button onclick="hideAddCourseForm()" style="background: #6c757d; color: white;">Annuler</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Catégorie</th>
+                        <th>Âge</th>
+                        <th>Niveau</th>
+                        <th>Instructeur</th>
+                        <th>Durée</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="coursesTable">
+                    <tr><td colspan="8" style="text-align: center;">Chargement...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = `${window.location.protocol}//${window.location.hostname}:5000/api`;
+        const TOKEN_KEY = 'thuun_token';
+        const USER_KEY = 'thuun_user';
+
+        // Vérifier si connecté et admin
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(localStorage.getItem(USER_KEY) || '{}');
+            const token = localStorage.getItem(TOKEN_KEY);
+
+            if (!token) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            loadUsers();
+            loadCourses();
+        });
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // ===== UTILISATEURS =====
+        async function loadUsers() {
+            try {
+                const token = localStorage.getItem(TOKEN_KEY);
+                const response = await fetch(`${API_URL}/admin/users`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!response.ok) throw new Error('Erreur lors du chargement');
+
+                const data = await response.json();
+                const users = data.data || data.users || [];
+
+                let html = '';
+                users.forEach(user => {
+                    html += `
+                        <tr>
+                            <td>${user.id}</td>
+                            <td>${user.email}</td>
+                            <td>${user.nom || '-'}</td>
+                            <td>${user.prenom || '-'}</td>
+                            <td><input type="number" value="${user.userAge || 18}" min="1" max="120" id="age-${user.id}" style="width: 80px;"></td>
+                            <td><input type="number" value="${user.solde || 0}" step="0.01" id="solde-${user.id}" style="width: 100px;"></td>
+                            <td><input type="number" value="${user.solde_max || 0}" step="0.01" id="solde-max-${user.id}" style="width: 100px;" readonly disabled></td>
+                            <td>${new Date(user.created_at).toLocaleDateString('fr-FR')}</td>
+                            <td>
+                                <div class="actions">
+                                    <button class="btn-edit" onclick="updateUserSolde(${user.id})">Mettre à jour</button>
+                                    <button class="btn-delete" onclick="deleteUser(${user.id})">Supprimer</button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                document.getElementById('usersTable').innerHTML = html;
+            } catch (error) {
+                showMessage('Erreur: ' + error.message, 'error');
+            }
+        }
+
+        function showAddUserForm() {
+            document.getElementById('addUserForm').style.display = 'block';
+        }
+
+        function hideAddUserForm() {
+            document.getElementById('addUserForm').style.display = 'none';
+        }
+
+        async function addUser() {
+            const email = document.getElementById('newUserEmail').value;
+            const password = document.getElementById('newUserPassword').value;
+            const nom = document.getElementById('newUserNom').value;
+            const prenom = document.getElementById('newUserPrenom').value;
+            const age = parseInt(document.getElementById('newUserAge').value) || 18;
+            const solde = parseFloat(document.getElementById('newUserSolde').value) || 0;
+
+            if (!email || !password || !nom || !prenom) {
+                showMessage('Tous les champs sont requis', 'error');
+                return;
+            }
+
+            try {
+                const token = localStorage.getItem(TOKEN_KEY);
+                const response = await fetch(`${API_URL}/admin/users`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password, nom, prenom, age, solde })
+                });
+
+                if (!response.ok) throw new Error('Erreur lors de la création');
+
+                showMessage('Utilisateur créé avec succès', 'success');
+                hideAddUserForm();
+                document.getElementById('newUserEmail').value = '';
+                document.getElementById('newUserPassword').value = '';
+                document.getElementById('newUserNom').value = '';
+                document.getElementById('newUserPrenom').value = '';
+                document.getElementById('newUserAge').value = '18';
+                document.getElementById('newUserSolde').value = '0';
+                loadUsers();
+            } catch (error) {
+                showMessage('Erreur: ' + error.message, 'error');
+            }
+        }
+
+        async function updateUserSolde(userId) {
+            const age = parseInt(document.getElementById(`age-${userId}`).value) || 18;
+            const solde = document.getElementById(`solde-${userId}`).value;
+
+            try {
+                const token = localStorage.getItem(TOKEN_KEY);
+                const response = await fetch(`${API_URL}/admin/users/${userId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        age: age,
+                        solde: parseFloat(solde)
+                    })
+                });
+
+                if (!response.ok) throw new Error('Erreur lors de la mise à jour');
+
+                showMessage('Âge et solde mis à jour avec succès', 'success');
+                
+                // Mettre à jour le localStorage si c'est l'utilisateur connecté
+                const currentUser = JSON.parse(localStorage.getItem(USER_KEY) || '{}');
+                if (currentUser.id === userId) {
+                    currentUser.userAge = age;
+                    currentUser.solde = parseFloat(solde);
+                    localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
+                }
+                
+                loadUsers();
+            } catch (error) {
+                showMessage('Erreur: ' + error.message, 'error');
+            }
+        }
+
+        async function deleteUser(userId) {
+            if (!confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) return;
+
+            try {
+                const token = localStorage.getItem(TOKEN_KEY);
+                const response = await fetch(`${API_URL}/admin/users/${userId}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!response.ok) throw new Error('Erreur lors de la suppression');
+
+                showMessage('Utilisateur supprimé avec succès', 'success');
+                loadUsers();
+            } catch (error) {
+                showMessage('Erreur: ' + error.message, 'error');
+            }
+        }
+
+        // ===== COURSES =====
+        async function loadCourses() {
+            try {
+                const token = localStorage.getItem(TOKEN_KEY);
+                const response = await fetch(`${API_URL}/admin/courses`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!response.ok) throw new Error('Erreur lors du chargement');
+
+                const data = await response.json();
+                const courses = data.data || data.courses || [];
+
+                let html = '';
+                courses.forEach(course => {
+                    html += `
+                        <tr>
+                            <td>${course.id}</td>
+                            <td>${course.nom}</td>
+                            <td>${course.category}</td>
+                            <td>${course.ageCategory}</td>
+                            <td>${course.niveau}</td>
+                            <td>${course.instructor}</td>
+                            <td>${course.duree}</td>
+                            <td>
+                                <div class="actions">
+                                    <button class="btn-edit" onclick="editCourse(${course.id})">Éditer</button>
+                                    <button class="btn-delete" onclick="deleteCourse(${course.id})">Supprimer</button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                document.getElementById('coursesTable').innerHTML = html;
+            } catch (error) {
+                showMessage('Erreur: ' + error.message, 'error');
+            }
+        }
+
+        function showAddCourseForm() {
+            document.getElementById('addCourseForm').style.display = 'block';
+        }
+
+        function hideAddCourseForm() {
+            document.getElementById('addCourseForm').style.display = 'none';
+        }
+
+        async function addCourse() {
+            const nom = document.getElementById('newCourseName').value;
+            const description = document.getElementById('newCourseDescription').value;
+            const ageCategory = document.getElementById('newCourseAgeCategory').value;
+            const category = document.getElementById('newCourseCategory').value;
+            const duree = document.getElementById('newCourseDuration').value;
+            const niveau = document.getElementById('newCourseLevel').value;
+            const instructor = document.getElementById('newCourseInstructor').value;
+
+            if (!nom || !description) {
+                showMessage('Le nom et la description sont requis', 'error');
+                return;
+            }
+
+            try {
+                const token = localStorage.getItem(TOKEN_KEY);
+                const response = await fetch(`${API_URL}/admin/courses`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nom,
+                        description,
+                        ageCategory,
+                        category,
+                        duree,
+                        niveau,
+                        instructor,
+                        quiz: []
+                    })
+                });
+
+                if (!response.ok) throw new Error('Erreur lors de la création');
+
+                showMessage('Cours créé avec succès', 'success');
+                hideAddCourseForm();
+                document.getElementById('newCourseName').value = '';
+                document.getElementById('newCourseDescription').value = '';
+                loadCourses();
+            } catch (error) {
+                showMessage('Erreur: ' + error.message, 'error');
+            }
+        }
+
+        function editCourse(courseId) {
+            alert('Édition en développement');
+        }
+
+        async function deleteCourse(courseId) {
+            if (!confirm('Êtes-vous sûr de vouloir supprimer ce cours ?')) return;
+
+            try {
+                const token = localStorage.getItem(TOKEN_KEY);
+                const response = await fetch(`${API_URL}/admin/courses/${courseId}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!response.ok) throw new Error('Erreur lors de la suppression');
+
+                showMessage('Cours supprimé avec succès', 'success');
+                loadCourses();
+            } catch (error) {
+                showMessage('Erreur: ' + error.message, 'error');
+            }
+        }
+
+        function showMessage(msg, type) {
+            const div = document.getElementById('message');
+            div.textContent = msg;
+            div.className = type;
+            setTimeout(() => {
+                div.textContent = '';
+                div.className = '';
+            }, 5000);
+        }
+
+        function logout() {
+            localStorage.removeItem(TOKEN_KEY);
+            localStorage.removeItem(USER_KEY);
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

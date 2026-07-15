@@ -1,0 +1,318 @@
+@import url('general.css');
+@import url('variables.css');
+
+/* ===== NAVIGATION RAPIDE ===== */
+.quick-nav {
+    background: var(--light-gray);
+    padding: var(--spacing-md) 0;
+    margin-bottom: var(--spacing-xl);
+    border-radius: var(--border-radius-md);
+}
+
+.quick-nav-list {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xl);
+    flex-wrap: wrap;
+}
+
+.quick-nav-list a {
+    color: var(--primary-color);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    transition: var(--transition-all);
+}
+
+.quick-nav-list a:hover {
+    background: var(--primary-color);
+    color: var(--white-color);
+}
+
+/* ===== SECTION FINANCEMENT ===== */
+.financement-section {
+    padding: 2rem 0;
+}
+
+.financement-block {
+    margin-bottom: 2rem;
+}
+
+/* ===== CONTENU FINANCEMENT ===== */
+.financement-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    align-items: center;
+}
+
+.financement-image {
+    flex: 1;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.financement-image img {
+    max-width: 200px;
+    height: auto;
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm);
+}
+
+.financement-text {
+    flex: 2;
+    text-align: left;
+    max-width: 100%;
+}
+
+.financement-text h3 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.financement-text p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+/* ===== LISTES DANS CONTENT-SECTION ===== */
+.content-section ul {
+    background: var(--light-gray);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm);
+    padding: 1.2rem 1.5rem;
+    font-size: 1.08rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    list-style: disc inside;
+}
+
+.content-section ol {
+    background: var(--light-gray);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm);
+    padding: 1.2rem 1.5rem;
+    font-size: 1.08rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    list-style: decimal inside;
+}
+
+.content-section ul li,
+.content-section ol li {
+    margin-bottom: 0.7em;
+    line-height: 1.6;
+}
+
+.content-section a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.content-section a:hover {
+    color: var(--accent-color);
+}
+
+/* ===== BOUTONS TOGGLE ===== */
+.toggle-button {
+    background: none;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle-button:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.toggle-button.small {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    border: 1px solid var(--primary-color);
+}
+
+/* ===== CONTENU EXTENSIBLE ===== */
+.more-content[hidden] {
+    display: none;
+}
+
+.more-content:not([hidden]) {
+    display: block;
+}
+
+.toggle-more {
+    color: var(--white-color);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.6rem 1.2rem;
+    transition: all 0.15s ease;
+    background: var(--primary-gradient);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    will-change: transform, box-shadow;
+}
+
+.toggle-more:hover {
+    color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.toggle-more:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-more::after {
+    content: "▼";
+    font-size: 0.8rem;
+    transition: all 0.15s ease;
+}
+
+.toggle-more[aria-expanded="true"] {
+    color: var(--white-color);
+    background: var(--reverse-primary-gradient);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transform: none;
+}
+
+.toggle-more[aria-expanded="true"]:hover {
+    color: var(--white-color);
+    background: var(--primary-gradient);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.toggle-more[aria-expanded="true"]::after {
+    content: "▲";
+}
+
+.toggle-button:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.toggle-button.small {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    border: 1px solid var(--primary-color);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .financement-section {
+        padding: 2.5rem 0;
+    }
+    
+    .financement-block h3 {
+        font-size: 1.4rem;
+    }
+    
+    .content-section {
+        padding: 1.8rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .financement-content {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+    
+    .financement-image {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .quick-nav-list {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+    
+    .quick-nav-list a {
+        display: block;
+        text-align: center;
+        min-width: 200px;
+    }
+    
+    .financement-section {
+        padding: 1.5rem 0;
+    }
+    
+    .financement-block {
+        margin-bottom: 1.5rem;
+    }
+    
+    .content-section ul,
+    .content-section ol {
+        padding: 1rem 1.2rem;
+        font-size: 1rem;
+    }
+    
+    .financement-content {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .financement-image {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .financement-section {
+        padding: 1rem 0;
+    }
+    
+    .financement-block h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .content-section {
+        padding: 1.2rem;
+    }
+    
+    .content-section ul,
+    .content-section ol {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .quick-nav-list a {
+        min-width: auto;
+        width: 100%;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+}

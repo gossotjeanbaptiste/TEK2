@@ -1,0 +1,18 @@
+[Unit]
+Description=My Awesome Node.js Application
+After=network.target redis-server.service
+Wants=redis-server.service
+
+[Service]
+Type=simple
+User=node
+WorkingDirectory=/opt/my-awesome-app
+ExecStart=/usr/bin/node /opt/my-awesome-app/index.js
+Restart=always
+RestartSec=10
+StandardOutput=append:/var/log/my-awesome-app/app.log
+StandardError=append:/var/log/my-awesome-app/error.log
+Environment="NODE_ENV=production"
+
+[Install]
+WantedBy=multi-user.target

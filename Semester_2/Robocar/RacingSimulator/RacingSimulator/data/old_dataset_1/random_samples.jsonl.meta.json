@@ -1,0 +1,17 @@
+{
+  "created_at_unix": 1774990500,
+  "config_path": "/home/victortv57/Downloads/RacingSimulatorLinux/BuildLinux/robocar_client/agents_config.json",
+  "mode": "collect-random",
+  "behaviors": {
+    "Agent0?team=0": {
+      "observation_shapes": [
+        [
+          50
+        ]
+      ],
+      "action_type": "continuous",
+      "continuous_size": 2,
+      "discrete_branches": []
+    }
+  }
+}

@@ -1,0 +1,8 @@
+mlagents-envs==0.28.0
+numpy>=1.23,<3
+protobuf==3.20.3
+setuptools>=82
+pygame>=2.5,<3
+pynput>=1.7,<2
+scikit-learn>=1.4,<2
+joblib>=1.4,<2

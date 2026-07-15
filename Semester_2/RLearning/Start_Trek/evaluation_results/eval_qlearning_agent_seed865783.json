@@ -1,0 +1,12 @@
+{
+  "num_episodes": 1000,
+  "mean_reward": 171.10019947146566,
+  "std_reward": 147.4575952493038,
+  "min_reward": -455.84913597280456,
+  "max_reward": 322.10295016834914,
+  "ci_95": 9.139516441868878,
+  "success_rate": 0.0,
+  "crash_rate": 0.0,
+  "truncated_rate": 1.0,
+  "mean_episode_length": 283.497
+}

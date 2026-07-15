@@ -1,0 +1,44 @@
+---
+# Base role tasks
+# These tasks are executed on every host
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Upgrade all packages to the latest version
+  apt:
+    name: "*"
+    state: latest
+    allow_unauthenticated: no
+
+- name: Install essential packages
+  apt:
+    name: "{{ essential_packages }}"
+    state: present
+    update_cache: yes
+
+- name: Set timezone to {{ timezone }}
+  timezone:
+    name: "{{ timezone }}"
+
+- name: Verify zsh is installed
+  apt:
+    name: zsh
+    state: present
+
+- name: Set zsh as root shell
+  user:
+    name: root
+    shell: "{{ root_shell }}"
+
+- name: Configure SSH key based authentication
+  authorized_key:
+    user: root
+    state: present
+    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_ed25519.pub') }}"
+  ignore_errors: yes
+
+- name: Ensure system is reachable after base configuration
+  ping:

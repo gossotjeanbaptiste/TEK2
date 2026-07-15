@@ -1,0 +1,22 @@
+---
+# Default variables for the base role
+
+# Timezone to set on all hosts
+timezone: Europe/Paris
+
+# Essential packages to install on all hosts
+essential_packages:
+  - apt-transport-https
+  - ca-certificates
+  - git
+  - curl
+  - unzip
+  - zsh
+  - wget
+  - vim
+  - htop
+  - openssh-client
+  - openssh-server
+
+# Shell to set as root default shell
+root_shell: /bin/zsh

@@ -1,0 +1,11 @@
+---
+# Handlers for the deploy role
+
+- name: Reload systemd daemon
+  systemd:
+    daemon_reload: yes
+
+- name: Restart my-awesome-app service
+  service:
+    name: my-awesome-app
+    state: restarted

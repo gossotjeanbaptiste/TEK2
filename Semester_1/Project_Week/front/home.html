@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thuun - Accueil</title>
+    <link href="https://db.onlinewebfonts.com/c/46f1b844c25934e9c98dad60d32caf71?family=Nord" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <button class="logout-btn-icon" onclick="handleLogout()" title="Déconnexion">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+            </button>
+            <img src="images/logotuunbanque-03.svg" alt="Thuun Logo" class="logo-img">
+            <p class="tagline">Votre banque digitale</p>
+            <p id="user-name" class="user-name"></p>
+        </header>
+
+        <main class="main-content">
+            <div class="welcome-section">
+                <h2>Bienvenue sur Tuun</h2>
+                <p>Sélectionnez une section pour continuer</p>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <div class="nav-buttons-row">
+                <button class="bottom-nav-btn" onclick="navigateTo('courses')">
+                    <span>📚</span>
+                    <span>Cours</span>
+                </button>
+
+                <button class="bottom-nav-btn" onclick="navigateTo('account')">
+                    <span>👤</span>
+                    <span>Compte</span>
+                </button>
+
+                <button class="bottom-nav-btn" onclick="navigateTo('advisor')">
+                    <span>💼</span>
+                    <span>Conseiller</span>
+                </button>
+            </div>
+        </nav>
+
+        <footer class="footer">
+            <p>&copy; 2026 Tuun. Tous droits réservés.</p>
+            <p class="footer-credit">Conçu par Epitech | Semester 1</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

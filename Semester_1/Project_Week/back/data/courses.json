@@ -1,0 +1,258 @@
+[
+  {
+    "id": 1,
+    "ageCategory": "12-14",
+    "category": "Tous nos cours",
+    "nom": "🍬 Les Bonbons de l'Argent",
+    "description": "Apprends comment économiser tes argents de poche pour t'acheter des bonbons et des jeux vidéo!",
+    "video": "/videos/bonbons-argent.mp4",
+    "duree": "12:30",
+    "niveau": "Débutant",
+    "instructor": "Pierre Cool",
+    "date": "2026-01-10",
+    "quiz": [
+      {"question": "Pourquoi économiser son argent de poche ?", "reponse": "Pour pouvoir acheter des choses qu'on veut vraiment plus tard !"},
+      {"question": "Que signifie 'épargner' ?", "reponse": "C'est mettre de l'argent de côté au lieu de tout dépenser."},
+      {"question": "Combien économiser de mon argent de poche ?", "reponse": "Au moins 20-30%. Si tu as 10€, garde 2-3€ !"},
+      {"question": "Où garder mon argent en sécurité ?", "reponse": "Dans une tirelire ou demande un compte jeune à tes parents."}
+    ]
+  },
+  {
+    "id": 2,
+    "ageCategory": "12-14",
+    "category": "Tous nos cours",
+    "nom": "🎮 Mon Premier Porte-Monnaie",
+    "description": "Découvre comment fonctionnent les portes-monnaies numériques pour tes jeux en ligne favoris",
+    "video": "/videos/premier-portefeuille.mp4",
+    "duree": "14:15",
+    "niveau": "Débutant",
+    "instructor": "Emma Jeune",
+    "date": "2026-01-11",
+    "quiz": [
+      {"question": "Qu'est-ce qu'un porte-monnaie numérique ?", "reponse": "C'est une app où tu gardes ton argent pour acheter sur Internet."},
+      {"question": "Pourquoi j'ai besoin de mes parents ?", "reponse": "Car tu es mineur et dois avoir l'autorisation d'un adulte."},
+      {"question": "Comment protéger mon porte-monnaie ?", "reponse": "Utilise un mot de passe fort et ne clique pas sur des liens suspects."}
+    ]
+  },
+  {
+    "id": 3,
+    "ageCategory": "12-14",
+    "category": "Tous nos cours",
+    "nom": "🏆 Gagner et Dépenser Intelligemment",
+    "description": "Apprends les secrets pour ne pas dépenser tout ton argent en une journée",
+    "video": "/videos/depense-intelligente.mp4",
+    "duree": "13:45",
+    "niveau": "Débutant",
+    "instructor": "Marc Ludique",
+    "date": "2026-01-12",
+    "quiz": [
+      {"question": "Qu'est-ce qu'un achat impulsif ?", "reponse": "Acheter sans réfléchir, juste parce que tu le veux tout de suite."},
+      {"question": "Comment éviter de tout dépenser ?", "reponse": "Fais une liste, attends un jour avant d'acheter, fixe des limites."},
+      {"question": "Besoin vs Envie : c'est quoi ?", "reponse": "Besoin = essentiel (nourriture). Envie = on peut vivre sans."}
+    ]
+  },
+  {
+    "id": 13,
+    "ageCategory": "12-14",
+    "category": "Cours du jour",
+    "nom": "🌟 Spécial : Créer ton Budget",
+    "description": "Aujourd'hui, apprends à créer ton premier budget !",
+    "video": "/videos/budget-personnel-jeunes.mp4",
+    "duree": "15:00",
+    "niveau": "Débutant",
+    "instructor": "Sophie Cool",
+    "date": "2026-01-13",
+    "quiz": [
+      {"question": "Qu'est-ce qu'un budget ?", "reponse": "Un plan pour voir combien tu reçois et dépenses chaque mois."},
+      {"question": "Pourquoi créer un budget ?", "reponse": "Pour ne pas dépenser plus qu'on a et économiser !"},
+      {"question": "Comment commencer mon budget ?", "reponse": "Note tout l'argent reçu et dépensé pendant un mois."}
+    ]
+  },
+  {
+    "id": 4,
+    "ageCategory": "15-18",
+    "category": "Tous nos cours",
+    "nom": "Construire son Autonomie Financière",
+    "description": "Les bases pour gérer ton argent et planifier ton futur",
+    "video": "/videos/autonomie-financiere.mp4",
+    "duree": "18:20",
+    "niveau": "Débutant",
+    "instructor": "Sophie Martin",
+    "date": "2026-01-10",
+    "quiz": [
+      {"question": "Pourquoi l'autonomie financière est importante ?", "reponse": "Elle te prépare à la vie d'adulte et te rend responsable."},
+      {"question": "Les 3 bases de l'autonomie ?", "reponse": "Gagner de l'argent, le gérer, et épargner pour l'avenir."},
+      {"question": "Comment commencer ?", "reponse": "Trouve des petits jobs, gère ton argent de poche intelligemment."}
+    ]
+  },
+  {
+    "id": 5,
+    "ageCategory": "15-18",
+    "category": "Tous nos cours",
+    "nom": "Premiers Pas vers l'Indépendance",
+    "description": "Ouvrir un compte, gérer tes transactions, comprendre tes relevés",
+    "video": "/videos/independance.mp4",
+    "duree": "20:45",
+    "niveau": "Débutant",
+    "instructor": "Jean Dupont",
+    "date": "2026-01-11",
+    "quiz": [
+      {"question": "À quel âge ouvrir un compte ?", "reponse": "Dès 12 ans avec les parents, seul à partir de 16-18 ans."},
+      {"question": "Qu'est-ce qu'un relevé bancaire ?", "reponse": "Document listant toutes tes transactions du mois."},
+      {"question": "Pourquoi vérifier son relevé ?", "reponse": "Pour repérer les erreurs et les fraudes."}
+    ]
+  },
+  {
+    "id": 6,
+    "ageCategory": "15-18",
+    "category": "Tous nos cours",
+    "nom": "Épargner pour tes Rêves",
+    "description": "Apprends à épargner pour tes projets : voyage, études, voiture",
+    "video": "/videos/reves-finance.mp4",
+    "duree": "16:30",
+    "niveau": "Intermédiaire",
+    "instructor": "Luc Bernard",
+    "date": "2026-01-12",
+    "quiz": [
+      {"question": "Comment fixer un objectif d'épargne ?", "reponse": "Définis ce que tu veux, calcule le coût, divise par le nombre de mois."},
+      {"question": "La règle des 50/30/20 ?", "reponse": "50% besoins, 30% envies, 20% épargne."},
+      {"question": "Où mettre mon épargne ?", "reponse": "Dans un livret jeune, livret A, ou compte d'épargne."}
+    ]
+  },
+  {
+    "id": 7,
+    "ageCategory": "15-18",
+    "category": "Tous nos cours",
+    "nom": "Sécurité Numérique et Fraude",
+    "description": "Protège-toi contre les arnaques et usurpations d'identité",
+    "video": "/videos/securite-numerique.mp4",
+    "duree": "19:15",
+    "niveau": "Intermédiaire",
+    "instructor": "Pierre Leclerc",
+    "date": "2026-01-09",
+    "quiz": [
+      {"question": "Qu'est-ce que le phishing ?", "reponse": "Arnaque où des escrocs se font passer pour ta banque."},
+      {"question": "Comment reconnaître un site frauduleux ?", "reponse": "Vérifie l'URL (https://), cherche les fautes, méfie-toi des offres folles."},
+      {"question": "Victime de fraude : que faire ?", "reponse": "Préviens tes parents, contacte la banque, change tes mots de passe."}
+    ]
+  },
+  {
+    "id": 14,
+    "ageCategory": "15-18",
+    "category": "Cours du jour",
+    "nom": "🌟 Spécial : Les Cartes Bancaires",
+    "description": "Tout sur les cartes : types, utilisation, sécurité",
+    "video": "/videos/cartes-bancaires-ados.mp4",
+    "duree": "17:30",
+    "niveau": "Débutant",
+    "instructor": "Marc Finance",
+    "date": "2026-01-13",
+    "quiz": [
+      {"question": "Débit vs Crédit ?", "reponse": "Débit = ton argent. Crédit = prêt à rembourser."},
+      {"question": "Qu'est-ce que le code PIN ?", "reponse": "Ton code secret à 4 chiffres. Ne le partage JAMAIS !"},
+      {"question": "Carte perdue : que faire ?", "reponse": "Appelle immédiatement ta banque pour la bloquer."}
+    ]
+  },
+  {
+    "id": 8,
+    "ageCategory": "18-25",
+    "category": "Tous nos cours",
+    "nom": "Gestion Stratégique du Compte Courant",
+    "description": "Optimise ta trésorerie et comprends les frais bancaires",
+    "video": "/videos/gestion-compte-courant.mp4",
+    "duree": "22:45",
+    "niveau": "Intermédiaire",
+    "instructor": "Sophie Martin",
+    "date": "2026-01-10",
+    "quiz": [
+      {"question": "Qu'est-ce qu'un découvert ?", "reponse": "Quand tu dépenses plus que ce que tu as. Frais élevés !"},
+      {"question": "Frais bancaires à surveiller ?", "reponse": "Tenue de compte, commissions, frais de carte, découvert."},
+      {"question": "Comment éviter les frais ?", "reponse": "Garde un matelas de sécurité, surveille ton solde."}
+    ]
+  },
+  {
+    "id": 9,
+    "ageCategory": "18-25",
+    "category": "Tous nos cours",
+    "nom": "Planification Financière Personnelle",
+    "description": "Établis un budget et atteins tes objectifs financiers",
+    "video": "/videos/planification-financiere.mp4",
+    "duree": "25:30",
+    "niveau": "Intermédiaire",
+    "instructor": "Marie Rousseau",
+    "date": "2026-01-11",
+    "quiz": [
+      {"question": "Objectif SMART ?", "reponse": "Spécifique, Mesurable, Atteignable, Réaliste, Temporel."},
+      {"question": "Créer un budget efficace ?", "reponse": "Liste revenus, soustrais dépenses fixes, alloue le reste."},
+      {"question": "Qu'est-ce qu'un fonds d'urgence ?", "reponse": "Réserve de 3-6 mois de dépenses pour les imprévus."}
+    ]
+  },
+  {
+    "id": 10,
+    "ageCategory": "18-25",
+    "category": "Tous nos cours",
+    "nom": "Crédit et Taux d'Intérêt",
+    "description": "Comprendre le crédit et comment bien emprunter",
+    "video": "/videos/credit-taux.mp4",
+    "duree": "23:15",
+    "niveau": "Intermédiaire",
+    "instructor": "Jean Dupont",
+    "date": "2026-01-12",
+    "quiz": [
+      {"question": "Qu'est-ce qu'un taux d'intérêt ?", "reponse": "Le coût de l'emprunt, en pourcentage supplémentaire."},
+      {"question": "Crédit conso vs immobilier ?", "reponse": "Conso = biens (voiture). Immobilier = logement."},
+      {"question": "Pourquoi éviter les crédits revolving ?", "reponse": "Taux très élevés (20%) et risque d'endettement."}
+    ]
+  },
+  {
+    "id": 11,
+    "ageCategory": "18-25",
+    "category": "Tous nos cours",
+    "nom": "Introduction aux Produits d'Investissement",
+    "description": "Actions, ETF, obligations et diversification",
+    "video": "/videos/intro-investissement.mp4",
+    "duree": "28:20",
+    "niveau": "Avancé",
+    "instructor": "Luc Bernard",
+    "date": "2026-01-08",
+    "quiz": [
+      {"question": "Qu'est-ce qu'une action ?", "reponse": "Part d'une entreprise. Tu deviens actionnaire."},
+      {"question": "Pourquoi diversifier ?", "reponse": "Pour réduire les risques : si un perd, les autres compensent."},
+      {"question": "Qu'est-ce qu'un ETF ?", "reponse": "Fonds regroupant plusieurs actions. Diversification facile."}
+    ]
+  },
+  {
+    "id": 12,
+    "ageCategory": "18-25",
+    "category": "Tous nos cours",
+    "nom": "Fiscalité et Déclaration d'Impôts",
+    "description": "Remplir ta déclaration et optimiser ta situation fiscale",
+    "video": "/videos/fiscalite.mp4",
+    "duree": "24:40",
+    "niveau": "Avancé",
+    "instructor": "Pierre Leclerc",
+    "date": "2026-01-09",
+    "quiz": [
+      {"question": "À quel âge déclarer ses impôts ?", "reponse": "Dès 18 ans avec des revenus ou détaché du foyer parental."},
+      {"question": "Qu'est-ce qu'une déduction fiscale ?", "reponse": "Dépense à soustraire pour payer moins d'impôts (dons, frais pro)."},
+      {"question": "Quand faire sa déclaration ?", "reponse": "Entre avril et juin, pour les revenus de l'année précédente."}
+    ]
+  },
+  {
+    "id": 15,
+    "ageCategory": "18-25",
+    "category": "Cours du jour",
+    "nom": "🌟 Spécial : Optimiser ses Finances 2026",
+    "description": "Stratégies d'épargne et investissements pour jeunes actifs",
+    "video": "/videos/optimisation-finances-2026.mp4",
+    "duree": "26:00",
+    "niveau": "Intermédiaire",
+    "instructor": "Alexandre Expert",
+    "date": "2026-01-13",
+    "quiz": [
+      {"question": "Meilleure stratégie d'épargne 2026 ?", "reponse": "Automatiser l'épargne dès réception du salaire, viser 20% minimum."},
+      {"question": "Meilleurs placements pour débuter ?", "reponse": "Livret A (urgence), PEA (actions), assurance-vie (long terme)."},
+      {"question": "Protéger son argent de l'inflation ?", "reponse": "Investir dans des actifs valorisables (actions, immobilier, or)."}
+    ]
+  }
+]

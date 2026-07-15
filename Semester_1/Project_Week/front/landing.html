@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thuun - Accueil</title>
+    <link href="https://db.onlinewebfonts.com/c/46f1b844c25934e9c98dad60d32caf71?family=Nord" rel="stylesheet" type="text/css"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'New Nord Wide', 'Nord', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a2463 0%, #247ba0 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 24px;
+            line-height: 100%;
+            letter-spacing: 0%;
+            text-align: center;
+        }
+        
+        .loader {
+            text-align: center;
+            color: white;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top: 5px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        h1 {
+            font-size: 48px;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <div class="spinner"></div>
+        <img src="images/logotuunbanque-03.svg" alt="Thuun Logo" class="logo">
+        <p>Redirection en cours...</p>
+    </div>
+    
+    <script>
+        // Vérifier si l'utilisateur est connecté
+        const token = localStorage.getItem('thuun_token');
+        
+        if (token) {
+            // Aller à la page d'accueil si connecté
+            window.location.href = 'home.html';
+        } else {
+            // Aller à la connexion si pas connecté
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

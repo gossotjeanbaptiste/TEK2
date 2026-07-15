@@ -1,0 +1,55 @@
+Wrong flying sequence, go back to the lab !
+
+Liftoff in 5...
+Liftoff in 4...
+Liftoff in 3...
+Main engine ignition
+Liftoff in 2...
+Liftoff in 1...
+Liftoff ! We have liftoff !
+T+10 : Everything is fine
+T+20 : Everything is fine
+T+20 : Main engine cutoff
+T+21 : Main engine decoupling
+T+30 : Secondary engines ignition
+T+30 : Everything is fine
+T+40 : Everything is fine
+T+50 : Everything is fine
+T+60 : Everything is fine
+T+65 : Secondary engines cutoff. We're in orbit !
+
+Liftoff in 10...
+Liftoff in 9...
+Liftoff in 8...
+Liftoff in 7...
+Liftoff in 6...
+Liftoff in 5...
+Liftoff in 4...
+Main engine ignition
+Liftoff in 3...
+Liftoff in 2...
+Liftoff in 1...
+Liftoff ! We have liftoff !
+T+10 : Everything is fine
+T+20 : Everything is fine
+T+30 : Everything is fine
+T+40 : Everything is fine
+T+50 : Everything is fine
+T+60 : Everything is fine
+T+70 : Everything is fine
+T+80 : Everything is fine
+T+90 : Everything is fine
+T+100 : Everything is fine
+T+110 : Everything is fine
+T+120 : Everything is fine
+T+130 : Everything is fine
+T+140 : Everything is fine
+T+149 : Main engine cutoff
+T+150 : Main engine decoupling
+T+150 : Everything is fine
+T+159 : Secondary engines ignition
+T+160 : Everything is fine
+T+170 : Everything is fine
+T+180 : Everything is fine
+T+190 : Everything is fine
+T+194 : Secondary engines cutoff. We're in orbit !

@@ -1,0 +1,12 @@
+---
+# Fichier de groupe pour personnaliser les variables par groupe
+
+# Variables spécifiques au groupe web
+[web:vars]
+app_port=3000
+nodejs_version=18.x
+
+# Variables spécifiques au groupe redis
+[redis:vars]
+redis_port=6379
+redis_bind=127.0.0.1

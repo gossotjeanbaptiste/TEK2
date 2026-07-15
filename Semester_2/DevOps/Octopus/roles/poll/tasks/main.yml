@@ -1,0 +1,46 @@
+---
+# 1. INSTALLATION DES DÉPENDANCES APPLICATIVES
+- name: Installer Python, Flask et le client Redis pour l'application
+  apt:
+    name:
+      - python3
+      - python3-pip
+      - python3-flask
+      - python3-redis
+    state: present
+
+# 2. PRÉPARATION DES DOSSIERS ET CODE SOURCE
+- name: Créer le répertoire pour l'application Poll
+  file:
+    path: /opt/poll
+    state: directory
+    mode: '0755'
+
+- name: Désarchiver le code de Poll
+  unarchive:
+    src: ../../poll.tar
+    dest: /opt/poll
+
+# 3. CONFIGURATION DU SERVICE SYSTEMD
+- name: Copier le fichier de service systemd pour Poll
+  copy:
+    src: poll.service
+    dest: /etc/systemd/system/poll.service
+    mode: '0644'
+  register: poll_service_status
+
+# 4. GESTION DU CYCLE DE VIE DU SERVICE (IDEMPOTENCE)
+- name: Recharger systemd et redémarrer Poll si le fichier service a changé
+  systemd:
+    name: poll
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+  when: poll_service_status.changed
+
+- name: S'assurer que Poll tourne activement au boot (si pas de changement)
+  systemd:
+    name: poll
+    state: started
+    enabled: yes
+  when: not poll_service_status.changed

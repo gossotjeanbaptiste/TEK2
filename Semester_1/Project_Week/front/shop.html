@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thuun - Offres</title>
+    <link href="https://db.onlinewebfonts.com/c/46f1b844c25934e9c98dad60d32caf71?family=Nord" rel="stylesheet" type="text/css"/>
+    <style>
+        /* Page shop - design iPhone 16 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #d0e2f4;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'New Nord Wide', 'Heavy', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-weight: 900;
+            font-size: 24px;
+            line-height: 100%;
+            letter-spacing: 0%;
+            text-align: center;
+        }
+
+        .shop-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            max-height: 100vh;
+        }
+
+        /* Header minimaliste */
+        .shop-header {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .shop-header img {
+            width: 480px;
+            height: auto;
+        }
+
+        .shop-header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #0a2463;
+            font-weight: 700;
+        }
+
+        /* Main content */
+        .shop-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 30px 20px 20px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative background shape */
+        .shop-bg-shape {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 40%;
+            background: #DB7C3B;
+            clip-path: polygon(0 30%, 100% 30%, 100% 100%, 0 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Floating wave */
+        .floating-wave {
+            position: fixed;
+            bottom: 160px;
+            left: 0px;
+            width: 200%;
+            height: 80px;
+            z-index: 1;
+            pointer-events: none;
+            overflow: visible;
+        }
+        
+        .wave-svg {
+            width: 200%;
+            height: 100%;
+            display: block;
+        }
+
+        .wave-fill {
+            animation: moveWave 8s linear infinite;
+        }
+
+        @keyframes moveWave {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-2400px);
+            }
+        }
+
+        /* Decorative circles */
+        .deco-circle {
+            position: fixed;
+            background: #DB7C3B;
+            border-radius: 50%;
+            z-index: 0;
+            animation: float linear infinite;
+            pointer-events: none;
+        }
+
+        .deco-circle-1 {
+            width: 34px;
+            height: 35px;
+            bottom: 35%;
+            left: 15%;
+            animation-duration: 2s;
+        }
+
+        .deco-circle-2 {
+            width: 15px;
+            height: 15px;
+            top: 25%;
+            left: 50%;
+            animation-duration: 2.5s;
+            animation-direction: reverse;
+        }
+
+        .deco-circle-3 {
+            width: 39px;
+            height: 41px;
+            top: 15%;
+            right: 10%;
+            animation-duration: 2.2s;
+        }
+
+        .deco-circle-4 {
+            width: 39px;
+            height: 41px;
+            bottom: 20%;
+            left: 10%;
+            animation-duration: 2.7s;
+            animation-direction: reverse;
+        }
+
+        .deco-circle-5 {
+            width: 20px;
+            height: 21px;
+            top: 5%;
+            right: 5%;
+            animation-duration: 2.3s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(20px);
+            }
+        }
+
+        /* Content cards grid */
+        .content-cards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            max-width: 350px;
+            width: 100%;
+            z-index: 2;
+        }
+
+        /* Content card */
+        .content-card {
+            background: white;
+            border-radius: 16px;
+            padding: 15px 5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+            animation: fadeIn 0.8s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .content-card h2 {
+            color: #0a2463;
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .content-card p {
+            color: #666;
+            font-size: 12px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Bottom nav circles */
+        .bottom-circles {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 420px;
+        }
+
+        .circle-nav {
+            width: 95px;
+            height: 95px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 20px;
+            border: none;
+            gap: 2px;
+        }
+
+        .circle-nav-label {
+            font-size: 9px;
+            color: #DB7C3B;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.1;
+            width: 100%;
+            padding: 0 4px;
+        }
+
+        .circle-nav:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Footer */
+        .shop-footer {
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #f0f0f0;
+            background: white;
+            z-index: 3;
+        }
+
+        .shop-footer p {
+            margin: 5px 0;
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .bottom-circles {
+                gap: 8px;
+            }
+
+            .circle-nav {
+                width: 80px;
+                height: 80px;
+                font-size: 16px;
+            }
+
+            .circle-nav-label {
+                font-size: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="shop-container">
+        <!-- Background elements -->
+        <div class="floating-wave wave-1">
+            <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#DB7C3B"/>
+            </svg>
+        </div>
+        <div class="floating-wave wave-2">
+            <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#E89761"/>
+            </svg>
+        </div>
+        <div class="floating-wave wave-3">
+            <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#F0B896"/>
+            </svg>
+        </div>
+        <div class="shop-bg-shape"></div>
+        <div class="deco-circle deco-circle-1"></div>
+        <div class="deco-circle deco-circle-2"></div>
+        <div class="deco-circle deco-circle-3"></div>
+        <div class="deco-circle deco-circle-4"></div>
+        <div class="deco-circle deco-circle-5"></div>
+
+        <!-- Header -->
+        <div class="shop-header">
+            <img src="images/logotuunbanque-03.svg" alt="Thuun Logo" class="logo">
+        </div>
+
+        <!-- Main content -->
+        <div class="shop-main">
+            <div class="content-cards-grid">
+                <div class="content-card">
+                    <h2>🏠</h2>
+                    <p style="font-weight: bold; color: #0a2463;">Essentielle</p>
+                    <p>Gratuit</p>
+                    <p style="font-size: 11px;">Pas de conseiller<br>Virement illimité<br>Pas de découvert</p>
+                </div>
+                <div class="content-card">
+                    <h2>📞</h2>
+                    <p style="font-weight: bold; color: #0a2463;">Standard</p>
+                    <p>12€/mois</p>
+                    <p style="font-size: 11px;">Conseiller 9h-17h<br>Virement illimité<br>Pas de découvert</p>
+                </div>
+                <div class="content-card">
+                    <h2>⭐</h2>
+                    <p style="font-weight: bold; color: #0a2463;">Premium</p>
+                    <p>24€/mois</p>
+                    <p style="font-size: 11px;">Conseiller 24/24<br>Virement illimité<br>Pas de découvert</p>
+                </div>
+                <div class="content-card">
+                    <h2>👑</h2>
+                    <p style="font-weight: bold; color: #0a2463;">Infinite</p>
+                    <p>35€/mois</p>
+                    <p style="font-size: 11px;">Conseiller 24/24<br>Virement illimité<br>Découvert autorisé</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom navigation circles -->
+        <div class="bottom-circles">
+            <button class="circle-nav" onclick="window.location.href='account.html'" title="Compte">
+                <img src="images/picto_banque-02.svg" alt="Compte" style="width: 40px; height: 40px;">
+                <div class="circle-nav-label">Compte</div>
+            </button>
+            <button class="circle-nav" onclick="window.location.href='courses.html'" title="Cours quotidien">
+                <img src="images/picto_banque-04.svg" alt="Cours" style="width: 40px; height: 40px;">
+                <div class="circle-nav-label">Cours</div>
+            </button>
+            <button class="circle-nav" onclick="window.location.href='advisor.html'" title="Conseiller">
+                <img src="images/picto_banque-01.svg" alt="Conseiller" style="width: 40px; height: 40px;">
+                <div class="circle-nav-label">Conseiller</div>
+            </button>
+            <button class="circle-nav" onclick="window.location.href='shop.html'" title="Offre à la demande">
+                <img src="images/picto_banque-03.svg" alt="Offres" style="width: 40px; height: 40px;">
+                <div class="circle-nav-label">Offres</div>
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="shop-footer">
+            <p>&copy; 2026 Tuun. Tous droits réservés.</p>
+        </div>
+    </div>
+</body>
+</html>

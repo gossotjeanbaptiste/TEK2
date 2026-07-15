@@ -1,0 +1,105 @@
+---
+# Variables avancées pour personnalisation du déploiement
+
+# ========================================
+# Configuration globale
+# ========================================
+deployment_name: "G-DOP-400 Octopus Bootstrap"
+deployment_version: "1.0.0"
+deployment_environment: "production"
+
+# ========================================
+# Configuration Base Role
+# ========================================
+
+# Politique de mise à jour
+base_auto_upgrade: true
+base_cache_valid_time: 3600
+
+# Packages système supplémentaires (au-delà des essentiels)
+base_extra_packages: []
+# Exemples:
+#   - nginx
+#   - postgresql-client
+#   - redis-tools
+
+# Configuration utilisateurs supplémentaires
+base_additional_users: []
+# Exemple:
+# - name: deployer
+#   shell: /bin/bash
+#   groups: sudo
+
+# ========================================
+# Configuration Redis Role
+# ========================================
+
+# Configuration Redis avancée
+redis_tcp_backlog: 511
+redis_timeout: 0
+redis_tcp_keepalive: 300
+redis_loglevel: notice
+
+# Persistence Redis
+redis_save: "900 1 300 10 60 10000"  # RDB snapshots
+
+# Mémoire
+redis_maxmemory: "256mb"
+redis_maxmemory_policy: "noeviction"
+
+# Authentification (optionnel)
+redis_requirepass: ""  # Laisser vide pour pas de mot de passe
+
+# ========================================
+# Configuration Node.js Role
+# ========================================
+
+# Build essentials (pour compiler les modules natifs)
+nodejs_build_essential: true
+nodejs_build_packages:
+  - build-essential
+  - python3
+
+# Outils globaux npm (optionnel)
+nodejs_global_packages: []
+# Exemples:
+#   - pm2
+#   - yarn
+
+# ========================================
+# Configuration Deploy Role
+# ========================================
+
+# Configuration application
+app_environment_variables:
+  NODE_ENV: "production"
+  NODE_OPTIONS: "--max-old-space-size=512"
+  REDIS_URL: "redis://127.0.0.1:6379"
+
+# Performance
+app_worker_restart_delay: 5000
+
+# Logs
+app_log_level: "info"
+app_log_max_size: "10M"
+app_log_retention_days: 7
+
+# Mise à jour de dépendances
+app_npm_ci: true  # Utiliser npm ci au lieu de npm install
+app_npm_audit_fix: false
+
+# ========================================
+# Configuration Monitoring (futur)
+# ========================================
+
+monitoring_enabled: false
+monitoring_prometheus_port: 9090
+monitoring_grafana_port: 3000
+
+# ========================================
+# Configuration Backup (futur)
+# ========================================
+
+backup_enabled: false
+backup_schedule: "0 2 * * *"  # 2h du matin
+backup_retention_days: 30

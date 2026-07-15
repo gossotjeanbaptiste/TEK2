@@ -1,0 +1,27 @@
+---
+# Step 2 - Role-playing development
+# Playbook principal qui orchestre tous les rôles pour configurer l'infrastructure
+
+- name: Configure all hosts with base configuration
+  hosts: all
+  become: true
+  roles:
+    - base
+
+- name: Install and configure Redis on cache servers
+  hosts: redis
+  become: true
+  roles:
+    - redis
+
+- name: Install Node.js on web servers
+  hosts: web
+  become: true
+  roles:
+    - nodejs
+
+- name: Deploy application on web servers
+  hosts: web
+  become: true
+  roles:
+    - deploy

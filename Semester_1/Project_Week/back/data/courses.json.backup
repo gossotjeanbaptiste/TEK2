@@ -1,0 +1,240 @@
+[
+  {
+    "id": 1,
+    "ageCategory": "12-14",
+    "category": "Tous nos cours",
+    "nom": "🍬 Les Bonbons de l'Argent",
+    "description": "Apprends comment économiser tes argents de poche pour t'acheter des bonbons et des jeux vidéo!",
+    "video": "/videos/bonbons-argent.mp4",
+    "duree": "12:30",
+    "niveau": "Débutant",
+    "instructor": "Pierre Cool",
+    "date": "2026-01-10",
+    "quiz": [
+      {
+        "question": "Pourquoi est-ce important d'économiser son argent de poche ?",
+        "reponse": "Pour pouvoir acheter des choses qu'on veut vraiment plus tard, comme des jeux vidéo ou des bonbons préférés !"
+      },
+      {
+        "question": "Que signifie 'épargner' ?",
+        "reponse": "C'est mettre de l'argent de côté au lieu de tout dépenser immédiatement."
+      },
+      {
+        "question": "Combien devrais-je économiser de mon argent de poche ?",
+        "reponse": "Au moins 20-30% de ce que tu reçois. Si tu as 10€, essaie d'en garder 2-3€ !"
+      },
+      {
+        "question": "Où puis-je garder mon argent en sécurité ?",
+        "reponse": "Dans une tirelire, un porte-monnaie fermé, ou demande à tes parents d'ouvrir un compte jeune."
+      },
+      {
+        "question": "Comment savoir si j'achète trop de bonbons ?",
+        "reponse": "Si tu n'as plus d'argent pour d'autres choses que tu veux ou si ta tirelire est toujours vide !"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "ageCategory": "12-14",
+    "category": "Tous nos cours",
+    "nom": "🎮 Mon Premier Porte-Monnaie",
+    "description": "Découvre comment fonctionnent les portes-monnaies numériques pour tes jeux en ligne favoris",
+    "video": "/videos/premier-portefeuille.mp4",
+    "duree": "14:15",
+    "niveau": "Débutant",
+    "instructor": "Emma Jeune",
+    "date": "2026-01-11",
+    "quiz": [
+      {
+        "question": "Qu'est-ce qu'un porte-monnaie numérique ?",
+        "reponse": "C'est une application ou un compte en ligne où tu gardes ton argent pour acheter des choses sur Internet."
+      },
+      {
+        "question": "Pourquoi ai-je besoin de mes parents pour un porte-monnaie numérique ?",
+        "reponse": "Parce qu'en étant mineur, tu dois avoir l'autorisation et la supervision d'un adulte pour gérer de l'argent en ligne."
+      },
+      {
+        "question": "Est-ce que je peux acheter tout ce que je veux avec un porte-monnaie numérique ?",
+        "reponse": "Non, certains achats sont réservés aux adultes. De plus, il faut toujours vérifier avec tes parents avant d'acheter."
+      },
+      {
+        "question": "Comment protéger mon porte-monnaie numérique ?",
+        "reponse": "Utilise un mot de passe fort, ne le partage avec personne (sauf tes parents), et ne clique pas sur des liens suspects."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "ageCategory": "12-14",
+    "category": "Tous nos cours",
+    "nom": "🏆 Gagner et Dépenser Intelligemment",
+    "description": "Apprends les secrets pour ne pas dépenser tout ton argent en une journée",
+    "video": "/videos/depense-intelligente.mp4",
+    "duree": "13:45",
+    "niveau": "Débutant",
+    "instructor": "Marc Ludique",
+    "date": "2026-01-12",
+    "quiz": [
+      {
+        "question": "Qu'est-ce qu'un achat impulsif ?",
+        "reponse": "C'est quand tu achètes quelque chose sans réfléchir, juste parce que tu le vois et que tu le veux tout de suite."
+      },
+      {
+        "question": "Comment éviter de tout dépenser d'un coup ?",
+        "reponse": "Fais une liste de ce dont tu as vraiment besoin, attends un jour avant d'acheter, et fixe-toi des limites de dépense."
+      },
+      {
+        "question": "C'est quoi la différence entre un besoin et une envie ?",
+        "reponse": "Un besoin c'est quelque chose d'essentiel (nourriture, vêtements). Une envie c'est quelque chose qu'on aimerait avoir mais qu'on peut vivre sans."
+      },
+      {
+        "question": "Que faire avant d'acheter quelque chose de cher ?",
+        "reponse": "Attendre quelques jours pour être sûr de le vouloir vraiment, comparer les prix, et vérifier si tu as assez d'argent."
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "ageCategory": "12-14",
+    "category": "Cours du jour",
+    "nom": "🌟 Spécial du Jour : Créer ton Budget Personnel",
+    "description": "Aujourd'hui, apprends à créer ton premier budget personnel ! Découvre comment suivre tes dépenses et économiser pour tes projets. Parfait pour les débutants !",
+    "video": "/videos/budget-personnel-jeunes.mp4",
+    "duree": "15:00",
+    "niveau": "Débutant",
+    "instructor": "Sophie Cool",
+    "date": "2026-01-13"
+  },
+  {
+    "id": 4,
+    "ageCategory": "15-18",
+    "category": "Tous nos cours",
+    "nom": "Construire son Autonomie Financière",
+    "description": "Les bases pour gérer ton argent de poche et commencer à planifier ton futur",
+    "video": "/videos/autonomie-financiere.mp4",
+    "duree": "18:20",
+    "niveau": "Débutant",
+    "instructor": "Sophie Martin",
+    "date": "2026-01-10"
+  },
+  {
+    "id": 5,
+    "ageCategory": "15-18",
+    "category": "Tous nos cours",
+    "nom": "Premiers Pas vers l'Indépendance",
+    "description": "Comment ouvrir un compte bancaire, gérer tes transactions et comprendre tes relevés",
+    "video": "/videos/independance.mp4",
+    "duree": "20:45",
+    "niveau": "Débutant",
+    "instructor": "Jean Dupont",
+    "date": "2026-01-11"
+  },
+  {
+    "id": 6,
+    "ageCategory": "15-18",
+    "category": "Tous nos cours",
+    "nom": "Épargner pour tes Rêves",
+    "description": "Apprends à épargner pour financer tes projets : voyage, études, voiture...",
+    "video": "/videos/reves-finance.mp4",
+    "duree": "16:30",
+    "niveau": "Intermédiaire",
+    "instructor": "Luc Bernard",
+    "date": "2026-01-12"
+  },
+  {
+    "id": 7,
+    "ageCategory": "15-18",
+    "category": "Tous nos cours",
+    "nom": "Sécurité Numérique et Fraude",
+    "description": "Protège-toi contre les arnaques en ligne et les usurpations d'identité",
+    "video": "/videos/securite-numerique.mp4",
+    "duree": "19:15",
+    "niveau": "Intermédiaire",
+    "instructor": "Pierre Leclerc",
+    "date": "2026-01-09"
+  },
+  {
+    "id": 14,
+    "ageCategory": "15-18",
+    "category": "Cours du jour",
+    "nom": "🌟 Spécial du Jour : Les Cartes Bancaires Expliquées",
+    "description": "Aujourd'hui, découvre tout sur les cartes bancaires : comment ça marche, les différents types, et comment les utiliser en toute sécurité. Un must pour ton indépendance !",
+    "video": "/videos/cartes-bancaires-ados.mp4",
+    "duree": "17:30",
+    "niveau": "Débutant",
+    "instructor": "Marc Finance",
+    "date": "2026-01-13"
+  },
+  {
+    "id": 8,
+    "ageCategory": "18-25",
+    "category": "Tous nos cours",
+    "nom": "Gestion Stratégique du Compte Courant",
+    "description": "Optimise ta gestion de trésorerie et comprends les frais bancaires",
+    "video": "/videos/gestion-compte-courant.mp4",
+    "duree": "22:45",
+    "niveau": "Intermédiaire",
+    "instructor": "Sophie Martin",
+    "date": "2026-01-10"
+  },
+  {
+    "id": 9,
+    "ageCategory": "18-25",
+    "category": "Tous nos cours",
+    "nom": "Planification Financière Personnelle",
+    "description": "Établis un budget réaliste et atteins tes objectifs financiers à court et long terme",
+    "video": "/videos/planification-financiere.mp4",
+    "duree": "25:30",
+    "niveau": "Intermédiaire",
+    "instructor": "Marie Rousseau",
+    "date": "2026-01-11"
+  },
+  {
+    "id": 10,
+    "ageCategory": "18-25",
+    "category": "Tous nos cours",
+    "nom": "Crédit et Taux d'Intérêt",
+    "description": "Comprendre les mécanismes du crédit, les taux d'intérêt et comment bien emprunter",
+    "video": "/videos/credit-taux.mp4",
+    "duree": "23:15",
+    "niveau": "Intermédiaire",
+    "instructor": "Jean Dupont",
+    "date": "2026-01-12"
+  },
+  {
+    "id": 11,
+    "ageCategory": "18-25",
+    "category": "Tous nos cours",
+    "nom": "Introduction aux Produits d'Investissement",
+    "description": "Débute avec les bases de l'investissement : actions, ETF, obligations et diversification",
+    "video": "/videos/intro-investissement.mp4",
+    "duree": "28:20",
+    "niveau": "Avancé",
+    "instructor": "Luc Bernard",
+    "date": "2026-01-08"
+  },
+  {
+    "id": 12,
+    "ageCategory": "18-25",
+    "category": "Tous nos cours",
+    "nom": "Fiscalité et Déclaration d'Impôts",
+    "description": "Apprends comment remplir ta déclaration et optimise ta situation fiscale",
+    "video": "/videos/fiscalite.mp4",
+    "duree": "24:40",
+    "niveau": "Avancé",
+    "instructor": "Pierre Leclerc",
+    "date": "2026-01-09"
+  },
+  {
+    "id": 15,
+    "ageCategory": "18-25",
+    "category": "Cours du jour",
+    "nom": "🌟 Spécial du Jour : Optimiser ses Finances en 2026",
+    "description": "Aujourd'hui, découvre les meilleures stratégies pour optimiser tes finances en 2026 : épargne, investissements malins et gestion de patrimoine pour jeunes actifs.",
+    "video": "/videos/optimisation-finances-2026.mp4",
+    "duree": "26:00",
+    "niveau": "Intermédiaire",
+    "instructor": "Alexandre Expert",
+    "date": "2026-01-13"
+  }
+]

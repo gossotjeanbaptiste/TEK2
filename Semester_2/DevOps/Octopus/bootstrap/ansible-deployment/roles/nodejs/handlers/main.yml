@@ -1,0 +1,7 @@
+---
+# Handlers for the nodejs role
+
+- name: Restart nodejs application
+  service:
+    name: my-awesome-app
+    state: restarted

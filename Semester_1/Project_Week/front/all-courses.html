@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thuun - Mes Cours</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Page courses - design iPhone 16 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #d0e2f4;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        .courses-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            max-height: 100vh;
+        }
+
+        /* Header minimaliste */
+        .courses-header {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .courses-header img {
+            width: 480px;
+            height: auto;
+        }
+
+        .courses-header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #0a2463;
+            font-weight: 700;
+        }
+
+        /* Main content */
+        .courses-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Decorative background shape */
+        .courses-bg-shape {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 40%;
+            background: #DB7C3B;
+            clip-path: polygon(0 30%, 100% 30%, 100% 100%, 0 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Floating wave */
+        .floating-wave {
+            position: fixed;
+            bottom: 160px;
+            left: 0px;
+            width: 200%;
+            height: 80px;
+            z-index: 1;
+            pointer-events: none;
+            overflow: visible;
+        }
+        
+        .wave-svg {
+            width: 200%;
+            height: 100%;
+            display: block;
+        }
+
+        .wave-fill {
+            animation: moveWave 8s linear infinite;
+        }
+
+        .wave-1 .wave-fill {
+            animation: moveWave 8s linear infinite;
+            opacity: 1;
+        }
+
+        .wave-2 .wave-fill {
+            animation: moveWave 10s linear infinite;
+            opacity: 1;
+            animation-delay: -2s;
+        }
+
+        .wave-3 .wave-fill {
+            animation: moveWave 12s linear infinite;
+            opacity: 1;
+            animation-delay: -4s;
+        }
+
+        .wave-3 {
+            z-index: 0;
+        }
+
+        .wave-2 {
+            z-index: 1;
+        }
+
+        .wave-1 {
+            z-index: 2;
+        }
+
+        @keyframes moveWave {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-2400px);
+            }
+        }
+
+        /* Decorative circles */
+        .deco-circle {
+            position: fixed;
+            background: #DB7C3B;
+            border-radius: 50%;
+            z-index: 0;
+            animation: float linear infinite;
+            pointer-events: none;
+        }
+
+        .deco-circle-1 {
+            width: 34px;
+            height: 35px;
+            bottom: 35%;
+            left: 15%;
+            animation-duration: 2s;
+        }
+
+        .deco-circle-2 {
+            width: 15px;
+            height: 15px;
+            top: 25%;
+            left: 50%;
+            animation-duration: 2.5s;
+            animation-direction: reverse;
+        }
+
+        .deco-circle-3 {
+            width: 39px;
+            height: 41px;
+            top: 15%;
+            right: 10%;
+            animation-duration: 2.2s;
+        }
+
+        .deco-circle-4 {
+            width: 39px;
+            height: 41px;
+            bottom: 20%;
+            left: 10%;
+            animation-duration: 2.7s;
+            animation-direction: reverse;
+        }
+
+        .deco-circle-5 {
+            width: 20px;
+            height: 21px;
+            top: 5%;
+            right: 5%;
+            animation-duration: 2.3s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(20px);
+            }
+        }
+
+        /* Categories selector */
+        .categories-selector {
+            z-index: 3;
+            display: none;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 15px 20px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .category-btn {
+            padding: 10px 18px;
+            border: 2px solid #DB7C3B;
+            background: white;
+            color: #DB7C3B;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            animation: slideUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .category-btn:nth-child(1) { animation-delay: 0.1s; }
+        .category-btn:nth-child(2) { animation-delay: 0.2s; }
+        .category-btn:nth-child(3) { animation-delay: 0.3s; }
+
+        .category-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(219, 124, 59, 0.3);
+        }
+
+        .category-btn.active {
+            background: #DB7C3B;
+            color: white;
+            box-shadow: 0 6px 16px rgba(219, 124, 59, 0.4);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scrollable courses container */
+        .courses-scroll-container {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 20px;
+            padding-bottom: 200px;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Category section */
+        .age-category-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .category-title {
+            font-size: 18px;
+            color: #0a2463;
+            font-weight: 700;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .subcategory {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .subcategory-title {
+            font-size: 15px;
+            color: #DB7C3B;
+            font-weight: 600;
+        }
+
+        /* Courses Grid */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            animation: fadeIn 0.8s ease;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Carousel for "Tous les cours" */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            width: 100%;
+        }
+
+        .carousel-slide {
+            flex: 0 0 100%;
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 280px;
+            animation: fadeIn 0.8s ease;
+            text-align: center;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 10px;
+            background: rgba(219, 124, 59, 0.9);
+            border: none;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-nav:hover {
+            background: #DB7C3B;
+            transform: scale(1.1);
+        }
+
+        .carousel-nav.prev {
+            left: 10px;
+        }
+
+        .carousel-nav.next {
+            right: 10px;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        .dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        .course-title {
+            font-size: 18px;
+            color: #0a2463;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .course-description {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .meta-tag {
+            background: #DB7C3B;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .meta-tag.debutant {
+            background: #4caf50;
+        }
+
+        .meta-tag.intermediaire {
+            background: #ff9800;
+        }
+
+        .meta-tag.avance {
+            background: #f44336;
+        }
+
+        .course-duration {
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        .course-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .course-btn {
+            flex: 1;
+            padding: 12px 16px;
+            background: #DB7C3B;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(219, 124, 59, 0.2);
+        }
+
+        .course-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(219, 124, 59, 0.3);
+        }
+
+        /* Video Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-content {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .video-player {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+        }
+
+        .close-video-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            font-size: 32px;
+            color: white;
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 210;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .close-video-btn:hover {
+            background: rgba(219, 124, 59, 0.9);
+            transform: rotate(90deg);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Quiz Modal */
+        .quiz-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .quiz-modal.active {
+            display: flex;
+        }
+
+        .quiz-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quiz-title {
+            font-size: 20px;
+            color: #0a2463;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .quiz-subtitle {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .close-quiz-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 101;
+            transition: all 0.3s ease;
+        }
+
+        .close-quiz-btn:hover {
+            transform: rotate(90deg);
+            color: #DB7C3B;
+        }
+
+        /* Postit Carousel */
+        .postit-carousel-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            perspective: 1000px;
+        }
+
+        .postit-carousel {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .postit {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            cursor: pointer;
+            perspective: 1000px;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .postit-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .postit.flipped .postit-inner {
+            transform: rotateY(180deg);
+        }
+
+        .postit-front,
+        .postit-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            line-height: 1.4;
+            font-size: 13px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .postit-front {
+            background: #ffeb3b;
+            color: #333;
+        }
+
+        .postit-back {
+            background: #4caf50;
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .postit-controls {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .postit-arrow {
+            background: rgba(219, 124, 59, 0.9);
+            border: none;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .postit-arrow:hover {
+            background: #DB7C3B;
+            transform: scale(1.1);
+        }
+
+        .postit-controls {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .postit-arrow {
+            background: rgba(219, 124, 59, 0.9);
+            border: none;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .postit-arrow:hover {
+            background: #DB7C3B;
+            transform: scale(1.1);
+        }
+
+        /* Back button */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Bottom nav circles */
+        .bottom-circles {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 420px;
+        }
+
+        .circle-nav {
+            width: 95px;
+            height: 95px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 20px;
+            border: none;
+            gap: 2px;
+        }
+
+        .circle-nav-label {
+            font-size: 9px;
+            color: #DB7C3B;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.1;
+            width: 100%;
+            padding: 0 4px;
+        }
+
+        .circle-nav:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Footer */
+        .courses-footer {
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #f0f0f0;
+            background: white;
+            z-index: 3;
+        }
+
+        .courses-footer p {
+            margin: 5px 0;
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .courses-scroll-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="courses-container">
+        <!-- Background elements -->
+        <div class="floating-wave wave-1">
+            <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#DB7C3B"/>
+            </svg>
+        </div>
+        <div class="floating-wave wave-2">
+            <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#E89761"/>
+            </svg>
+        </div>
+        <div class="floating-wave wave-3">
+            <svg class="wave-svg" viewBox="0 0 3600 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="wave-fill" d="M0,40 Q300,10 600,40 T1200,40 L1200,80 L0,80 Z M1200,40 Q1500,10 1800,40 T2400,40 L2400,80 L1200,80 Z M2400,40 Q2700,10 3000,40 T3600,40 L3600,80 L2400,80 Z" fill="#F0B896"/>
+            </svg>
+        </div>
+        <div class="courses-bg-shape"></div>
+        <div class="deco-circle deco-circle-1"></div>
+        <div class="deco-circle deco-circle-2"></div>
+        <div class="deco-circle deco-circle-3"></div>
+        <div class="deco-circle deco-circle-4"></div>
+        <div class="deco-circle deco-circle-5"></div>
+
+        <!-- Back button -->
+        <button class="back-btn" onclick="window.location.href='courses.html'" title="Retour">‹</button>
+
+        <!-- Header -->
+        <div class="courses-header">
+            <img src="images/logotuunbanque-03.svg" alt="Thuun Logo">
+        </div>
+
+        <!-- Main content -->
+        <div class="courses-main">
+            <!-- Categories selector -->
+            <div class="categories-selector">
+                <button class="category-btn active" onclick="scrollToCategory('12-14')">🎮 12-14 ans</button>
+                <button class="category-btn" onclick="scrollToCategory('15-18')">🎓 15-18 ans</button>
+                <button class="category-btn" onclick="scrollToCategory('18-25')">💼 18-25 ans</button>
+            </div>
+
+            <!-- Scrollable courses container -->
+            <div class="courses-scroll-container" id="coursesScroll">
+                <!-- Categories will be generated by JS -->
+            </div>
+        </div>
+
+        <!-- Quiz Modal -->
+        <div class="quiz-modal" id="quizModal">
+            <button class="close-quiz-btn" onclick="closeQuiz()">×</button>
+            <div class="quiz-content">
+                <div class="quiz-header">
+                    <div class="quiz-title" id="quizTitle">Quiz</div>
+                    <div class="quiz-subtitle" id="quizSubtitle">Questions et réponses</div>
+                </div>
+                <div class="postit-carousel-container">
+                    <div class="postit-carousel" id="postitCarousel"></div>
+                    <div class="postit-controls">
+                        <button class="postit-arrow" onclick="prevPostit()">‹</button>
+                        <button class="postit-arrow" onclick="nextPostit()">›</button>
+                    </div>
+                </div>
+                <div style="margin-top: 20px; text-align: center;">
+                    <button class="course-btn" onclick="switchToVideo()" id="quizVideoBtn" style="display: none;">Voir la vidéo 🎬</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Modal -->
+        <div class="video-modal" id="videoModal">
+            <button class="close-video-btn" onclick="closeVideo()">×</button>
+            <div class="video-content">
+                <video class="video-player" id="videoPlayer" controls>
+                    <source id="videoSource" src="" type="video/mp4">
+                    Votre navigateur ne supporte pas la lecture de vidéo.
+                </video>
+                <div style="padding: 20px; background: white; text-align: center;">
+                    <button class="course-btn" onclick="switchToQuiz()" id="videoQuizBtn" style="display: none;">Faire le Quiz 📝</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom navigation circles -->
+        <div class="bottom-circles">
+            <button class="circle-nav" onclick="window.location.href='account.html'" title="Compte">
+                <img src="images/picto_banque-02.svg" alt="Compte" style="width: 40px; height: 40px;">
+                <div class="circle-nav-label">Compte</div>
+            </button>
+            <button class="circle-nav" onclick="window.location.href='courses.html'" title="Cours quotidien">
+                <img src="images/picto_banque-04.svg" alt="Cours" style="width: 40px; height: 40px;">
+                <div class="circle-nav-label">Cours</div>
+            </button>
+            <button class="circle-nav" onclick="window.location.href='advisor.html'" title="Conseiller">
+                <img src="images/picto_banque-01.svg" alt="Conseiller" style="width: 40px; height: 40px;">
+                <div class="circle-nav-label">Conseiller</div>
+            </button>
+            <button class="circle-nav" onclick="window.location.href='shop.html'" title="Offre à la demande">
+                <img src="images/picto_banque-03.svg" alt="Offres" style="width: 40px; height: 40px;">
+                <div class="circle-nav-label">Offres</div>
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="courses-footer">
+            <p>&copy; 2026 Tuun. Tous droits réservés.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        let coursesData = [];
+        let carouselPositions = {};
+        let autoRotateIntervals = {};
+        let currentQuiz = [];
+        let currentPostitIndex = 0;
+        let currentCourseId = null;
+        let currentVideoUrl = null;
+
+        // Initialiser les données
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Loading courses...');
+            loadCoursesData();
+        });
+
+        async function loadCoursesData() {
+            try {
+                const response = await fetch(`${API_URL}/courses`);
+                const result = await response.json();
+
+                if (result.success) {
+                    coursesData = result.data;
+                } else {
+                    coursesData = getDummyCourses();
+                }
+
+                displayAllCourses();
+            } catch (error) {
+                console.error('Erreur:', error);
+                coursesData = getDummyCourses();
+                displayAllCourses();
+            }
+        }
+
+        function getDummyCourses() {
+            return [
+                // 12-14 ans - Cours du jour
+                {
+                    id: 1,
+                    nom: 'Comprendre l\'épargne',
+                    description: 'Apprends comment économiser et faire grandir ton argent de poche.',
+                    niveau: 'Débutant',
+                    duree: '5 min',
+                    ageCategory: '12-14',
+                    category: 'Cours du jour',
+                    instructor: 'Sarah Martin',
+                    quiz: [
+                        { question: 'Qu\'est-ce que l\'épargne?', reponse: 'C\'est de l\'argent économisé pour l\'avenir' },
+                        { question: 'Pourquoi épargner?', reponse: 'Pour réaliser ses rêves et se préparer à l\'avenir' }
+                    ]
+                },
+                {
+                    id: 2,
+                    nom: 'Les bases du budget',
+                    description: 'Découvre comment gérer ton argent de poche efficacement.',
+                    niveau: 'Débutant',
+                    duree: '7 min',
+                    ageCategory: '12-14',
+                    category: 'Cours du jour',
+                    instructor: 'Thomas Durand',
+                    quiz: [
+                        { question: 'Qu\'est-ce qu\'un budget?', reponse: 'Un plan pour gérer son argent' },
+                        { question: 'Comment faire un budget?', reponse: 'Noter ses revenus et ses dépenses' }
+                    ]
+                },
+                // 12-14 ans - Tous les cours
+                {
+                    id: 3,
+                    nom: 'L\'importance des économies',
+                    description: 'Comprendre pourquoi économiser est important pour ton avenir.',
+                    niveau: 'Débutant',
+                    duree: '6 min',
+                    ageCategory: '12-14',
+                    category: 'Tous les cours',
+                    instructor: 'Marie Leclerc',
+                    quiz: [
+                        { question: 'Quand commencer à épargner?', reponse: 'Dès maintenant, peu importe ton âge' }
+                    ]
+                },
+                {
+                    id: 4,
+                    nom: 'Mon premier compte bancaire',
+                    description: 'Comment ouvrir et utiliser ton premier compte bancaire.',
+                    niveau: 'Débutant',
+                    duree: '8 min',
+                    ageCategory: '12-14',
+                    category: 'Tous les cours',
+                    instructor: 'Pierre Dubois',
+                    quiz: [
+                        { question: 'À quel âge ouvrir un compte?', reponse: 'À partir de 10-12 ans avec les parents' }
+                    ]
+                },
+                // 15-18 ans - Cours du jour
+                {
+                    id: 5,
+                    nom: 'Gérer son premier salaire',
+                    description: 'Guide complet pour gérer ton argent quand tu commences à travailler.',
+                    niveau: 'Intermédiaire',
+                    duree: '10 min',
+                    ageCategory: '15-18',
+                    category: 'Cours du jour',
+                    instructor: 'Lucas Fournier',
+                    quiz: [
+                        { question: 'Pourquoi faire un budget mensuel?', reponse: 'Pour maîtriser ses dépenses' }
+                    ]
+                },
+                {
+                    id: 6,
+                    nom: 'Investir en bourse simplement',
+                    description: 'Les premiers pas pour investir intelligemment.',
+                    niveau: 'Intermédiaire',
+                    duree: '12 min',
+                    ageCategory: '15-18',
+                    category: 'Cours du jour',
+                    instructor: 'Claire Moreau',
+                    quiz: [
+                        { question: 'Qu\'est-ce qu\'une action?', reponse: 'Un titre de propriété d\'une entreprise' }
+                    ]
+                },
+                // 15-18 ans - Tous les cours
+                {
+                    id: 7,
+                    nom: 'Les impôts expliqués simplement',
+                    description: 'Comprendre comment fonctionnent les impôts en France.',
+                    niveau: 'Intermédiaire',
+                    duree: '9 min',
+                    ageCategory: '15-18',
+                    category: 'Tous les cours',
+                    instructor: 'Antoine Rousseau',
+                    quiz: [
+                        { question: 'Qu\'est-ce qu\'un impôt?', reponse: 'Une contribution au financement de l\'état' }
+                    ]
+                },
+                {
+                    id: 8,
+                    nom: 'Crédit et prêts: les bases',
+                    description: 'Comment fonctionnent les crédits et les prêts.',
+                    niveau: 'Intermédiaire',
+                    duree: '11 min',
+                    ageCategory: '15-18',
+                    category: 'Tous les cours',
+                    instructor: 'Juliette Bernard',
+                    quiz: [
+                        { question: 'Qu\'est-ce qu\'un taux d\'intérêt?', reponse: 'Le coût du crédit' }
+                    ]
+                },
+                // 18-25 ans - Cours du jour
+                {
+                    id: 9,
+                    nom: 'Crédit et prêts: bien les utiliser',
+                    description: 'Maîtriser l\'art du crédit pour réaliser tes projets.',
+                    niveau: 'Avancé',
+                    duree: '15 min',
+                    ageCategory: '18-25',
+                    category: 'Cours du jour',
+                    instructor: 'Antoine Rousseau',
+                    quiz: [
+                        { question: 'Qu\'est-ce que le taux d\'intérêt?', reponse: 'Le coût du crédit' }
+                    ]
+                },
+                {
+                    id: 10,
+                    nom: 'Planification financière à long terme',
+                    description: 'Construis un plan financier solide pour ta vie d\'adulte.',
+                    niveau: 'Avancé',
+                    duree: '20 min',
+                    ageCategory: '18-25',
+                    category: 'Cours du jour',
+                    instructor: 'Juliette Bernard',
+                    quiz: [
+                        { question: 'Qu\'est-ce que la retraite?', reponse: 'Une période sans travail financée par ses économies' }
+                    ]
+                },
+                // 18-25 ans - Tous les cours
+                {
+                    id: 11,
+                    nom: 'Investissement immobilier',
+                    description: 'Les principes de base pour investir dans l\'immobilier.',
+                    niveau: 'Avancé',
+                    duree: '18 min',
+                    ageCategory: '18-25',
+                    category: 'Tous les cours',
+                    instructor: 'Marc Lefevre',
+                    quiz: [
+                        { question: 'Qu\'est-ce qu\'un bien immobilier?', reponse: 'Une propriété (maison, appartement, terrain)' }
+                    ]
+                },
+                {
+                    id: 12,
+                    nom: 'Crypto-monnaies et blockchain',
+                    description: 'Découvre le monde des crypto-monnaies et de la blockchain.',
+                    niveau: 'Avancé',
+                    duree: '17 min',
+                    ageCategory: '18-25',
+                    category: 'Tous les cours',
+                    instructor: 'Sophie Laurent',
+                    quiz: [
+                        { question: 'Qu\'est-ce qu\'un Bitcoin?', reponse: 'Une monnaie numérique décentralisée' }
+                    ]
+                }
+            ];
+        }
+
+        let currentSelectedCategory = '12-14';
+
+        function getAgeCategory(age) {
+            age = parseInt(age);
+            if (age >= 12 && age <= 14) return '12-14';
+            if (age >= 15 && age <= 18) return '15-18';
+            if (age >= 19 && age <= 25) return '18-25';
+            return '12-14'; // Par défaut
+        }
+
+        function displayAllCourses() {
+            // Récupérer l'âge de l'utilisateur depuis localStorage
+            const user = JSON.parse(localStorage.getItem('thuun_user') || '{}');
+            const userAge = user.userAge || 18;
+            
+            // Déterminer la catégorie automatiquement
+            const ageCategory = getAgeCategory(userAge);
+            
+            displayCoursesForCategory(ageCategory);
+        }
+
+        function displayCoursesForCategory(ageCategory) {
+            const scroll = document.getElementById('coursesScroll');
+            const categoryLabels = {
+                '12-14': '🎮 12-14 ans',
+                '15-18': '🎓 15-18 ans',
+                '18-25': '💼 18-25 ans'
+            };
+
+            currentSelectedCategory = ageCategory;
+
+            const allCourses = coursesData.filter(c => 
+                c.ageCategory === ageCategory && (c.category === 'Tous nos cours' || c.category === 'Tous les cours')
+            );
+
+            console.log('Age Category:', ageCategory);
+            console.log('All Courses:', allCourses);
+            console.log('Total coursesData:', coursesData.length);
+
+            let html = `
+                <div class="age-category-section" id="section-${ageCategory}">
+                    <div class="category-title">${categoryLabels[ageCategory]}</div>
+                    
+                    <div class="subcategory">
+                        <div class="subcategory-title">📖 Tous les Cours</div>
+                        <div class="carousel-container">
+                            <div class="carousel" id="carousel-all-${ageCategory}">
+                                ${allCourses.map((course, index) => createCarouselSlide(course, index)).join('')}
+                            </div>
+                            <button class="carousel-nav prev" onclick="prevSlide('carousel-all-${ageCategory}')">‹</button>
+                            <button class="carousel-nav next" onclick="nextSlide('carousel-all-${ageCategory}')">›</button>
+                            <div class="carousel-dots" id="dots-all-${ageCategory}">
+                                ${allCourses.map((_, index) => `<div class="dot ${index === 0 ? 'active' : ''}" onclick="goToSlide('carousel-all-${ageCategory}', ${index})"></div>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            scroll.innerHTML = html;
+            initializeCarouselPositions(ageCategory, allCourses.length);
+        }
+
+        function updateCategoryButtons() {
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const activeBtn = document.querySelector(`[onclick="scrollToCategory('${currentSelectedCategory}')"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+        }
+
+        function createCourseCard(course, index) {
+            const niveauClass = course.niveau.toLowerCase().replace('é', 'e').replace(' ', '');
+            return `
+                <div class="course-card" data-index="${index}">
+                    <div class="course-title">${course.nom}</div>
+                    <div class="course-description">${course.description}</div>
+                    <div class="course-meta">
+                        <span class="meta-tag ${niveauClass}">${course.niveau}</span>
+                        <span class="meta-tag">👨‍🏫 ${course.instructor}</span>
+                    </div>
+                    <div class="course-duration">⏱️ ${course.duree}</div>
+                    <div class="course-actions">
+                        <button class="course-btn" onclick="openVideoWithCourse(${course.id}, '${course.video}')">Vidéo 🎬</button>
+                        <button class="course-btn" onclick="openQuiz(${course.id})">Quiz 📝</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createCarouselSlide(course, index) {
+            const niveauClass = course.niveau.toLowerCase().replace('é', 'e').replace(' ', '');
+            return `
+                <div class="carousel-slide" data-index="${index}">
+                    <div class="course-title">${course.nom}</div>
+                    <div class="course-description">${course.description}</div>
+                    <div class="course-meta">
+                        <span class="meta-tag ${niveauClass}">${course.niveau}</span>
+                        <span class="meta-tag">👨‍🏫 ${course.instructor}</span>
+                    </div>
+                    <div class="course-duration">⏱️ ${course.duree}</div>
+                    <div class="course-actions">
+                        <button class="course-btn" onclick="openVideoWithCourse(${course.id}, '${course.video}')">Vidéo 🎬</button>
+                        <button class="course-btn" onclick="openQuiz(${course.id})">Quiz 📝</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function initializeCarouselPositions(ageCategory, count) {
+            carouselPositions[`carousel-all-${ageCategory}`] = 0;
+        }
+
+        function goToSlide(carouselId, index) {
+            const carousel = document.getElementById(carouselId);
+            if (!carousel) return;
+            
+            carousel.style.transform = `translateX(-${index * 100}%)`;
+            carouselPositions[carouselId] = index;
+
+            // Update dots
+            const dotsId = carouselId.replace('carousel', 'dots');
+            const dots = document.getElementById(dotsId);
+            if (dots) {
+                document.querySelectorAll(`#${dotsId} .dot`).forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+            }
+        }
+
+        function nextSlide(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const slideCount = carousel.querySelectorAll('.carousel-slide').length;
+            const currentIndex = carouselPositions[carouselId] || 0;
+            const nextIndex = (currentIndex + 1) % slideCount;
+            goToSlide(carouselId, nextIndex);
+        }
+
+        function prevSlide(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const slideCount = carousel.querySelectorAll('.carousel-slide').length;
+            const currentIndex = carouselPositions[carouselId] || 0;
+            const prevIndex = (currentIndex - 1 + slideCount) % slideCount;
+            goToSlide(carouselId, prevIndex);
+        }
+
+        function scrollToCategory(category) {
+            displayCoursesForCategory(category);
+            updateCategoryButtons();
+        }
+
+        function openVideo(videoUrl) {
+            if (!videoUrl) {
+                alert('Vidéo non disponible pour ce cours');
+                return;
+            }
+
+            const modal = document.getElementById('videoModal');
+            const videoSource = document.getElementById('videoSource');
+            const videoPlayer = document.getElementById('videoPlayer');
+            
+            videoSource.src = videoUrl;
+            videoPlayer.load();
+            modal.classList.add('active');
+            
+            // Afficher le bouton quiz si le cours actuel a un quiz
+            if (currentCourseId) {
+                document.getElementById('videoQuizBtn').style.display = 'block';
+            }
+        }
+
+        function openVideoWithCourse(courseId, videoUrl) {
+            currentCourseId = courseId;
+            const course = coursesData.find(c => c.id === courseId);
+            if (course) {
+                currentVideoUrl = course.video;
+            }
+
+            if (!videoUrl) {
+                alert('Vidéo non disponible pour ce cours');
+                return;
+            }
+
+            const modal = document.getElementById('videoModal');
+            const videoSource = document.getElementById('videoSource');
+            const videoPlayer = document.getElementById('videoPlayer');
+            
+            videoSource.src = videoUrl;
+            videoPlayer.load();
+            modal.classList.add('active');
+            
+            // Afficher le bouton quiz
+            document.getElementById('videoQuizBtn').style.display = 'block';
+        }
+
+        function closeVideo() {
+            const modal = document.getElementById('videoModal');
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.pause();
+            modal.classList.remove('active');
+        }
+
+        function switchToVideo() {
+            closeQuiz();
+            if (currentVideoUrl) {
+                openVideo(currentVideoUrl);
+            }
+        }
+
+        function switchToQuiz() {
+            closeVideo();
+            if (currentCourseId) {
+                openQuiz(currentCourseId);
+            }
+        }
+
+        function openQuiz(courseId) {
+            const course = coursesData.find(c => c.id === courseId);
+            if (!course || !course.quiz || course.quiz.length === 0) {
+                alert('Aucun quiz disponible pour ce cours');
+                return;
+            }
+
+            currentCourseId = courseId;
+            currentVideoUrl = course.video;
+            currentQuiz = course.quiz;
+            currentPostitIndex = 0;
+
+            document.getElementById('quizTitle').textContent = course.nom;
+            document.getElementById('quizSubtitle').textContent = `${course.quiz.length} questions`;
+
+            renderPostits();
+            
+            // Afficher le bouton vidéo si le cours a une vidéo
+            if (currentVideoUrl) {
+                document.getElementById('quizVideoBtn').style.display = 'block';
+            }
+            
+            document.getElementById('quizModal').classList.add('active');
+        }
+
+        function renderPostits() {
+            const carousel = document.getElementById('postitCarousel');
+            carousel.innerHTML = currentQuiz.map((q, index) => `
+                <div class="postit" id="postit-${index}" onclick="flipPostit(${index})" 
+                     style="transform: translateX(${(index - currentPostitIndex) * 220}px) scale(${index === currentPostitIndex ? 1 : 0.7}); opacity: ${index === currentPostitIndex ? 1 : 0.3}; z-index: ${10 - Math.abs(index - currentPostitIndex)};">
+                    <div class="postit-inner">
+                        <div class="postit-front">
+                            <p>${q.question}</p>
+                        </div>
+                        <div class="postit-back">
+                            <p>${q.reponse}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function flipPostit(index) {
+            const postit = document.getElementById(`postit-${index}`);
+            postit.classList.toggle('flipped');
+        }
+
+        function nextPostit() {
+            if (currentPostitIndex < currentQuiz.length - 1) {
+                currentPostitIndex++;
+                updatePostitCarousel();
+            }
+        }
+
+        function prevPostit() {
+            if (currentPostitIndex > 0) {
+                currentPostitIndex--;
+                updatePostitCarousel();
+            }
+        }
+
+        function updatePostitCarousel() {
+            const carousel = document.getElementById('postitCarousel');
+            const postits = carousel.querySelectorAll('.postit');
+
+            postits.forEach((postit, index) => {
+                const distance = index - currentPostitIndex;
+                postit.style.transform = `translateX(${distance * 220}px) scale(${distance === 0 ? 1 : 0.7})`;
+                postit.style.opacity = distance === 0 ? 1 : 0.3;
+                postit.style.zIndex = 10 - Math.abs(distance);
+
+                if (distance !== 0) {
+                    postit.classList.remove('flipped');
+                }
+            });
+        }
+
+        function closeQuiz() {
+            document.getElementById('quizModal').classList.remove('active');
+            document.querySelectorAll('.postit').forEach(p => p.classList.remove('flipped'));
+        }
+
+        // Fermer la modal vidéo en cliquant en dehors
+        document.addEventListener('click', (e) => {
+            const videoModal = document.getElementById('videoModal');
+            if (e.target === videoModal) {
+                closeVideo();
+            }
+        });
+
+        // Fermer la modal quiz en cliquant en dehors
+        document.addEventListener('click', (e) => {
+            const quizModal = document.getElementById('quizModal');
+            if (e.target === quizModal) {
+                closeQuiz();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+---
+- name: Installer Node.js et NPM
+  apt:
+    name:
+      - nodejs
+      - npm
+    state: present
+
+- name: Créer le répertoire pour l'application Result
+  file:
+    path: /opt/result
+    state: directory
+    mode: '0755'
+
+- name: Désarchiver le code de Result
+  unarchive:
+    src: ../../result.tar
+    dest: /opt/result
+
+- name: Installer les dépendances Node.js via npm
+  npm:
+    path: /opt/result/result
+
+- name: Copier le fichier de service systemd pour Result
+  copy:
+    src: result.service
+    dest: /etc/systemd/system/result.service
+    mode: '0644'
+  register: result_service_status # <-- On enregistre le statut ici
+
+- name: Recharger systemd et redémarrer Result si le service a changé
+  systemd:
+    name: result
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+  when: result_service_status.changed
+
+- name: S'assurer que Result tourne (si pas de changement)
+  systemd:
+    name: result
+    state: started
+    enabled: yes
+  when: not result_service_status.changed

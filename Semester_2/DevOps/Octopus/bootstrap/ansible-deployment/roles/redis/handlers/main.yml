@@ -1,0 +1,8 @@
+---
+# Handlers for the redis role
+
+- name: Restart redis-server
+  service:
+    name: redis-server
+    state: restarted
+    enabled: yes

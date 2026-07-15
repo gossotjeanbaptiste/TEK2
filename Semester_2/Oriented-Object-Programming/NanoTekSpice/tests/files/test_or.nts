@@ -1,0 +1,17 @@
+# Simple OR gate test circuit
+#
+# in_x  -1-+---\
+#          | OR  |-3- out_z
+# in_y  -2-+---/
+
+.chipsets:
+input in_x
+input in_y
+output out_z
+or gate_or
+
+.links:
+in_x:1 gate_or:1
+in_y:1 gate_or:2
+gate_or:3 out_z:1
+

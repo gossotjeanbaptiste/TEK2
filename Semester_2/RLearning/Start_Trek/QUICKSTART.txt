@@ -1,0 +1,156 @@
+# 🚀 Démarrage Rapide - Agent Q-Learning pour LunarLander
+
+## ⚡ Instructions rapides (5 minutes)
+
+### 1. Activer l'environnement virtuel
+```bash
+cd /home/antoine/devas/PGE2/IA/star_trek
+source venv/bin/activate
+```
+
+### 2. Entraîner l'agent (prend ~1-2 minutes pour 50 épisodes)
+```bash
+python3 train.py --episodes 50 --seed 42
+```
+
+### 3. Évaluer le modèle entraîné
+```bash
+python3 eval.py --model models/qlearning_agent_seed42.pt --episodes 20
+```
+
+### 4. [NOUVEAU] Contrôle manuel - Pilote le lander toi-même! 🎮
+```bash
+python3 manual_control.py
+```
+
+**Contrôles:**
+- **AZERTY:**
+  - Z : Moteur principal (descendre)
+  - Q : Rotation gauche
+  - D : Rotation droite
+- **QWERTY:**
+  - W : Moteur principal (descendre)
+  - A : Rotation gauche
+  - D : Rotation droite
+- **Flèches:**
+  - ↓ : Moteur principal
+  - ← : Rotation gauche
+  - → : Rotation droite
+- **Autres:**
+  - Space : Moteur principal (alternative)
+  - R : Redémarrer l'épisode
+  - Esc : Quitter
+
+## 📚 Explications
+
+### Qu'est-ce qui a été créé?
+
+L'implémentation comprend:
+
+1. **agents/qlearning_agent.py** - L'agent Q-Learning avec:
+   - Réseau de neurones MLP (2 couches cachées)
+   - Replay buffer pour l'apprentissage stable
+   - Target network
+   - Exploration epsilon-greedy
+
+2. **train.py** - Script pour entraîner l'agent
+
+3. **eval.py** - Script pour évaluer le modèle
+
+### Que font les fichiers?
+
+#### train.py
+- Crée un environnement LunarLander
+- Entraîne l'agent en interagissant avec l'environnement
+- Sauvegarde le modèle et les statistiques
+- Montre la progression chaque 50 épisodes
+
+**Résultats:** 
+- Modèle: `models/qlearning_agent_seedX.pt`
+- Stats: `models/stats_seedX.json`
+
+#### eval.py
+- Charge un modèle pré-entraîné
+- Évalue sa performance sur N épisodes
+- Calcule les statistiques (moyenne, std dev, intervalle de confiance)
+- Détecte les atterrissages réussis vs crashes
+
+**Résultats:**
+- Stats: `evaluation_results/eval_qlearning_agent_seedX.json`
+
+### Critère de succès
+
+L'agent réussit quand il obtient une **moyenne ≥ 200** sur 100 épisodes consécutifs.
+
+Pour cela, il faut:
+- Entraîner sur plus d'épisodes (ex: 2000)
+- Ajuster les hyperparamètres
+
+## 🔧 Commandes avancées
+
+### Entraîner avec différents hyperparamètres:
+```bash
+python3 train.py --episodes 2000 --seed 0 --lr 0.0005 --epsilon_decay 0.998
+```
+
+### Entraîner plusieurs seeds (pour reproducibilité):
+```bash
+for seed in 0 1 2 3 4; do
+    python3 train.py --episodes 1000 --seed $seed
+    python3 eval.py --model models/qlearning_agent_seed$seed.pt --episodes 100
+done
+```
+
+### Utiliser GPU (si disponible):
+```bash
+python3 train.py --episodes 1000 --device cuda
+```
+
+## 📊 Résultats attendus
+
+Après 1000-2000 épisodes d'entraînement:
+- Récompense moyenne: 100-200+
+- Taux de succès: 30-70%
+- L'agent commence à apprendre à faire des atterrissages contrôlés
+
+## ❓ FAQ
+
+**Q: Pourquoi l'agent a-t-il une mauvaise performance au début?**
+A: C'est normal! Pendant les premiers épisodes, epsilon est élevé (~1.0), donc l'agent explore beaucoup. Il faut du temps pour apprendre.
+
+**Q: Comment améliorer la performance?**
+A: 
+- Entraîner plus longtemps
+- Ajuster epsilon_decay (valeurs plus petites = exploration plus longue)
+- Modifier la taille du buffer ou du batch size
+- Réduire le learning rate
+
+**Q: Combien de temps prend l'entraînement?**
+A: ~2-3 secondes par épisode sur CPU. 1000 épisodes ≈ 30-50 minutes.
+
+## 📝 Structure du projet
+
+```
+.
+├── agents/
+│   ├── __init__.py
+│   └── qlearning_agent.py          # Agent Q-Learning
+├── models/
+│   ├── qlearning_agent_seed42.pt   # Modèle entraîné
+│   └── stats_seed42.json           # Statistiques
+├── evaluation_results/
+│   └── eval_qlearning_agent_seed42.json
+├── train.py                         # Entraînement
+├── eval.py                          # Évaluation
+├── requirements.txt                 # Dépendances
+└── README.md                        # Documentation complète
+```
+
+## 🎯 Prochaines étapes
+
+1. Augmenter les épisodes d'entraînement à 2000+
+2. Faire une étude d'ablation (tester différents paramètres)
+3. Entraîner avec plusieurs seeds
+4. Analyser les statistiques de convergence
+
+Bon entraînement! 🚀

@@ -1,0 +1,7 @@
+{
+  "created_at_unix": 1775239755,
+  "config_path": "/home/justwireless/Documents/RacingSimulatorLinux/BuildLinux/robocar_client/configs/agents_config.json",
+  "model_path": "/home/justwireless/Documents/RacingSimulatorLinux/BuildLinux/robocar_client/models/policy_track2.joblib",
+  "policy_gain": 1.0,
+  "speed_limit": 0.45
+}

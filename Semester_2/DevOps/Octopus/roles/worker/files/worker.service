@@ -1,0 +1,21 @@
+[Unit]
+Description=Worker Java Application
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/opt/worker/worker
+# Variables pour se connecter à Redis et PostgreSQL
+Environment=REDIS_HOST=redis-1
+Environment=POSTGRES_HOST=postgresql-1
+Environment=POSTGRES_USER=paul
+# Note : Pour éviter le mot de passe en clair ici, tu pourras utiliser un template Ansible (.j2) si tu veux injecter le Vault, 
+# mais si tu mets ce fichier dans "files/", voici la structure avec un mot de passe (attention à la consigne de sécurité du sujet si tu l'écris en dur).
+Environment=POSTGRES_PASSWORD=democracyIsFragile
+
+# On lance le .jar généré par la compilation Maven
+ExecStart=/usr/bin/java -jar target/worker-jar-with-dependencies.jar
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

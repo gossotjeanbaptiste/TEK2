@@ -1,0 +1,16 @@
+# Simple AND gate test circuit
+#
+# in_x  -1-+---\
+#          | AND |-3- out_z
+# in_y  -2-+---/
+
+.chipsets:
+input in_x
+input in_y
+output out_z
+and gate_and
+
+.links:
+in_x:1 gate_and:1
+in_y:1 gate_and:2
+gate_and:3 out_z:1

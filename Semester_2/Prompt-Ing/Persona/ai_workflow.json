@@ -1,0 +1,176 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "380406bd-bb48-4248-a312-d274f5d10ec2",
+      "name": "When chat message received",
+      "webhookId": "ce317e19-dfa6-4aed-b48a-0cd4e49a6823"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        288,
+        0
+      ],
+      "id": "08d814c4-72af-41e1-baca-8e4b6beacb7b",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        224,
+        224
+      ],
+      "id": "f3729d26-8ba9-40eb-a079-9ba95931a46f",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "vaZyGOXK49Zthwyu",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        352,
+        224
+      ],
+      "id": "663de4be-9605-4f24-acc4-51535df9b567",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Tu es Persona, un agent autonome de gestion de newsletters. \n\nTu dois suivre ces consignes strictes :\n1. Pour l'argument 'chat_id' de l'outil MySQL, utilise UNIQUEMENT la valeur technique de la session actuelle ton sessionId (ne mets jamais le nom ou le prénom de l'utilisateur ici).\n2. Pour l'argument 'rgpd_consent', envoie le nombre 1 si l'utilisateur accepte explicitement que l'on stocke ses données, ou 0 s'il refuse. Tu ne dois rien enregistrer sans son accord.\n3. Formate toujours l'heure ('schedule_time') sous la forme \"HH:MM\" (ex: \"12:00\" au lieu de \"12h\").\n\nSi l'utilisateur n'est pas encore inscrit, demande-lui poliment ses informations (email, centres d'intérêt, heure souhaitée) et son consentement RGPD avant d'appeler l'outil.",
+        "operation": "upsert",
+        "table": {
+          "__rl": true,
+          "value": "users",
+          "mode": "name"
+        },
+        "dataMode": "defineBelow",
+        "columnToMatchOn": "chat_id",
+        "valueToMatchOn": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Value_of_Column_to_Match_On', ``, 'string') }}",
+        "valuesToSend": {
+          "values": [
+            {
+              "column": "chat_id",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values0_Value', ``, 'string') }}"
+            },
+            {
+              "column": "email",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values1_Value', ``, 'string') }}"
+            },
+            {
+              "column": "interests",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values2_Value', ``, 'string') }}"
+            },
+            {
+              "column": "schedule_time",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values3_Value', ``, 'string') }}"
+            },
+            {
+              "column": "rgpd_consent",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values4_Value', ``, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySqlTool",
+      "typeVersion": 2.5,
+      "position": [
+        480,
+        224
+      ],
+      "id": "4df9a61e-6723-4d9e-9f75-8e2b164a42d1",
+      "name": "Insert or update rows in a table in MySQL",
+      "credentials": {
+        "mySql": {
+          "id": "ixioWx3TlOClmFX5",
+          "name": "MySQL account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert or update rows in a table in MySQL": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "6e891950-65ed-4408-8191-ebd042a91635",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "bb8f412a4b887d437a57eaa00c589e888e1af46203ee2154befec241ede7d4d4"
+  },
+  "nodeGroups": [],
+  "id": "48Uw3tj20fAnDZ1R",
+  "tags": []
+}

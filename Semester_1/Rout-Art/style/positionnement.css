@@ -1,0 +1,481 @@
+@import url('variables.css');
+@import url('general.css');
+
+/* Page de positionnement */
+.positionnement-section {
+    background: var(--white-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-2xl) var(--spacing-2xl);
+    margin: var(--spacing-xl) auto;
+    max-width: var(--max-width-section);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+}
+
+.positionnement-intro {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.positionnement-intro .section-title {
+    color: var(--primary-color);
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+}
+
+.positionnement-intro .section-title::after {
+    content: '';
+    display: block;
+    width: var(--divider-width);
+    height: var(--divider-height);
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    margin: var(--spacing-md) auto 0;
+    border-radius: var(--border-radius-small);
+}
+
+.positionnement-intro-text {
+    font-size: var(--font-size-lg);
+    color: var(--text-color);
+    line-height: 1.7;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+/* Processus de positionnement */
+.positionnement-process {
+    background: var(--light-gray);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-md) 0;
+}
+
+.positionnement-process-title {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-lg);
+}
+
+.positionnement-process-title::before {
+    content: '📍';
+    display: block;
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--spacing-xs);
+}
+
+.positionnement-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+/* Centrage du dernier élément quand il y a un nombre impair */
+.positionnement-steps-grid:has(.positionnement-step-item:nth-child(odd):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.positionnement-steps-grid .positionnement-step-item:nth-child(odd):last-child {
+    grid-column: 1 / -1;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+:root[data-theme="dark"] .positionnement-step-item {
+    background: var(--white-color);
+    border-top: 4px solid var(--primary-dark-color);
+}
+
+.positionnement-step-item {
+    background: var(--white-color);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid var(--accent-color);
+    text-align: center;
+}
+
+.positionnement-step-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg), 0 10px 30px rgba(29,53,87,0.15);
+}
+
+:root[data-theme="dark"] .positionnement-step-number {
+    background: var(--dark-gradient);
+    color: var(--text-color-rgb);
+}
+
+.positionnement-step-number {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-gradient);
+    color: var(--white-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    box-shadow: var(--shadow-md);
+}
+
+.positionnement-step-content {
+    text-align: center;
+    margin-top: var(--spacing-md);
+}
+
+.positionnement-step-content h4 {
+    color: var(--primary-color);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-md);
+}
+
+.positionnement-step-content p {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-base);
+}
+
+.positionnement-step-icon {
+    font-size: var(--font-size-4xl);
+    margin-top: var(--spacing-md);
+    opacity: 0.8;
+}
+
+/* Avantages du positionnement */
+
+:root[data-theme="dark"] .positionnement-benefits {
+    background: var(--dark-gradient);
+}
+
+.positionnement-benefits {
+    background: var(--primary-gradient);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-2xl);
+    color: var(--white-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.positionnement-benefits::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="waves" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M0,10 Q5,0 10,10 Q15,20 20,10" stroke="white" stroke-width="0.5" fill="none" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23waves)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+:root[data-theme="dark"] .positionnement-benefits h3 {
+    color: var(--text-color-rgb);
+}
+
+.positionnement-benefits h3 {
+    color: var(--white-color);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+    z-index: 1;
+}
+
+.positionnement-benefits-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--spacing-xl);
+    position: relative;
+    z-index: 1;
+}
+
+/* Pour 3 éléments, centrer le 3ème */
+.positionnement-benefits-list:has(.positionnement-benefit-card:nth-child(3):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.positionnement-benefits-list .positionnement-benefit-card:nth-child(3):last-child {
+    grid-column: 1 / -1;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Pour 5 éléments, centrer le 5ème */
+.positionnement-benefits-list:has(.positionnement-benefit-card:nth-child(5):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.positionnement-benefits-list .positionnement-benefit-card:nth-child(5):last-child {
+    grid-column: 1 / -1;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.positionnement-benefit-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-xl);
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.positionnement-benefit-card:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.positionnement-benefit-card .positionnement-benefit-icon {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-md);
+    display: block;
+}
+
+:root[data-theme="dark"] .positionnement-benefit-card h4 {
+    color: var(--text-color-rgb);
+}
+.positionnement-benefit-card h4 {
+    color: var(--white-color);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-md);
+}
+
+:root[data-theme="dark"] .positionnement-benefit-card p {
+    color: var(--text-color-rgb);
+}
+
+.positionnement-benefit-card p {
+    color: var(--white-color);
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+/* Call-to-action */
+.positionnement-cta {
+    background: var(--light-gray);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-2xl);
+    text-align: center;
+    border: 2px solid var(--accent-color);
+    position: relative;
+}
+
+.positionnement-cta h3 {
+    color: var(--primary-color);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-lg);
+}
+
+.positionnement-cta p {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+
+.positionnement-cta-link {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.positionnement-cta-link:hover {
+    color: var(--accent-color);
+}
+
+:root[data-theme="dark"] .positionnement-cta .positionnement-button {
+    background: var(--dark-gradient);
+    color: var(--text-color-rgb);
+}
+
+.positionnement-cta .positionnement-button {
+    background: var(--primary-gradient);
+    color: var(--white-color);
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.positionnement-cta .positionnement-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg), 0 8px 25px var(--primary-shadow-hover);
+}
+
+.positionnement-cta .positionnement-button:active {
+    transform: translateY(0);
+}
+
+/* ===== STYLES RESPONSIVES ===== */
+
+/* Écrans moyens */
+@media (max-width: 992px) {
+    .positionnement-section {
+        padding: 3rem 2rem;
+    }
+    
+    .positionnement-intro .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .positionnement-steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.8rem;
+    }
+    
+    .positionnement-benefit-list {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.8rem;
+    }
+}
+
+/* Tablettes et petits écrans */
+@media (max-width: 768px) {
+    .positionnement-section {
+        padding: 2rem 1.5rem;
+        gap: 2rem;
+    }
+
+    .positionnement-intro .section-title {
+        font-size: 2rem;
+    }
+
+    .positionnement-process,
+    .positionnement-benefits,
+    .positionnement-cta {
+        padding: 2rem;
+    }
+
+    .positionnement-process-title {
+        font-size: 1.6rem;
+    }
+
+    .positionnement-steps-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .positionnement-benefits h3 {
+        font-size: 1.6rem;
+    }
+
+    .positionnement-benefits-list {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    /* Réinitialiser les règles de centrage sur mobile */
+    .positionnement-benefits-list:has(.positionnement-benefit-card:nth-child(3):last-child),
+    .positionnement-benefits-list:has(.positionnement-benefit-card:nth-child(5):last-child) {
+        grid-template-columns: 1fr;
+    }
+
+    .positionnement-benefits-list .positionnement-benefit-card:nth-child(3):last-child,
+    .positionnement-benefits-list .positionnement-benefit-card:nth-child(5):last-child {
+        grid-column: auto;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .positionnement-benefit-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .positionnement-cta h3 {
+        font-size: 1.5rem;
+    }
+
+    .positionnement-button {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* Mobiles */
+@media (max-width: 480px) {
+    .positionnement-section {
+        padding: 1.5rem 1rem;
+        gap: 1.5rem;
+        margin: 1rem auto;
+    }
+
+    .positionnement-intro .section-title {
+        font-size: 1.8rem;
+    }
+
+    .positionnement-intro-text {
+        font-size: 1rem;
+    }
+
+    .positionnement-process,
+    .positionnement-benefits,
+    .positionnement-cta {
+        padding: 1.5rem;
+    }
+
+    .positionnement-process-title,
+    .positionnement-benefits h3,
+    .positionnement-cta h3 {
+        font-size: 1.4rem;
+    }
+
+    .positionnement-step-item,
+    .positionnement-benefit-card {
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Assurer que les cartes d'avantages utilisent toute la largeur */
+    .positionnement-benefits-list {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+
+    .positionnement-benefits-list .positionnement-benefit-card:nth-child(3):last-child,
+    .positionnement-benefits-list .positionnement-benefit-card:nth-child(5):last-child {
+        grid-column: auto;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .positionnement-step-content h4,
+    .positionnement-benefit-card h4 {
+        font-size: 1.1rem;
+    }
+
+    .positionnement-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        letter-spacing: 0.3px;
+    }
+}

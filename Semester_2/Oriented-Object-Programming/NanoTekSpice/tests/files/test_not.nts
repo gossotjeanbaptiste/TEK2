@@ -1,0 +1,12 @@
+# Test circuit for NOT gate
+#
+# Simple NOT gate circuit
+
+.chipsets:
+input in
+output out
+not gate
+
+.links:
+in:1 gate:1
+gate:2 out:1

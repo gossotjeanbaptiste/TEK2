@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/admin.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='icon/NotLinkedIn_icon.ico') }}">
+    <script src="{{ url_for('static', filename='script/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='script/admin.js') }}"></script>
+    <script src="{{ url_for('static', filename='script/admin_candidatures.js') }}"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-logo">
+                <a href="{{ url_for('index') }}">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo">
+                </a>
+            </div>
+            <nav class="nav-main">
+                <a href="{{ url_for('index') }}" class="nav-link">Accueil</a>
+                {% if session.user_id %}
+                    <a href="{{ url_for('profile') }}" class="nav-link">Mon Profil</a>
+                {% endif %}
+                <a href="{{ url_for('logout') }}" class="nav-link">Déconnexion</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="admin-panel">
+            <div class="admin-header">
+                <h1 class="admin-title">Panneau d'administration</h1>
+                <p class="admin-subtitle">Gérez votre plateforme d'emploi</p>
+            </div>
+            
+            <div class="admin-tabs">
+                <button class="tab-btn active" onclick="showTab('companies')">
+                    <span class="tab-icon">🏢</span>
+                    Entreprises
+                </button>
+                <button class="tab-btn" onclick="showTab('advertisements')">
+                    <span class="tab-icon">💼</span>
+                    Annonces
+                </button>
+                <button class="tab-btn" onclick="showTab('applications')">
+                    <span class="tab-icon">📋</span>
+                    Candidatures
+                </button>
+            </div>
+
+            <!-- Companies Tab -->
+            <div id="companies" class="tab-content active">
+                <div class="section-header">
+                    <h3 class="section-title">Gestion des Entreprises</h3>
+                    <button class="btn btn-primary admin-action-btn" onclick="showAddCompanyForm()">
+                        <span>➕</span> Ajouter une entreprise
+                    </button>
+                </div>
+                
+                <div id="companies-list" class="admin-list">
+                    <!-- Companies will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Advertisements Tab -->
+            <div id="advertisements" class="tab-content">
+                <div class="section-header">
+                    <h3 class="section-title">Gestion des Annonces</h3>
+                    <button class="btn btn-primary admin-action-btn" onclick="showAddAdForm()">
+                        <span>➕</span> Ajouter une annonce
+                    </button>
+                </div>
+                
+                <div id="advertisements-list" class="admin-list">
+                    <!-- Advertisements will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Applications Tab -->
+            <div id="applications" class="tab-content">
+                <div class="section-header">
+                    <h3 class="section-title">📋 Candidatures Reçues</h3>
+                </div>
+                
+                <div class="admin-applications-section">
+                    <div class="applications-stats-grid">
+                        <!-- Stats will be loaded here -->
+                    </div>
+                    
+                    <div class="admin-applications-list" id="applications-list">
+                        <!-- Applications will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for forms -->
+    <div id="adminModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closeAdminModal()">&times;</span>
+            <div id="modal-form-content">
+                <!-- Form content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Job Board. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

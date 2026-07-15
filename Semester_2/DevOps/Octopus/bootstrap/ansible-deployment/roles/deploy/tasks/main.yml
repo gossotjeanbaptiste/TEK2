@@ -1,0 +1,93 @@
+---
+# Deploy role tasks
+# Uploads, unzips application and installs dependencies
+
+- name: Create application user group
+  group:
+    name: "{{ app_group }}"
+    state: present
+
+- name: Create application user
+  user:
+    name: "{{ app_user }}"
+    group: "{{ app_group }}"
+    home: /var/lib/node
+    shell: /usr/sbin/nologin
+    state: present
+
+- name: Create application deployment directory
+  file:
+    path: "{{ app_deploy_path }}"
+    state: directory
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+    mode: '0755'
+
+- name: Copy application files to deployment directory
+  synchronize:
+    src: "{{ app_source_path }}/"
+    dest: "{{ app_deploy_path }}/"
+    owner: no
+    group: no
+    perms: no
+  delegate_to: "{{ inventory_hostname }}"
+  notify: Restart my-awesome-app service
+
+- name: Render application configuration
+  template:
+    src: config.json.j2
+    dest: "{{ app_deploy_path }}/config.json"
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+    mode: '0644'
+  notify: Restart my-awesome-app service
+
+- name: Fix ownership of application directory
+  file:
+    path: "{{ app_deploy_path }}"
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+    recurse: yes
+    state: directory
+
+- name: Install application dependencies via npm
+  npm:
+    path: "{{ app_deploy_path }}"
+    state: present
+    ci: yes
+  notify: Restart my-awesome-app service
+
+- name: Create log directory for application
+  file:
+    path: /var/log/my-awesome-app
+    state: directory
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+    mode: '0755'
+
+- name: Upload systemd service file
+  copy:
+    src: my-awesome-app.service
+    dest: /etc/systemd/system/my-awesome-app.service
+    mode: '0644'
+  notify: Reload systemd daemon
+
+- name: Enable and start my-awesome-app service
+  service:
+    name: my-awesome-app
+    enabled: yes
+    state: started
+
+- name: Apply pending service changes now
+  meta: flush_handlers
+
+- name: Verify application is running
+  wait_for:
+    host: localhost
+    port: "{{ app_port }}"
+    state: started
+    timeout: 30
+
+- name: Display deployment status
+  debug:
+    msg: "Application {{ app_name }} deployed successfully at {{ app_deploy_path }}"

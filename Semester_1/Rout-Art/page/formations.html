@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Découvrez les formations proposées par Auto-École Rout'Art. Permis B, permis moto, cours de conduite adaptés à tous les niveaux.">
+    <meta name="keywords"
+        content="formations, permis de conduire, cours de conduite, permis B, permis moto, permis am, bsr, lunéville, auto-école">
+    <meta name="author" content="Auto-École Rout'Art">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Formations - Auto-École Rout'Art">
+    <meta property="og:description"
+        content="Nos formations complètes pour l'apprentissage de la conduite. Permis B, moto et autres formations disponibles.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://autoecoleroutart.github.io/page/formations.html">
+    <meta property="og:image" content="https://autoecoleroutart.github.io/images/logo_routart_modern.png">
+    <meta property="og:site_name" content="Auto-École Rout'Art">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://autoecoleroutart.github.io/page/formations.html">
+
+    <title>
+        Formations - Auto-École Rout'Art
+    </title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;family=Open+Sans:wght@400;600&amp;display=swap"
+        rel="stylesheet" />
+    <link href="../style/formations.css" rel="stylesheet" />
+    <link href="../style/dark-mode.css" rel="stylesheet" />
+    <link href="../icon/logo_routart_modern.png" rel="icon" type="image/x-icon" />
+    <script src="../script/script.js">
+    </script>
+    <script src="../script/formations.js">
+    </script>
+    <script src="../script/dark-mode.js">
+    </script>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo">
+                <a href="../index.html">
+                    <img alt="Logo Auto-École Rout'Art" src="../images/logo_routart_modern.png" />
+                </a>
+            </div>
+            <nav class="main-nav" id="main-nav">
+                <ul class="nav-list">
+                    <li>
+                        <button class="nav-btn" onclick="location.href='../index.html'">
+                            Accueil
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn active" onclick="location.href='formations.html'">
+                            Formations
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn" onclick="location.href='tarifs.html'">
+                            Tarifs
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn" onclick="location.href='financement.html'">
+                            Financement
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn" onclick="location.href='contact.html'">
+                            Contact
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn" onclick="location.href='code_de_la_route.html'">
+                            Code de la
+                            Route
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn" onclick="location.href='equipe.html'">
+                            Équipe
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn theme-toggle-nav" id="theme-toggle-nav">
+                            Thème Sombre
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+            <button aria-controls="main-nav" aria-expanded="false" aria-label="Ouvrir le menu" class="hamburger-menu">
+                <span>
+                </span>
+                <span>
+                </span>
+                <span>
+                </span>
+            </button>
+        </div>
+    </header>
+    <section class="hero-section">
+        <div class="hero-bg">
+            <img alt="Voiture sur une route côtière au lever du soleil" class="hero-image"
+                src="../images/hero-car-road.png" />
+        </div>
+        <div class="container hero-content">
+            <h1>
+                Nos Formations
+            </h1>
+            <p>
+                Découvrez toutes les formations proposées par Rout'Art pour réussir votre permis.
+            </p>
+        </div>
+    </section>
+    <main>
+        <section class="tarifs-section container">
+            <div class="formation-selector-wrapper">
+                <label for="formation-select">
+                    Choisissez une formation :
+                </label>
+                <select id="formation-select">
+                    <option selected="" value="b-traditionnel">
+                        Permis B - Traditionnel
+                    </option>
+                    <option value="b-accompagnee">
+                        Permis B - Conduite Accompagnée
+                    </option>
+                    <option value="b-supervisee">
+                        Permis B - Conduite Supervisée
+                    </option>
+                    <option value="b-automatique">
+                        Permis B - Boite Automatique
+                    </option>
+                    <option value="am-moto">
+                        Permis AM - Moto
+                    </option>
+                    <option value="am-voiture">
+                        Permis AM - Voiture
+                    </option>
+                    <option value="moto-a1">
+                        Permis Moto A1 (125cc)
+                    </option>
+                    <option value="moto-a2">
+                        Permis Moto A2
+                    </option>
+                    <option value="passerelle-a2-a">
+                        Formation Moto passerelle A2 vers A
+                    </option>
+                    <option value="formation-125cc">
+                        Formation 125cc
+                    </option>
+                    <option value="post-permis">
+                        Formation Post Permis
+                    </option>
+                </select>
+            </div>
+            <div id="formation-details">
+                <table class="formations-table formation-b-section" id="table-b-traditionnel">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                Permis B - Traditionnel
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="editable" id="desc-b-trad" colspan="1">
+                                Le permis de conduire de la catégorie B permet la conduite de tous les véhicules de
+                                tourisme et des véhicules utilitaires dont le poids total en charge ne dépasse pas 3,5
+                                tonnes. Pour s'inscrire au permis B, il faut être âgé de 16 ans minimum. Pour vous
+                                présenter à l'examen pratique, vous devez avoir 17 ans à la date de l'examen pratique et
+                                avoir obtenu l'épreuve théorique (le code).
+                            </td>
+                            <td class="editable" id="voiture-utilisé" colspan="2">
+                                Notre formation pratique est assurée par des enseignants
+                                diplômés, avec 2 Clio V et 1 Peugeots 208 à boîte manuelle.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <strong class="editable">
+                                    Étapes de la formation :
+                                </strong>
+                                <ul>
+                                    <li class="editable">
+                                        Apprendre à maîtriser le véhicule dans un trafic faible ou nul.
+                                    </li>
+                                    <li class="editable">
+                                        Apprendre à maîtriser son véhicule dans un trafic normal.
+                                    </li>
+                                    <li class="editable">
+                                        Apprendre à partager la route avec les autres usagers.
+                                    </li>
+                                    <li class="editable">
+                                        Pratiquer une conduite sûre, autonome et économe.
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong class="editable">
+                                    Documents à fournir :
+                                </strong>
+                                <ul>
+                                    <li class="editable" id="e_photo">
+                                        3 e-photos
+                                    </li>
+                                    <li class="editable" id="copie_jdc">
+                                        Copie de l'attestation JDC
+                                    </li>
+                                    <li class="editable" id="assr_2">
+                                        Copie de l'ASSR 2
+                                    </li>
+                                    <li class="editable" id="cni_parents">
+                                        Pour les mineurs : Copie de la carte d'identité des parents recto verso
+                                    </li>
+                                    <li class="editable" id="cni_eleve">
+                                        Copie de la carte d'identité de l'élève recto verso
+                                    </li>
+                                    <li class="editable" id="attest_hebergement">
+                                        Attestation d'hébergement
+                                    </li>
+                                    <li class="editable" id="justif_dom">
+                                        Copie d'un justificatif de domicile de moins de 3 mois
+                                    </li>
+                                    <li class="editable" id="timbre">
+                                        6 timbres poste
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <strong class="editable">
+                                    Enjeux de la formation :
+                                </strong>
+                                <ul>
+                                    <li class="editable">
+                                        L’automobile est devenue un outil social indispensable pour une
+                                        très grande partie des jeunes de notre société.
+                                    </li>
+                                    <li class="editable">
+                                        Au-delà du plaisir de conduire, l’utilisation d’une voiture est
+                                        souvent indispensable pour les études, le travail ou les loisirs.
+                                    </li>
+                                    <li class="editable">
+                                        Rouler en sécurité est donc une nécessité pour tous.
+                                    </li>
+                                    <li class="editable">
+                                        Les conducteurs débutants représentent une part trop importante
+                                        des tués et des blessés sur la route.
+                                    </li>
+                                    <li class="editable">
+                                        L’effort engagé doit être poursuivi, notamment par le
+                                        renforcement de l’éducation et de la formation.
+                                    </li>
+                                    <li class="editable">
+                                        Les accidents de la route ne sont pas liés à la fatalité et
+                                        pour aider les nouveaux conducteurs à se déplacer avec un risque faible de
+                                        perdre la vie ou de la dégrader, un nouveau programme de formation est mis en
+                                        place.
+                                    </li>
+                                    <li class="editable">
+                                        L’objectif général est d’amener tout automobiliste débutant à
+                                        la maîtrise de compétences en termes de savoir être, savoirs, savoir-faire et
+                                        savoir devenir.
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong class="editable">
+                                    Évaluation initiale obligatoire :
+                                </strong>
+                                <p class="editable">
+                                    L’élève devra réaliser une évaluation qui permettra
+                                    de connaître son niveau. Le moniteur sera donc ensuite en capacité d’adapter son
+                                    programme de formation en fonction des besoins de l’élève.
+                                </p>
+                            </td>
+                            <td>
+                                <strong class="editable">
+                                    Le code de la route :
+                                </strong>
+                                <p class="editable">
+                                    Vous pouvez commencez les heures de conduites, avant d'avoir avec succès l'épreuve
+                                    théorique générale du code de la route. Le code de la route est une épreuve
+                                    globale qui englobe des connaissances sur le code de la route, sur le véhicule et
+                                    sur les comportements à adopter.
+                                </p>
+                                <a class="ftextlink" href="code_de_la_route.html" target="_blank">
+                                    Plus de détails sur le
+                                    code de la route
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <strong class="editable">
+                                    La formation à la conduite :
+                                </strong>
+                                <p class="editable">
+                                    L’élève devra effectuer au minimum de 20h de conduite. Cependant, la
+                                    formation à la conduite nécessite généralement plus de 20h de conduite.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <strong class="editable">
+                                    Déroulement de la formation :
+                                </strong>
+                                <p class="editable">
+                                    Ce programme se veut une vue d’ensemble, aussi exhaustive que
+                                    possible, des compétences qu’un conducteur responsable doit acquérir pour ne pas
+                                    mettre sa sécurité et celle des autres en danger.
+                                </p>
+                                <p class="editable">
+                                    Il vous faudra prendre conscience que ce qui est appris en formation
+                                    doit progresser et évoluer, après l’obtention du permis de conduire, en tenant
+                                    compte des mêmes objectifs sécuritaires que lors de votre apprentissage.
+                                </p>
+                                <p class="editable">
+                                    Vous allez apprendre à manipuler une automobile et à circuler dans
+                                    différentes configurations, à en connaître les risques et les limites.
+                                </p>
+                                <p class="editable">
+                                    Vous allez au travers de ce programme comprendre les règles du code
+                                    de la route ainsi que l’influence des lois physiques, psychologiques et
+                                    physiologiques.
+                                </p>
+                                <p class="editable">
+                                    Vous devrez également vous situer personnellement en tant que
+                                    citoyen dans vos choix de conduite.
+                                </p>
+                                <p class="editable">
+                                    Des cours théoriques et pratiques, collectifs ou individuels, vous
+                                    aideront à atteindre les objectifs définis et à personnaliser votre progression.
+                                    Votre formateur sera à vos côtés pour vous guider et vous conseiller.
+                                </p>
+                                <p class="editable">
+                                    Des tests de connaissances et de capacités pourront être mis en
+                                    place au fur et à mesure.
+                                </p>
+                                <p class="editable">
+                                    Afin de disposer de repères, quatre grilles de progression
+                                    accompagnent l’élève dans l’acquisition des compétences. Elles détaillent les
+                                    savoirs comportementaux, techniques et environnementaux dont doit disposer l’élève
+                                    conducteur au fur et à mesure de son évolution.
+                                </p>
+                                <p class="editable">
+                                    Pour chacun des objectifs de votre programme, des évaluations mises
+                                    en place par votre formateur, qui vous précisera les critères et les conditions de
+                                    réussite, sont prévues. Il vous sera possible ainsi de mesurer votre réussite ou
+                                    d’apprécier les éléments à faire progresser.
+                                </p>
+                                <p class="editable">
+                                    De même, pour chacun des objectifs, qui impliquent la conscience que
+                                    vous aurez de vos capacités, de vos motivations et de vos limites, des auto
+                                    évaluations sont à votre disposition sur chacune des quatre grilles.
+                                </p>
+                                <strong class="editable">
+                                    Lorsque l’ensemble des compétences requises sera validé, votre
+                                    formateur pourra alors vous présenter aux épreuves du permis de conduire.
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <strong class="editable">
+                                    Déroulement de l'examen :
+                                </strong>
+                                <ul>
+                                    <li class="editable">
+                                        Réaliser un parcours empruntant des voies à caractère urbain,
+                                        routier et/ou autoroutier
+                                    </li>
+                                    <li class="editable">
+                                        Suivre un itinéraire ou vous rendre vers une destination
+                                        préalablement établie, en vous guidant de manière autonome, pendant une durée
+                                        globale d’environ cinq minutes
+                                    </li>
+                                    <li class="editable">
+                                        Réaliser une manœuvre
+                                    </li>
+                                    <li class="editable">
+                                        Procéder à la vérification d’un élément technique à l’intérieur
+                                        ou à l’extérieur du véhicule, répondre à une question en lien avec la sécurité
+                                        routière et à une question portant sur les notions élémentaires de premiers
+                                        secours
+                                    </li>
+                                    <li class="editable">
+                                        Appliquer les règles du code de la route, notamment les
+                                        limitations de vitesse s’appliquant aux élèves conducteurs
+                                    </li>
+                                    <li class="editable">
+                                        Adapter votre conduite dans un souci d’économie de carburant et
+                                        de limitation de rejet de gaz à effet de serre
+                                    </li>
+                                    <li class="editable">
+                                        Faire preuve de courtoisie envers les autres usagers, et
+                                        notamment les plus vulnérables
+                                    </li>
+                                </ul>
+                                <p class="editable">
+                                    L’évaluation réalisée par l’expert est basée sur des textes
+                                    réglementaires et instructions précises qui en fixent les modalités.
+                                </p>
+                                <p class="editable">
+                                    Cette évaluation consiste en un bilan des compétences nécessaires et
+                                    fondamentales devant être acquises pour une conduite en sécurité, car la conduite
+                                    est un acte difficile qui engage une responsabilité forte.
+                                </p>
+                                <p class="editable">
+                                    L’expert s’attache à valoriser vos acquis comportementaux plutôt que
+                                    vos faiblesses. Il réalise ainsi un inventaire des points positifs et des points
+                                    négatifs restitués par rapport à une compétence donnée. Un échange entre l’expert et
+                                    vous peut s’instaurer au cours de l’épreuve.
+                                </p>
+                                <p class="editable">
+                                    À l’issue de l’épreuve, l’expert retranscrit de façon formelle ce
+                                    bilan de compétences dans une grille d’évaluation.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <strong>
+                                    Ressources utiles :
+                                </strong>
+                                <br />
+                                <a class="pl_button primary" href="../files/voiture/enjeux_formation_permis_b.pdf"
+                                    target="_blank">
+                                    LES ENJEUX DE LA FORMATION
+                                </a>
+                                <a class="pl_button purple" href="../files/voiture/programme_formation_b.pdf"
+                                    target="_blank">
+                                    PROGRAMME DE FORMATION
+                                </a>
+                                <a class="pl_button success" href="../files/voiture/parcours_formation_b.pdf"
+                                    target="_blank">
+                                    PARCOURS DE FORMATION
+                                </a>
+                                <a class="pl_button eval" href="../files/voiture/evaluation.pdf"
+                                        target="_blank">
+                                        EVALUATION DE DEPART
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <strong>
+                                    Information handicap :
+                                </strong>
+                                <br />
+                                <span class="text-error">
+                                    Chaque situation de handicap étant unique et ne disposant pas
+                                    de matériel évolutif et adéquat, nous ne pouvons donc dispenser ce type de formation
+                                    spécifique.
+                                </span>
+                                <br />
+                                <span class="text-error">
+                                    Cependant vous pouvez consulter le site
+                                    <a class="ftextlink" href="https://www.automobile.ceremh.org" target="_blank">
+                                        automobile.ceremh.org
+                                    </a>
+                                    afin de trouver une auto-école adaptée
+                                    à vos besoins.
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="formations-table formation-b-section hidden" id="table-b-accompagnee">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                APPRENTISSAGE ANTICIPÉ DE LA CONDUITE - CONDUITE ACCOMPAGNÉE
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    Quelles sont les conditions d'accès ?
+                                </h3>
+                                <p>
+                                    <strong class="editable">
+                                        Pour s'inscrire
+                                    </strong>
+                                    à l'Apprentissage anticipé de la
+                                    conduite, il faut :
+                                </p>
+                                <ul>
+                                    <li class="editable">
+                                        être âgé de 15 ans ou plus,
+                                    </li>
+                                    <li class="editable">
+                                        avoir l’accord de son représentant légal et de l’assureur du
+                                        véhicule.
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    Documents à fournir
+                                </h3>
+                                <ul>
+                                    <li class="editable" id="e_photos">
+                                        3 e-photos
+                                    </li>
+                                    <li class="editable" id="copie_assr_2">
+                                        Copie de l'ASSR 2
+                                    </li>
+                                    <li class="editable" id="copie_cni_parents">
+                                        Copie de la carte d'identité des parents recto verso (si mineur)
+                                    </li>
+                                    <li class="editable" id="copie_cni_eleve">
+                                        Copie de la carte d'identité de l'élève recto verso
+                                    </li>
+                                    <li class="editable" id="attest_hebergement">
+                                        Attestation d'hébergement
+                                    </li>
+                                    <li class="editable" id="justif_dom">
+                                        Copie d'un justificatif de domicile de moins de 3 mois
+                                    </li>
+                                    <li class="editable" id="timbres_poste">
+                                        6 timbres poste
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    Évaluation initiale obligatoire
+                                </h3>
+                                <p class="editable">
+                                    L'élève devra réaliser une évaluation qui permettra
+                                    de connaître son niveau. Le moniteur sera ensuite en capacité d'adapter son
+                                    programme de formation en fonction des besoins de l'élève.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    Le code de la route
+                                </h3>
+                                <p class="editable">
+                                    Vous pouvez commencez les heures de conduites, avant d'avoir avec succès l'épreuve
+                                    théorique générale du code de la route. Le code de la route est une épreuve
+                                    globale qui englobe des connaissances sur le code de la route, sur le véhicule et
+                                    sur les comportements à adopter.
+                                </p>
+                                <a href="code_de_la_route.html">
+                                    <p class="editable">
+                                        Vous trouverez plus de détails dans la rubrique code de la route.
+                                    </p>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    La formation à la conduite
+                                </h3>
+                                <p class="editable">
+                                    L'élève devra effectuer au minimum 20h de conduite. Il devra
+                                    également bénéficier d'une évaluation favorable de la part de son enseignant de
+                                    conduite, matérialisée par la remise de l'attestation de fin de formation.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    Déroulement et rendez-vous pédagogiques
+                                </h3>
+                                <p class="editable">
+                                    La conduite avec l'accompagnateur se déroule sur une durée d'au
+                                    moins un an et une distance parcourue de 3 000 km minimum. Cette période débute par
+                                    un rendez-vous préalable et est ponctuée de deux rendez-vous pédagogiques
+                                    obligatoires :
+                                </p>
+                                <ul>
+                                    <li class="editable">
+                                        Le rendez-vous préalable : en présence de l'enseignant et du
+                                        futur accompagnateur pour préparer la période.
+                                    </li>
+                                    <li class="editable">
+                                        Le 1er rendez-vous pédagogique : entre quatre et six mois après
+                                        la délivrance de l'attestation de fin de formation initiale (souvent collectif).
+                                    </li>
+                                    <li class="editable">
+                                        Le 2e rendez-vous pédagogique : après 3 000 km parcourus.
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    Avantages de la conduite accompagnée
+                                </h3>
+                                <ul>
+                                    <li class="editable">
+                                        Réduit la période probatoire du permis à 2 ans au lieu de 3.
+                                    </li>
+                                    <li class="editable">
+                                        Permet de commencer la formation en école de conduite dès 15
+                                        ans.
+                                    </li>
+                                    <li class="editable">
+                                        Donne plus d'expérience de conduite avant l'examen.
+                                    </li>
+                                    <li class="editable">
+                                        Possibilité de passer l'examen à 17 ans et conduire seul à 18
+                                        ans.
+                                    </li>
+                                    <li class="editable">
+                                        Augmente les chances de réussite à l'examen.
+                                    </li>
+                                    <li class="editable">
+                                        Permet d'obtenir un tarif préférentiel sur l'assurance jeune
+                                        conducteur.
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    Qui peut être accompagnateur ?
+                                </h3>
+                                <p class="editable">
+                                    L'accompagnateur doit :
+                                </p>
+                                <ul>
+                                    <li class="editable">
+                                        être titulaire du permis B depuis au moins cinq ans sans
+                                        interruption,
+                                    </li>
+                                    <li class="editable">
+                                        avoir obtenu l'accord de son assureur,
+                                    </li>
+                                    <li class="editable">
+                                        être mentionné dans le contrat signé avec l'école de conduite.
+                                    </li>
+                                </ul>
+                                <p class="editable">
+                                    Il est possible d'avoir plusieurs accompagnateurs, même hors du
+                                    cadre familial.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="formation-info-center">
+                                    <a class="pl_button primary" href="../files/voiture/enjeux_formation_permis_b.pdf"
+                                        target="_blank">
+                                        LES ENJEUX DE LA FORMATION
+                                    </a>
+                                    <a class="pl_button purple" href="../files/voiture/programme_formation_b.pdf"
+                                        target="_blank">
+                                        PROGRAMME DE FORMATION
+                                    </a>
+                                    <a class="pl_button success" href="../files/voiture/parcours_formation_b.pdf"
+                                        target="_blank">
+                                        PARCOURS DE FORMATION
+                                    </a>
+                                    <a class="pl_button fascicule" href="../files/voiture/depliant-aac.pdf"
+                                        target="_blank">
+                                        FASCICULE
+                                    </a>
+                                    <a class="pl_button eval" href="../files/voiture/evaluation.pdf"
+                                        target="_blank">
+                                        EVALUATION DE DEPART
+                                    </a>
+                                </p>
+                                <p class="text-error">
+                                    <strong>
+                                        INFORMATION HANDICAP :
+                                    </strong>
+                                </p>
+                                <p class="text-error">
+                                    Chaque situation de handicap étant unique et ne disposant pas de
+                                    matériel évolutif et adapté, nous ne pouvons donc dispenser ce type de formation
+                                    spécifique. Cependant vous pouvez consulter le site
+                                    <a class="ftextlink" href="https://www.automobile.ceremh.org" target="_blank">
+                                        automobile.ceremh.org
+                                    </a>
+                                    afin de trouver une auto-école adaptée
+                                    à vos besoins.
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="formations-table formation-b-section hidden" id="table-b-supervisee">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                CONDUITE SUPERVISÉE
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    LA CONDUITE SUPERVISÉE
+                                </h3>
+                                <p class="editable">
+                                    La conduite supervisée permet aux candidats âgés de 18 ans et plus,
+                                    inscrits en auto-école, de compléter leur formation initiale par une phase de
+                                    conduite supervisée afin d’acquérir davantage d’expérience à moindre coût.
+                                </p>
+                                <p class="editable">
+                                    Pour pouvoir bénéficier de cette formule, le candidat doit :
+                                    avoir réussi l’épreuve du « code » ;
+                                    avoir suivi au moins 20 heures de conduite en école de conduite ;
+                                    obtenir l’accord préalable de sa compagnie d’assurance ;
+                                    être autorisé par son enseignant, en fonction de son niveau de
+                                    maîtrise du véhicule et de son comportement au volant.
+                                </p>
+                                <p class="editable">
+                                    La conduite supervisée vise à améliorer la sécurité des nouveaux
+                                    conducteurs en augmentant leur expérience pratique avant l’examen pratique.
+                                </p>
+                                <p class="formation-info-center">
+                                    <a class="pl_button primary" href="../files/voiture/enjeux_formation_permis_b.pdf"
+                                        target="_blank">
+                                        LES ENJEUX DE LA FORMATION
+                                    </a>
+                                    <a class="pl_button purple" href="../files/voiture/programme_formation_b.pdf"
+                                        target="_blank">
+                                        PROGRAMME DE FORMATION
+                                    </a>
+                                    <a class="pl_button success" href="../files/voiture/parcours_formation_b.pdf"
+                                        target="_blank">
+                                        PARCOURS DE FORMATION
+                                    </a>
+                                    <a class="pl_button fascicule" href="../files/voiture/depliant-cs.pdf"
+                                        target="_blank">
+                                        FASCICULE
+                                    </a>
+                                    <a class="pl_button eval" href="../files/voiture/evaluation.pdf"
+                                        target="_blank">
+                                        EVALUATION DE DEPART
+                                    </a>
+                                </p>
+                                <h4>
+                                    Information handicap
+                                </h4>
+                                <p class="text-error">
+                                    Chaque situation de handicap étant unique et ne disposant pas de
+                                    matériel évolutif et adéquat, nous ne pouvons donc dispenser ce type de formation
+                                    spécifique. Consultez
+                                    <a class="ftextlink" href="https://www.automobile.ceremh.org" target="_blank">
+                                        automobile.ceremh.org
+                                    </a>
+                                    pour trouver une auto-école adaptée.
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="formations-table formation-b-section hidden" id="table-b-automatique">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                PERMIS B - BOÎTE AUTOMATIQUE
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    LA FORMATION PERMIS B BOÎTE AUTOMATIQUE
+                                </h3>
+                                <p class="editable">
+                                    La filière « boîte automatique » présente plusieurs avantages :
+                                    l’élève est libéré de la plupart des contraintes mécaniques (embrayage, calage,
+                                    passage de vitesses), ce qui facilite l'apprentissage et permet de se concentrer sur
+                                    l'environnement et la circulation.
+                                </p>
+                                <p class="editable">
+                                    Cette formation est particulièrement adaptée aux personnes
+                                    rencontrant des difficultés mécaniques ou recherchant un confort de conduite. De
+                                    plus, la durée de formation est souvent plus courte que la filière manuelle.
+                                </p>
+                                <h3 class="editable">
+                                    Conditions et public concerné
+                                </h3>
+                                <p class="editable">
+                                    La formation peut s'adresser à tous :
+                                </p>
+                                <ul>
+                                    <li class="editable">
+                                        à partir de 15 ans dans le cadre de la conduite accompagnée
+                                        (sur véhicule à boîte automatique) ;
+                                    </li>
+                                    <li class="editable">
+                                        à partir de 17 ans pour l'inscription à la formation
+                                        traditionnelle B ou la conduite supervisée.
+                                    </li>
+                                </ul>
+                                <p class="editable">
+                                    Les conditions d'accès (âge, rendez-vous pédagogiques, volume
+                                    d'heures) restent les mêmes que pour la filière traditionnelle. La conduite doit
+                                    obligatoirement se faire sur un véhicule équipé d'une boîte automatique. Nous
+                                    disposons d'une Peugeot 308 à boîte automatique.
+                                </p>
+                                <h3 class="editable">
+                                    Contenu et examen
+                                </h3>
+                                <p class="editable">
+                                    Le contenu de la formation ne présente pas de spécificité majeure :
+                                    en fonction de la filière choisie, le volume d'heures et les rendez-vous
+                                    pédagogiques resteront les mêmes et répondront aux mêmes conditions que pour la
+                                    boîte manuelle.
+                                </p>
+                                <p class="editable">
+                                    L'examen est quasi-identique à celui sur boîte manuelle. Deux
+                                    différences : l'examen se déroule obligatoirement sur boîte automatique, et le
+                                    permis délivré est limité à la conduite des véhicules de la catégorie B munis d'un
+                                    changement de vitesse automatique (permis restrictif).
+                                </p>
+                                <h3 class="editable" id="apres_l_examen">
+                                    Après l'examen
+                                </h3>
+                                <p class="editable">
+                                    Après obtention d'un permis sur boîte automatique, il est possible
+                                    de repasser sur boîte manuelle sans repasser l'examen final, sous conditions :
+                                </p>
+                                <ul>
+                                    <li class="editable">
+                                        avoir obtenu son permis depuis au moins 6 mois ;
+                                    </li>
+                                    <li class="editable">
+                                        suivre une formation de 7 heures en auto-école.
+                                    </li>
+                                </ul>
+                                <p class="formation-requirement-center">
+                                    <strong>
+                                        Après cette formation, vous pourrez
+                                        demander la modification auprès de la préfecture pour obtenir le permis boîte
+                                        manuelle sans nouvel examen.
+                                    </strong>
+                                </p>
+                                <p class="formation-info-center">
+                                    <a class="pl_button primary" href="../files/voiture/enjeux_formation_permis_b.pdf"
+                                        target="_blank">
+                                        LES ENJEUX DE LA FORMATION
+                                    </a>
+                                    <a class="pl_button purple" href="../files/voiture/auto/programme_auto_manuel.pdf"
+                                        target="_blank">
+                                        PROGRAMME DE FORMATION B78 vers B
+                                    </a>
+                                    <a class="pl_button success" href="../files/voiture/parcours_formation_b.pdf"
+                                        target="_blank">
+                                        PARCOURS DE FORMATION
+                                    </a>
+                                    <a class="pl_button eval" href="../files/voiture/evaluation.pdf"
+                                        target="_blank">
+                                        EVALUATION DE DEPART
+                                    </a>
+                                </p>
+                                <p class="text-error">
+                                    INFORMATION HANDICAP : chaque situation de handicap étant unique
+                                    et ne disposant pas de matériel évolutif et adéquat, nous ne pouvons donc dispenser
+                                    ce type de formation spécifique. Consultez
+                                    <a class="ftextlink" href="https://www.automobile.ceremh.org" target="_blank">
+                                        automobile.ceremh.org
+                                    </a>
+                                    pour trouver une auto-école adaptée.
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="formations-table formation-b-section hidden" id="table-am-moto">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                PERMIS AM - MOTO
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    LE PERMIS AM - QU'EST CE QUE C'EST ?
+                                </h3>
+                                <p class="editable">
+                                    Le permis AM - Moto (ancien BSR) est obligatoire pour conduire un
+                                    cyclomoteur à partir de 14 ans ou un quadricycle léger à moteur à partir de 16 ans.
+                                    Il concerne les cyclomoteurs de cylindrée ≤ 50 cm3 (ou 4 kW pour les électriques) et
+                                    une vitesse maximale de 45 km/h.
+                                </p>
+                                <p class="editable">
+                                    La formation pratique dure 8 heures et se compose de :
+                                </p>
+                                <ul class="editable">
+                                    <li>1 séquence d'échanges sur les représentations individuelles autour de la
+                                        conduite ;</li>
+                                    <li>1 séquence de formation à la conduite hors circulation (2h) ;</li>
+                                    <li>1 séquence sur le Code de la route ;</li>
+                                    <li>1 séquence de formation à la conduite sur les voies ouvertes à la circulation
+                                        publique (4h) ;</li>
+                                    <li>1 séquence de sensibilisation aux risques (1h).</li>
+                                </ul>
+                                <p class="editable">
+                                    Nous disposons de 2 scooters Peugeot Streetzone pour les formations.
+                                    L'élève doit venir équipé d'un casque homologué, de gants, d'un blouson ou d'une
+                                    veste à manches longues, d'un pantalon et de bottes ou chaussures montantes.
+                                </p>
+                                <h3 class="editable">
+                                    Détails pratiques
+                                </h3>
+                                <p class="editable">
+                                    La formation a lieu sur notre piste privée près de l'aéroclub de
+                                    Chanteheux (derrière le club canin), à environ 3 minutes en voiture de l'auto-école.
+                                    Les cours se déroulent du lundi au vendredi (7h-19h) et le samedi (7h-17h).
+                                </p>
+                                <strong class="text-warning editable" >La piste ne dispose pas de toilettes, cependant il y en a disponible à 3 minutes de la piste.</strong>
+                                <h3 class="editable" id="doc_a_fournir">
+                                    Documents à fournir
+                                </h3>
+                                <ul>
+                                    <li class="editable" id="e_photos">
+                                        2 e-photos
+                                    </li>
+                                    <li class="editable" id="assr">
+                                        Copie de l'ASSR
+                                    </li>
+                                    <li class="editable" id="cni_parent">
+                                        Copie de la carte d'identité des parents recto verso
+                                    </li>
+                                    <li class="editable" id="cni_eleve">
+                                        Copie de la carte d'identité de l'élève recto verso
+                                    </li>
+                                    <li class="editable" id="attest_hebergement">
+                                        Attestation d'hébergement
+                                    </li>
+                                    <li class="editable" id="justif_dom">
+                                        Justificatif de domicile de moins de 3 mois
+                                    </li>
+                                </ul>
+                                <p class="formation-info-center">
+                                    <a class="pl_button primary" href="../files/moto/am/enjeux_formation_permis_am.pdf"
+                                        target="_blank">
+                                        LES ENJEUX DE LA FORMATION
+                                    </a>
+                                    <a class="pl_button purple"
+                                        href="../files/moto/am/programme_formation_permis_am.pdf" target="_blank">
+                                        PROGRAMME DE FORMATION AM
+                                    </a>
+                                </p>
+                                <p class="text-error">
+                                    INFORMATION HANDICAP : chaque situation étant unique et ne
+                                    disposant pas de matériel évolutif et adéquat, nous ne pouvons pas dispenser ce type
+                                    de formation spécifique. Consultez
+                                    <a class="ftextlink" href="https://www.automobile.ceremh.org" target="_blank">
+                                        automobile.ceremh.org
+                                    </a>
+                                    pour trouver une
+                                    auto-école adaptée.
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="formations-table formation-b-section hidden" id="table-am-voiture">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                PERMIS AM - VOITURE
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    LE PERMIS AM - QU'EST CE QUE C'EST ?
+                                </h3>
+                                <p class="editable">
+                                    Le permis AM - Moto (ancien BSR) est obligatoire pour conduire un
+                                    cyclomoteur à partir de 14 ans ou un quadricycle léger à moteur à partir de 16 ans.
+                                    Il concerne les quadricycle de cylindrée ≤ 50 cm3 (ou 4 kW pour les électriques) et
+                                    une vitesse maximale de 45 km/h.
+                                </p>
+                                <p class="editable">
+                                    La formation pratique dure 8 heures et se compose de :
+                                </p>
+                                <ul class="editable">
+                                    <li>1 séquence d'échanges sur les représentations individuelles autour de la
+                                        conduite ;</li>
+                                    <li>1 séquence de formation à la conduite hors circulation (2h) ;</li>
+                                    <li>1 séquence sur le Code de la route ;</li>
+                                    <li>1 séquence de formation à la conduite sur les voies ouvertes à la circulation
+                                        publique (4h) ;</li>
+                                    <li>1 séquence de sensibilisation aux risques (1h).</li>
+                                </ul>
+                                <p class="editable">
+                                    Nous disposons d'une Renault Duo pour les formations.
+                                </p>
+                                <h3 class="editable">
+                                    Détails pratiques
+                                </h3>
+                                <p class="editable">
+                                    La formation a lieu sur notre piste privée près de l'aéroclub de
+                                    Chanteheux (derrière le club canin), à environ 3 minutes en voiture de l'auto-école.
+                                    Les cours se déroulent du lundi au vendredi (8h-19h) et le samedi (8h-17h).
+                                </p>
+                                <strong class="text-warning editable" >La piste ne dispose pas de toilettes, cependant il y en a disponible à 3 minutes de la piste.</strong>
+                                <h3 class="editable" id="doc_a_fournir">
+                                    Documents à fournir
+                                </h3>
+                                <ul>
+                                    <li class="editable" id="e_photos">
+                                        2 e-photos
+                                    </li>
+                                    <li class="editable" id="assr">
+                                        Copie de l'ASSR
+                                    </li>
+                                    <li class="editable" id="cni_parent">
+                                        Copie de la carte d'identité des parents recto verso
+                                    </li>
+                                    <li class="editable" id="cni_eleve">
+                                        Copie de la carte d'identité de l'élève recto verso
+                                    </li>
+                                    <li class="editable" id="attest_hebergement">
+                                        Attestation d'hébergement
+                                    </li>
+                                    <li class="editable" id="justif_dom">
+                                        Justificatif de domicile de moins de 3 mois
+                                    </li>
+                                </ul>
+                                <p class="formation-info-center">
+                                    <a class="pl_button primary" href="../files/moto/am/enjeux_formation_permis_am.pdf"
+                                        target="_blank">
+                                        LES ENJEUX DE LA FORMATION
+                                    </a>
+                                    <a class="pl_button purple"
+                                        href="../files/moto/am/programme_formation_permis_am.pdf" target="_blank">
+                                        PROGRAMME DE FORMATION AM
+                                    </a>
+                                </p>
+                                <p class="text-error">
+                                    INFORMATION HANDICAP : chaque situation étant unique et ne
+                                    disposant pas de matériel évolutif et adéquat, nous ne pouvons pas dispenser ce type
+                                    de formation spécifique. Consultez
+                                    <a class="ftextlink" href="https://www.automobile.ceremh.org" target="_blank">
+                                        automobile.ceremh.org
+                                    </a>
+                                    pour trouver une
+                                    auto-école adaptée.
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="formations-table formation-b-section hidden" id="table-moto-a1">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                PERMIS MOTO A1 - PERMIS 125
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    LE PERMIS A1 - QU'EST CE QUE C'EST ?
+                                </h3>
+                                <p class="editable">
+                                    Le permis A1 ou permis 125 est accessible dès l'âge de 16 ans et
+                                    permet la conduite d’une cylindrée inférieure à 125cm3, d’une puissance inférieure à
+                                    15 ch. Il nécessite de passer l'examen du code de la route et d'effectuer une
+                                    formation minimale de 8 heures de leçons hors circulation (plateau) et 12 heures de
+                                    leçon en circulation. Après obtention du code, l'examen pratique comprend une
+                                    épreuve hors circulation et une épreuve en circulation.
+                                </p>
+                                <p class="formation-info-center">
+                                    Nous disposons de 2 Yamaha 125 cm3 MT125.
+                                </p>
+                                <p class="formation-info-center">
+                                    <strong class="text-warning">
+                                        L'élève doit venir équipé
+                                        de gants, d'un casque, d'un pantalon, de chaussures montantes et d'une veste. En
+                                        raison de la crise sanitaire, l'auto-école ne peut plus fournir de
+                                        matériel.
+                                    </strong>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3 class="editable" id="lieu_et_organisation">
+                                    Lieu et organisation
+                                </h3>
+                                <p class="editable">
+                                    Les séances pratiques se déroulent en grande partie sur notre piste
+                                    privée située près de l'aéroclub de Chanteheux (derrière le club Canin), à environ 5
+                                    minutes en voiture de l'auto‑école. Les cours ont lieu du lundi au vendredi de 7h à
+                                    19h et le samedi de 7h à 17h.
+                                </p>
+                                <strong class="text-warning editable" id="commodite sur piste">La piste ne dispose pas de toilettes, cependant il y en a disponible à 3 minutes de la piste.</strong>
+                                <iframe allowfullscreen="" class="editable" height="450" id="position-piste"
+                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1463.5427251546691!2d6.558745088173876!3d48.59183783549939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sfr!4v1759304503819!5m2!1sen!2sfr"
+                                    width="600">
+                                </iframe>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    LES ENJEUX DE LA FORMATION
+                                </h3>
+                                <p class="editable">
+                                    La dimension sociale de l’usage de la motocyclette, au même titre
+                                    que l’automobile, se développe fortement. Au-delà du plaisir de conduire et des
+                                    loisirs, il devient aussi un outil pratique de déplacement pour les études, le
+                                    travail, etc.
+                                </p>
+                                <p class="editable">
+                                    Les conducteurs de motocyclette sont largement sur-exposés pour ce
+                                    qui est du risque routier. L’effort de renforcement de l’éducation et de la
+                                    formation à la conduite de ce type de véhicule doit donc être poursuivi.
+                                </p>
+                                <p class="editable">
+                                    L’objectif général de la formation est d’amener tout conducteur à la
+                                    maîtrise de compétences en termes de savoirs, savoir-être, savoir-faire, et
+                                    savoir-devenir.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    LE DÉROULEMENT DE LA FORMATION
+                                </h3>
+                                <p class="editable">
+                                    La conduite d’une motocyclette présente de réelles spécificités
+                                    qu’il faut être en mesure de correctement maîtriser. Ce programme se veut une vue
+                                    d’ensemble, aussi exhaustive que possible, des compétences théoriques et pratiques
+                                    qu’un conducteur de motocyclette responsable et autonome doit acquérir pour ne pas
+                                    mettre sa sécurité et celle des autres en danger.
+                                </p>
+                                <p class="editable">
+                                    Au travers de ce programme, avec l’aide de votre formateur, vous
+                                    allez apprendre et comprendre les règles du code de la route (notamment celles qui
+                                    concernent plus spécifiquement le type de véhicule que vous apprenez à conduire)
+                                    mais aussi apprendre et comprendre le rôle de l’équipement du motard, les moyens de
+                                    maîtriser la conduite d’une motocyclette à allure faible et soutenue, la nécessité
+                                    de partager la route en bonne intelligence avec les autres usagers et d’adopter des
+                                    comportements de conduite citoyens et responsables.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    LE DÉROULEMENT DE L'EXAMEN
+                                </h3>
+                                <p class="editable">
+                                    L’épreuve pratique de l’examen du permis de conduire catégorie A1
+                                    comporte deux phases :
+                                </p>
+                                <ul>
+                                    <li class="editable">
+                                        la première : hors circulation ;
+                                    </li>
+                                    <li class="editable">
+                                        la seconde : en circulation.
+                                    </li>
+                                </ul>
+                                <p class="editable">
+                                    Ces deux phases de l’épreuve pratique sont évaluées par un expert :
+                                    l’inspecteur du permis de conduire et de la sécurité routière. L’épreuve hors
+                                    circulation constitue une admissibilité pour l’épreuve en circulation.
+                                </p>
+                                <p class="editable">
+                                    L’objectif de ces épreuves est d’évaluer le niveau des savoirs et
+                                    savoir-faire que vous avez acquis : code de la route, sécurité et signalisation
+                                    routières, équilibre et stabilité, connaissance et emploi des accessoires et
+                                    commandes du véhicule, freinage, etc.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    DOCUMENTS A FOURNIR
+                                </h3>
+                                <ul>
+                                    <li class="editable" id="e_photos">
+                                        3 e-photos
+                                    </li>
+                                    <li class="editable" id="assr_2">
+                                        Copie de l'ASSR 2
+                                    </li>
+                                    <li class="editable" id="copie_jdc">
+                                        Copie de la JDC
+                                    </li>
+                                    <li class="editable" id="cni_parents">
+                                        Copie de la carte d'identité des parents recto verso
+                                    </li>
+                                    <li class="editable" id="cni_eleve">
+                                        Copie de la carte d'identité de l'élève recto verso
+                                    </li>
+                                    <li class="editable" id="attest_hebergement">
+                                        Attestation d'hébergement
+                                    </li>
+                                    <li class="editable" id="justif_dom">
+                                        Copie d'un justificatif de domicile de moins de 3 mois
+                                    </li>
+                                    <li class="editable" id="timbres_poste">
+                                        4 timbres poste
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    Ressources et informations complémentaires
+                                </h3>
+                                <p class="formation-info-center">
+                                    <a class="pl_button purple" href="../files/moto/a1/programme_formation_a1.pdf"
+                                        target="_blank">
+                                        PROGRAMME DE FORMATION A1
+                                    </a>
+                                    <a class="pl_button success" href="../files/moto/a1/parcours_formation_a1.pdf"
+                                        target="_blank">
+                                        PARCOURS DE FORMATION
+                                    </a>
+                                    <a class="pl_button eval" href="../files/moto/evaluation.pdf"
+                                        target="_blank">
+                                        EVALUATION DE DEPART
+                                    </a>
+                                </p>
+                                <p class="text-error">
+                                    <strong>
+                                        INFORMATION HANDICAP :
+                                    </strong>
+                                </p>
+                                <p class="text-error">
+                                    Chaque situation de handicap étant unique et ne disposant pas de
+                                    matériel évolutif et adapté, nous ne pouvons donc dispenser ce type de formation
+                                    spécifique. Cependant vous pouvez consulter le site
+                                    <a class="ftextlink" href="https://www.automobile.ceremh.org" target="_blank">
+                                        automobile.ceremh.org
+                                    </a>
+                                    afin de trouver une auto-école adaptée
+                                    à vos besoins.
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="formations-table formation-b-section hidden" id="table-moto-a2">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                PERMIS MOTO A2
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    LE PERMIS A2 - QU'EST CE QUE C'EST ?
+                                </h3>
+                                <p class="editable">
+                                    Le permis A2 est accessible dès l'âge de 18 ans et
+                                    permet la conduite de motos d'une puissance limitée (puissance brute maximale prévue
+                                    par la réglementation). Il nécessite le passage de l'épreuve théorique (le code) et
+                                    une formation pratique comprenant des exercices hors circulation (plateau) et en
+                                    circulation.
+                                </p>
+                                <p class="formation-vehicle-center">
+                                    Nous disposons de 3 Yamaha 689 cm3 MT-07 pour les
+                                    formations A2.
+                                </p>
+                                <p class="formation-info-center">
+                                    <strong class="text-warning">
+                                        L'élève doit venir équipé
+                                        de gants, d'un casque homologué, d'un pantalon, de chaussures montantes et d'une
+                                        veste.
+                                    </strong>
+                                </p>
+                                <h3 class="editable">
+                                    LES ENJEUX DE LA FORMATION
+                                </h3>
+                                <p class="editable">
+                                    La formation vise à amener le futur conducteur à maîtriser les
+                                    compétences théoriques et pratiques nécessaires pour circuler en sécurité :
+                                    connaissance du véhicule, maîtrise des trajectoires, freinage, anticipation et
+                                    comportements adaptés aux différents contextes routiers.
+                                </p>
+                                <h3 class="editable">
+                                    Lieu et organisation
+                                </h3>
+                                <p class="editable">
+                                    Les séances pratiques se déroulent en grande partie sur notre piste
+                                    privée située près de l'aéroclub de Chanteheux (derrière le club Canin), à environ 3
+                                    minutes en voiture de l'auto‑école. Les cours ont lieu du lundi au vendredi de 7h à
+                                    19h et le samedi de 7h à 17h.
+                                </p>
+                                <strong class="text-warning editable" id="commodite sur piste">La piste ne dispose pas de toilettes, cependant il y en a disponible à 3 minutes de la piste.</strong>
+                                <h3 class="editable" id="doc_a_fournin">
+                                    DOCUMENTS A FOURNIR
+                                </h3>
+                                <ul>
+                                    <li class="editable" id="e_photos">
+                                        3 e-photos
+                                    </li>
+                                    <li class="editable" id="copie_jdc">
+                                        Copie de la JDC
+                                    </li>
+                                    <li class="editable" id="copie_permis">
+                                        Copie du permis de conduire (si équivalence)
+                                    </li>
+                                    <li class="editable" id="cni">
+                                        Pièce d'identité recto/verso
+                                    </li>
+                                    <li class="editable" id="justif_dom">
+                                        Justificatif de domicile de moins de 3 mois
+                                    </li>
+                                    <li class="editable" id="attest_hebergement">
+                                        Attestation d'hébergement (si nécessaire)
+                                    </li>
+                                    <li class="editable" id="timbres_postes">
+                                        4 timbres poste
+                                    </li>
+                                </ul>
+                                <p class="formation-info-center">
+                                    <a class="pl_button primary" href="../files/moto/a2/enjeux_formation_a2.pdf"
+                                        target="_blank">
+                                        LES ENJEUX DE LA FORMATION
+                                    </a>
+                                    <a class="pl_button purple" href="../files/moto/a2/programme_formation_a2.pdf"
+                                        target="_blank">
+                                        PROGRAMME DE FORMATION A2
+                                    </a>
+                                    <a class="pl_button success" href="../files/moto/a2/parcours_formation_a2.pdf"
+                                        target="_blank">
+                                        PARCOURS DE FORMATION
+                                    </a>
+                                    <a class="pl_button eval" href="../files/moto/evaluation.pdf"
+                                        target="_blank">
+                                        EVALUATION DE DEPART
+                                    </a>
+                                </p>
+                                <p class="text-error">
+                                    INFORMATION HANDICAP : chaque situation de handicap étant unique
+                                    et ne disposant pas de matériel évolutif et adapté, nous ne pouvons donc dispenser
+                                    ce type de formation spécifique. Consultez
+                                    <a class="ftextlink" href="https://www.automobile.ceremh.org" target="_blank">
+                                        automobile.ceremh.org
+                                    </a>
+                                    pour trouver une auto‑école adaptée.
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="formations-table formation-b-section hidden" id="table-passerelle-a2-a">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                FORMATION MOTO PASSERELLE A2 VERS A
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    LES ENJEUX DE LA FORMATION
+                                </h3>
+                                <p class="editable">
+                                    La dimension sociale de l’usage de la motocyclette, au même titre
+                                    que l’automobile, se développe fortement. Au-delà du plaisir de conduire et des
+                                    loisirs, il devient aussi un outil pratique de déplacement pour les études, le
+                                    travail, etc.
+                                </p>
+                                <p class="editable">
+                                    Les conducteurs de motocyclettes sont largement sur-exposés au
+                                    risque routier. L’effort de renforcement de l’éducation et de la formation à la
+                                    conduite de ce type de véhicule doit donc être poursuivi.
+                                </p>
+                                <p class="editable">
+                                    L’objectif général de la formation est d’amener tout conducteur à la
+                                    maîtrise de compétences en termes de savoirs, savoir-être, savoir-faire et
+                                    savoir-devenir.
+                                </p>
+                                <p class="editable">
+                                    Apprendre à conduire une motocyclette est une démarche éducative
+                                    exigeante et ce livret va vous guider dans votre progression avec l’aide de votre
+                                    formateur, enseignant diplômé de la sécurité routière.
+                                </p>
+                                <p class="formation-info-center">
+                                    <strong>
+                                        Une formation de
+                                        <span class="text-warning">
+                                            7
+                                            heures
+                                        </span>
+                                        est obligatoire pour tous les titulaires du permis A2 qui
+                                        souhaitent passer sur la catégorie A.
+                                    </strong>
+                                </p>
+                                <p class="formation-info-center">
+                                    Nous disposons de 3 Yamaha 689 cm3 MT-07 pour les
+                                    formations.
+                                </p>
+                                <p class="formation-info-center">
+                                    <strong class="text-warning">
+                                        L'élève doit venir équipé
+                                        de gants, d'un casque homologué, d'un pantalon, de chaussures montantes et d'une
+                                        veste.
+                                    </strong>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    Lieu et organisation
+                                </h3>
+                                <p class="editable">
+                                    Les séances pratiques se déroulent en grande partie sur notre piste
+                                    privée située près de l'aéroclub de Chanteheux (derrière le club Canin), à environ 5
+                                    minutes en voiture de l'auto‑école. Les cours ont lieu du lundi au vendredi de 7h à
+                                    19h et le samedi de 7h à 17h.
+                                </p>
+                                <strong class="text-warning editable" id="commodite sur piste">La piste ne dispose pas de toilettes, cependant il y en a disponible à 3 minutes de la piste.</strong>
+                                <iframe allowfullscreen="" class="editable" height="450" id="position-piste"
+                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1463.5427251546691!2d6.558745088173876!3d48.59183783549939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sfr!4v1759304503819!5m2!1sen!2sfr"
+                                    width="600">
+                                </iframe>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3 class="editable" id="documents_fournir">
+                                    DOCUMENTS À FOURNIR
+                                </h3>
+                                <ul>
+                                    <li class="editable" id="e_photo">
+                                        1 e-photo
+                                    </li>
+                                    <li class="editable" id="permis_a2">
+                                        Permis de conduire A2
+                                    </li>
+                                    <li class="editable" id="cni">
+                                        Pièce d'identité recto/verso
+                                    </li>
+                                    <li class="editable" id="justif_dom">
+                                        Justificatif de domicile de moins de 3 mois
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="formation-info-center">
+                                    <a class="pl_button success" href="../files/moto/a2_a/parcours_formation_a.pdf"
+                                        target="_blank">
+                                        PARCOURS DE FORMATION
+                                    </a>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="text-error">
+                                    <strong>
+                                        INFORMATION HANDICAP :
+                                    </strong>
+                                </p>
+                                <p class="text-error">
+                                    Chaque situation de handicap étant unique et ne disposant pas de
+                                    matériel évolutif et adapté, nous ne pouvons donc dispenser ce type de formation
+                                    spécifique. Cependant vous pouvez consulter le site
+                                    <a class="ftextlink" href="https://www.automobile.ceremh.org" target="_blank">
+                                        automobile.ceremh.org
+                                    </a>
+                                    afin de trouver une auto-école adaptée
+                                    à vos besoins.
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="formations-table formation-b-section hidden" id="table-formation-125cc">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                FORMATION 125CC
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    Les enjeux de la formation à la conduite
+                                </h3>
+                                <p class="editable">
+                                    La dimension sociale de l’usage de la motocyclette, au même titre
+                                    que l’automobile, se développe fortement. Au-delà du plaisir de conduire et des
+                                    loisirs, il devient aussi un outil pratique de déplacement pour les études, le
+                                    travail, etc.
+                                </p>
+                                <p class="editable">
+                                    Les conducteurs de motocyclettes sont largement sur-exposés pour ce
+                                    qui est du risque routier. L’effort de renforcement de l’éducation et de la
+                                    formation à la conduite de ce type de véhicule doit donc être poursuivi.
+                                </p>
+                                <p class="editable">
+                                    L’objectif général de la formation est d’amener tout conducteur à la
+                                    maîtrise de compétences en termes de savoirs, savoir-être, savoir-faire, et
+                                    savoir-devenir.
+                                </p>
+                                <p class="editable">
+                                    Apprendre à conduire une motocyclette est une démarche éducative
+                                    exigeante et ce livret va vous guider dans votre progression avec l’aide de votre
+                                    formateur, enseignant diplômé de la sécurité routière.
+                                </p>
+                                <p class="formation-info-center">
+                                    <strong>
+                                        Une formation 125 cm3
+                                    </strong>
+                                    de
+                                    <span class="text-warning">
+                                        7 heures
+                                    </span>
+                                    est
+                                    <strong>
+                                        <span class="text-warning">
+                                            obligatoire pour tous les titulaires du permis
+                                            B
+                                        </span>
+                                    </strong>
+                                    qui souhaitent commencer à conduire un deux-roues motorisé
+                                    de 50 à 125 cm3 ou un « scooter à trois roues » de plus de 50 cm3.
+                                </p>
+                                <p class="formation-info-center">
+                                    Nous disposons de 2 Yamaha 125 cm3 MT125.
+                                </p>
+                                <p class="formation-info-center">
+                                    <strong class="text-warning">
+                                        L'élève doit venir équipé
+                                        de gants, d'un casque, d'un pantalon, de chaussures montantes et d'une veste. En
+                                        raison de la crise sanitaire, l'auto-école ne peut plus fournir de
+                                        matériel.
+                                    </strong>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    Lieu et organisation
+                                </h3>
+                                <p class="editable">
+                                    Pour votre formation, nous vous accueillons sur notre piste privée
+                                    située près de l'aéroclub de Chanteheux, derrière le club Canin à 5 minutes de
+                                    l'auto-école en voiture. Les cours débutent sur place du lundi au vendredi de 7h à
+                                    19h et le samedi de 7h à 17h.
+                                </p>
+                                <p class="editable">
+                                    Nous disposons d'une convention avec l'aéroclub afin d'exploiter
+                                    cette piste.
+                                </p>
+                                <strong class="text-warning editable" id="commodite sur piste">La piste ne dispose pas de toilettes, cependant il y en a disponible à 3 minutes de la piste.</strong>
+                                <iframe allowfullscreen="" class="editable" height="450" id="position-piste"
+                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1463.5427251546691!2d6.558745088173876!3d48.59183783549939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sfr!4v1759304503819!5m2!1sen!2sfr"
+                                    width="600">
+                                </iframe>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    DOCUMENTS À FOURNIR
+                                </h3>
+                                <ul>
+                                    <li class="editable" id="e_photo">
+                                        1 e-photo
+                                    </li>
+                                    <li class="editable" id="permis_de_conduire">
+                                        Permis de conduire
+                                    </li>
+                                    <li class="editable" id="cni">
+                                        Pièce d'identité recto/verso
+                                    </li>
+                                    <li class="editable" id="justif_dom">
+                                        Justificatif de domicile de moins de 3 mois
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="formation-info-center">
+                                    <a class="pl_button purple"
+                                        href="../files/moto/125cm3/programme_formation_125cm3.pdf" target="_blank">
+                                        PROGRAMME DE FORMATION
+                                    </a>
+                                </p>
+                                <p class="text-error">
+                                    <strong>
+                                        INFORMATION HANDICAP :
+                                    </strong>
+                                </p>
+                                <p class="text-error">
+                                    Chaque situation de handicap étant unique et ne disposant pas de
+                                    matériel évolutif et adapté, nous ne pouvons donc dispenser ce type de formation
+                                    spécifique. Cependant vous pouvez consulter le site
+                                    <a class="ftextlink" href="https://www.automobile.ceremh.org" target="_blank">
+                                        automobile.ceremh.org
+                                    </a>
+                                    afin de trouver une auto-école adaptée
+                                    à vos besoins.
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="formations-table formation-b-section hidden" id="table-post-permis">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                FORMATION POST PERMIS
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h3 class="editable">
+                                    Les stages post-permis pour la réduction de la période probatoire
+                                </h3>
+                                <p class="editable">
+                                    Les conducteurs novices titulaires d’un premier permis de conduire
+                                    peuvent suivre une formation complémentaire « post-permis » pour
+                                    bénéficier d’une réduction du délai probatoire.
+                                </p>
+                                <p class="editable">
+                                    La période probatoire correspond au délai nécessaire pour acquérir
+                                    les 12 points sur le permis de conduire (6 points sont attribués à l’obtention du
+                                    permis). Selon le type d’apprentissage, ce délai varie :
+                                </p>
+                                <ul>
+                                    <li class="editable">
+                                        2 ans dans le cas d’une
+                                        formation en AAC (Conduite accompagnée)
+                                    </li>
+                                    <li class="editable">
+                                        3 ans dans le cas d’une
+                                        formation traditionnelle ou en conduite supervisée (CS)
+                                    </li>
+                                </ul>
+                                <h3 class="editable">
+                                    Réduire la période probatoire
+                                </h3>
+                                <p class="editable">
+                                    Depuis le 1er janvier 2019, la formation
+                                    post-permis permet de réduire la période probatoire.
+                                </p>
+                                <p class="editable">
+                                    Elle concerne les permis ayant été :
+                                    • Obtenus en premier permis de conduire (A1, A2,
+                                    B1 ou B)
+                                    • Repassés suite à une invalidation ou une annulation du précédent permis de
+                                    conduire.
+                                </p>
+                                <p class="editable">
+                                    À partir du 6ème mois et avant la fin du
+                                    12ème mois suivant l’obtention du permis, le nouveau conducteur peut
+                                    suivre une journée de formation post-permis. Suite à cette
+                                    formation, la durée du permis probatoire est réduite :
+                                </p>
+                                <ul>
+                                    <li class="editable">
+                                        pour les permis obtenus suite à une formation
+                                        traditionnelle ou en conduite supervisée : de
+                                        3 ans à 2 ans
+                                    </li>
+                                    <li class="editable">
+                                        pour les permis obtenus suite à une formation en
+                                        <strong>
+                                            conduite accompagnée
+                                        </strong>
+                                        (AAC) : de
+                                        <strong>
+                                            2 ans
+                                        </strong>
+                                        à
+                                        <strong>
+                                            1 an et demi
+                                        </strong>
+                                    </li>
+                                </ul>
+                                <h3 class="editable">
+                                    La formation post-permis
+                                </h3>
+                                <p class="editable">
+                                    Cette formation est dispensée dans une auto-école
+                                    labellisée par un enseignant habilité et se déroule sur 2
+                                    demi-journées consécutives soit 7 heures.
+                                </p>
+                                <p class="editable">
+                                    Cette formation collective de 6 à 12 participants
+                                    vise à « améliorer la compréhension et la gestion des situations de conduite
+                                    complexes » et « rendre le déplacement plus sûr et plus
+                                    citoyen ».
+                                </p>
+                                <h3 class="editable">
+                                    Attestation de suivi
+                                </h3>
+                                <p class="editable">
+                                    Si l’élève assiste aux 7 heures, une attestation de suivi de
+                                    formation est établie et délivrée par l’école de conduite à l’issue de
+                                    la journée de formation.
+                                </p>
+                                <p>
+                                    <strong>
+                                        INFORMATION HANDICAP :
+                                    </strong>
+                                </p>
+                                <p>
+                                    Chaque situation de handicap étant unique et ne disposant pas de matériel évolutif
+                                    et
+                                    adéquat, nous ne pouvons donc dispenser ce type de formation spécifique. Cependant
+                                    vous pouvez consulter le site
+                                    <a class="ftextlink" href="https://www.automobile.ceremh.org" target="_blank">
+                                        automobile.ceremh.org
+                                    </a>
+                                    afin de trouver une
+                                    auto-école adaptée à vos besoins.
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- Ajoutez ici les autres tableaux formations selon le même format -->
+            </div>
+        </section>
+    </main>
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <div class="footer-row">
+                <div class="footer-links">
+                    <a href="presse.html">Presse</a>
+                    <a href="reglement.html">
+                        Règlement intérieur
+                    </a>
+                    <a href="satisfaction.html">
+                        Enquête de satisfaction
+                    </a>
+                    <a href="positionnement.html">
+                        Procédé de positionnement
+                    </a>
+                    <a href="reclamation.html">
+                        Gestion des réclamations
+                    </a>
+                    <a href="resultat.html">
+                        Résultats du permis
+                    </a>
+                    <a href="contact.html">
+                        Contact
+                    </a>
+                    <a href="garantie_financiere.html">
+                        Garantie financière
+                    </a>
+                    <a href="remerciement.html">Remerciement</a>
+                </div>
+            </div>
+            <div class="footer-row">
+                <p>
+                    © 2025 Auto-École Rout'Art. Tous droits réservés.
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

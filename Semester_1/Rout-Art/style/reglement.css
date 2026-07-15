@@ -1,0 +1,433 @@
+@import url('general.css');
+@import url('variables.css');
+
+/* ===== SECTION RÈGLEMENT ===== */
+.reglement-section {
+    padding: var(--spacing-3xl) 0;
+    background: var(--light-gray);
+}
+
+.reglement-intro {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.reglement-intro .section-title {
+    color: var(--primary-color);
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--spacing-md);
+}
+
+.intro-text {
+    font-size: var(--font-size-lg);
+    color: var(--text-color);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ===== CATÉGORIES DE RÈGLEMENT ===== */
+.regulation-category {
+    background: var(--white-color);
+    margin: var(--spacing-xl) 0;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+:root[data-theme="dark"] .regulation-header {
+    background: var(--dark-gradient);
+    color: var(--text-color-rgb);
+}
+
+.regulation-header {
+    background: var(--primary-gradient);
+    color: var(--white-color);
+    padding: var(--spacing-xl);
+    text-align: center;
+    position: relative;
+}
+
+.regulation-icon {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-md);
+    display: block;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    line-height: 2;
+}
+
+.regulation-header h3 {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-xs);
+    position: relative;
+    z-index: 1;
+}
+
+.regulation-desc {
+    font-size: var(--font-size-base);
+    opacity: 0.9;
+    margin-top: var(--spacing-xs);
+}
+
+/* ===== GRILLE DE RÈGLEMENT ===== */
+.regulation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+    padding: var(--spacing-xl);
+}
+
+.regulation-card {
+    background: var(--light-gray);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.regulation-card:hover {
+    transform: translateY(-5px);
+}
+
+.regulation-card .regulation-icon {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--spacing-lg);
+    display: block;
+    text-align: center;
+    line-height: 2;
+}
+
+.regulation-content h4 {
+    color: var(--primary-color);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-md);
+}
+
+.regulation-content p {
+    color: var(--text-color);
+    line-height: 1.6;
+    font-size: var(--font-size-base);
+}
+
+/* ===== GRILLES SUPPLÉMENTAIRES ===== */
+.obligations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    padding: var(--spacing-xl);
+}
+
+:root[data-theme="dark"] .obligation-regulation {
+    border-top: 4px solid var(--primary-dark-color);
+}
+
+.obligation-regulation {
+    background: var(--white-color);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-xl);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    border-top: 4px solid var(--accent-color);
+    transition: all 0.3s ease;
+}
+
+.obligation-regulation:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.obligation-regulation .regulation-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+    text-align: center;
+    line-height: 2;
+}
+
+.obligation-regulation h4 {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.obligation-regulation p {
+    color: var(--text-color);
+    line-height: 1.5;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.explanation-regulation {
+    background: var(--light-gray);
+    padding: 2rem;
+    border-radius: var(--border-radius-md);
+    text-align: center;
+}
+
+.explanation-regulation .regulation-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    line-height: 2;
+}
+
+/* ===== EXIGENCES D'EXAMEN ===== */
+.exam-requirements {
+    background: var(--white-color);
+    padding: 2rem;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    margin: 2rem 0;
+}
+
+.requirements-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.requirements-regulation h4 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+:root[data-theme="dark"] .requirement-item {
+    border-top: 4px solid var(--primary-dark-color);
+}
+
+.requirement-item {
+    background: var(--white-color);
+    border-radius: var(--border-radius-md);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    border-top: 4px solid var(--accent-color);
+    transition: all 0.3s ease;
+}
+
+.requirement-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.requirement-item .req-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+    text-align: center;
+    line-height: 2;
+}
+
+.requirement-item p {
+    margin: 0;
+    color: var(--text-color);
+    line-height: 1.5;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.note-regulation {
+    background: rgba(var(--accent-color-rgb), 0.1);
+    border-radius: var(--border-radius-md);
+    padding: 1.5rem;
+    color: var(--text-color);
+    font-style: italic;
+    margin-top: 2rem;
+}
+
+/* ===== CARTE DE TÉLÉCHARGEMENT ===== */
+:root[data-theme="dark"] .download-regulation {
+    background: var(--reverse-dark-gradient);
+    color: var(--text-color-rgb);
+}
+
+.download-regulation {
+    background: var(--reverse-primary-gradient);
+    color: var(--white-color);
+    padding: 3rem 2rem;
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    margin: 3rem 0;
+}
+
+.download-regulation h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.download-regulation p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.download-regulation .btn {
+    background: var(--white-color);
+    color: var(--primary-color);
+    padding: 1.2rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: var(--border-radius-sm);
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.download-regulation .btn:hover {
+    background: var(--light-gray);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .reglement-section {
+        padding: 1.5rem 0;
+    }
+    
+    .reglement-intro .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .regulation-header,
+    .regulation-exam-requirements,
+    .regulation-download-card {
+        padding: 2.2rem;
+    }
+    
+    .regulation-categories-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .reglement-section {
+        padding: 1rem 0;
+    }
+    
+    .reglement-intro .section-title {
+        font-size: 2rem;
+    }
+    
+    .intro-text {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+    
+    .regulation-header {
+        padding: 2rem 1.5rem;
+    }
+    
+    .regulation-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .regulation-icon {
+        font-size: 2.5rem;
+    }
+    
+    .regulation-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .regulation-card {
+        padding: 1.5rem;
+    }
+    
+    .obligations-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .requirements-list {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .exam-requirements {
+        padding: 2rem 1.5rem;
+    }
+    
+    .download-regulation {
+        padding: 2rem 1.5rem;
+    }
+    
+    .download-regulation h3 {
+        font-size: 1.4rem;
+    }
+    
+    .download-regulation .btn {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .reglement-section {
+        padding: 0.5rem 0;
+    }
+    
+    .reglement-intro .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .intro-text {
+        font-size: 1rem;
+    }
+    
+    .regulation-header {
+        padding: 1.5rem 1rem;
+    }
+    
+    .regulation-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .regulation-grid {
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .regulation-card {
+        padding: 1rem;
+    }
+    
+    .regulation-card .regulation-icon {
+        font-size: 2rem;
+    }
+    
+    .regulation-content h4 {
+        font-size: 1.1rem;
+    }
+    
+    .regulation-content p {
+        font-size: 0.9rem;
+    }
+    
+    .download-regulation {
+        padding: 1.5rem 1rem;
+    }
+    
+    .download-regulation h3 {
+        font-size: 1.2rem;
+    }
+    
+    .download-regulation .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+}

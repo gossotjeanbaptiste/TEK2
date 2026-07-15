@@ -1,0 +1,18 @@
+[redis]
+redis-1 ansible_host=192.168.56.101 ansible_ssh_user=redis
+
+[postgresql]
+postgresql-1 ansible_host=192.168.56.102 ansible_ssh_user=postgre
+
+[poll]
+poll-1 ansible_host=192.168.56.103 ansible_ssh_user=poll
+
+[result]
+result-1 ansible_host=192.168.56.104 ansible_ssh_user=result
+
+[worker]
+worker-1 ansible_host=192.168.56.105 ansible_ssh_user=worker
+
+[all:vars]
+ansible_ssh_private_key_file=~/.ssh/id_ed25519
+ansible_become_pass=0

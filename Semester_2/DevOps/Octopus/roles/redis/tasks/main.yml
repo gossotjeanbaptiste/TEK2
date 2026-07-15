@@ -1,0 +1,28 @@
+---
+- name: Installer Redis Server
+  apt:
+    name: redis-server
+    state: present
+
+- name: Copier la configuration de Redis
+  copy:
+    src: redis.conf
+    dest: /etc/redis/redis.conf
+    owner: redis
+    group: redis
+    mode: '0640'
+  register: redis_config_status
+
+- name: Appliquer la config et activer Redis au boot
+  systemd:
+    name: redis-server
+    state: restarted
+    enabled: yes
+  when: redis_config_status.changed
+
+- name: S'assurer que Redis tourne (si la config n'a pas changé)
+  systemd:
+    name: redis-server
+    state: started
+    enabled: yes
+  when: not redis_config_status.changed

@@ -1,0 +1,233 @@
+@import url('general.css');
+@import url('variables.css');
+
+/* ===== STYLES GÉNÉRAUX DES SECTIONS DE CONTENU ===== */
+.content-section {
+    background: var(--white-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-2xl) var(--spacing-xl);
+    margin: var(--spacing-xl) auto;
+    max-width: var(--max-width-form);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.content-section h1,
+.content-section h2.section-title {
+    color: var(--primary-color);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.content-section h2 {
+    color: var(--accent-color);
+    font-size: var(--font-size-2xl);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+    text-align: left;
+    font-weight: var(--font-weight-semibold);
+}
+
+.content-section h3 {
+    color: var(--secondary-color);
+    font-size: var(--font-size-lg);
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    text-align: left;
+    font-weight: 600;
+}
+
+.content-section p {
+    font-size: 1.08rem;
+    color: var(--text-color);
+    margin-bottom: 1.1rem;
+    text-align: left;
+}
+
+/* ===== LISTES DANS CONTENT-SECTION ===== */
+.content-section ul {
+    background: var(--light-gray);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm);
+    padding: 1.2rem 1.5rem;
+    font-size: 1.08rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    list-style: disc inside;
+}
+
+.content-section ol {
+    background: var(--light-gray);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm);
+    padding: 1.2rem 1.5rem;
+    font-size: 1.08rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    list-style: decimal inside;
+}
+
+.content-section ul li,
+.content-section ol li {
+    margin-bottom: 0.7em;
+    line-height: 1.6;
+}
+
+/* ===== LIENS ===== */
+.content-section a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.content-section a:hover {
+    color: var(--accent-color);
+}
+
+/* ===== CONTENU CODE DE LA ROUTE (Layout) ===== */
+.code-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    align-items: center;
+}
+
+.code-image {
+    flex: 1;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.code-text {
+    flex: 2;
+    text-align: left;
+    max-width: 100%;
+}
+
+.content-section .content-image {
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    max-width: 100%;
+    height: auto;
+}
+
+.content-section .code-content-flex {
+    margin: 1.5rem 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .content-section {
+        padding: 2.5rem 2rem;
+        gap: 2rem;
+    }
+    
+    .code-section {
+        padding: 2.5rem 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .code-content {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+    
+    .code-image {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-section {
+        padding: 2rem 1.5rem;
+        margin: 1rem auto;
+        gap: 1.5rem;
+    }
+    
+    .content-section h1,
+    .content-section h2.section-title {
+        font-size: 1.8rem;
+    }
+    
+    .content-section h2 {
+        font-size: 1.3rem;
+        margin-top: 1.5rem;
+    }
+    
+    .content-section h3 {
+        font-size: 1.1rem;
+        margin-top: 1rem;
+    }
+    
+    .content-section ul,
+    .content-section ol {
+        padding: 1rem 1.2rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-section {
+        padding: 1rem;
+        margin: 0.5rem;
+        gap: 1rem;
+    }
+    
+    .content-section h1,
+    .content-section h2.section-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .content-section h2 {
+        font-size: 1.2rem;
+    }
+    
+    .content-section h3 {
+        font-size: 1rem;
+    }
+    
+    .content-section p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .content-section ul,
+    .content-section ol {
+        padding: 0.8rem 1rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* ===== IMPRESSION ===== */
+@media print {
+    .content-section {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        padding: 2rem;
+        margin: 1rem 0;
+    }
+    
+    .content-section h1,
+    .content-section h2,
+    .content-section h3 {
+        color: #000 !important;
+    }
+    
+    .content-section a {
+        color: #000 !important;
+        text-decoration: underline;
+    }
+}
+

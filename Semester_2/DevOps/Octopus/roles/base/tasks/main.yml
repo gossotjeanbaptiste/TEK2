@@ -1,0 +1,15 @@
+- name: Mettre à jour le cache apt
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Installer les outils système indispensables
+  apt:
+    name:
+      - curl
+      - htop
+      - git
+      - ufw
+      - sudo
+      - tar
+    state: present

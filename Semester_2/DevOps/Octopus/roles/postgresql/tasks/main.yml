@@ -1,0 +1,62 @@
+---
+# 1. INSTALLATION
+- name: Installer PostgreSQL et les dépendances Python pour Ansible
+  apt:
+    name:
+      - postgresql
+      - postgresql-contrib
+      - acl
+      - python3-psycopg2
+    state: present
+
+# 2. CONFIGURATION RÉSEAU & ACCÈS
+- name: Autoriser PostgreSQL à écouter sur toutes les interfaces réseau
+  lineinfile:
+    path: /etc/postgresql/17/main/postgresql.conf
+    regexp: '^#?listen_addresses\s*='
+    line: "listen_addresses = '*'"
+
+- name: Copier le fichier pg_hba.conf pour autoriser les connexions du Worker/Result
+  copy:
+    src: pg_hba.conf
+    dest: /etc/postgresql/17/main/pg_hba.conf
+    owner: postgres
+    group: postgres
+    mode: '0640'
+
+- name: Appliquer les changements et démarrer activement Postgres au boot
+  systemd:
+    name: postgresql
+    state: restarted
+    enabled: yes
+
+# 3. CRÉATION DES ACCÈS
+- name: Créer l'utilisateur de la base de données Paul
+  postgresql_user:
+    name: "paul"
+    password: "{{ db_password }}"
+    role_attr_flags: NOSUPERUSER,CREATEDB
+  become: yes
+  become_user: postgres
+
+- name: Créer la base de données Paul
+  postgresql_db:
+    name: "paul"
+    owner: "paul"
+  become: yes
+  become_user: postgres
+
+# 4. INJECTION DU SCHÉMA
+- name: Copier le schéma SQL sur la VM Postgres
+  copy:
+    src: schema.sql
+    dest: /tmp/schema.sql
+    mode: '0644'
+
+- name: Importer le schéma dans la base de données de Paul
+  postgresql_db:
+    name: "paul"
+    state: restore
+    target: /tmp/schema.sql
+  become: yes
+  become_user: postgres

@@ -1,0 +1,274 @@
+{
+  "name": "send_mail",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        96
+      ],
+      "id": "b76c04fd-4e34-44b1-9250-b5c93410fbc9",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT chat_id, email, interests \nFROM users \nWHERE rgpd_consent = 1 \n  AND schedule_time = DATE_FORMAT(NOW(), '%H:00');",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.5,
+      "position": [
+        224,
+        96
+      ],
+      "id": "c538e515-4e20-4a89-8dc1-fd53d949c6e3",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "mySql": {
+          "id": "ixioWx3TlOClmFX5",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://www.lemonde.fr/sciences/rss_full.xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        448,
+        -96
+      ],
+      "id": "fe308d8f-8766-4598-8e9b-f497dc782037",
+      "name": "RSS Le monde"
+    },
+    {
+      "parameters": {
+        "url": "https://hnrss.org/frontpage",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        448,
+        96
+      ],
+      "id": "75d8402f-0bba-4876-a174-5bd66792e60b",
+      "name": "RSS Hacker Network"
+    },
+    {
+      "parameters": {
+        "url": "https://feeds.content.dowjones.io/public/rss/socialeconomyfeed",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        448,
+        288
+      ],
+      "id": "ed731368-c467-431f-9dc5-03cc99bf7cce",
+      "name": "RSS WSJ Economy"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        672,
+        80
+      ],
+      "id": "968df053-2c15-4dcd-adcc-3902dc702894",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Tu es l'intelligence artificielle du projet Persona. Ton rôle est de concevoir une newsletter personnalisée et attrayante.\n\nConsignes de filtrage et rédaction :\n1. Analyse la liste des 56 articles d'actualité bruts issus des flux RSS qui te sont fournis en entrée.\n2. Sélectionne uniquement les 3 articles les plus pertinents et les plus intéressants en fonction des centres d'intérêt de l'utilisateur.\n3. Rédige l'intégralité du résultat directement au format HTML valide pour un e-mail (utilise des balises comme <h3> pour les titres, <p> pour les résumés et <a href=\"...\"> pour les liens de redirection vers les sources). \n\nInformations utilisateur (Dynamiques) :\n- Centres d'intérêt de l'abonné : {{ $('Execute a SQL query').item.json.interests }}\n\nDonnées d'actualités (Dynamiques) :\n- Articles du jour : {{ $json }}",
+        "hasOutputParser": true,
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        896,
+        96
+      ],
+      "id": "e40469b2-e118-4d44-a0f2-9e959d600d48",
+      "name": "Basic LLM Chain",
+      "retryOnFail": false,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        976,
+        320
+      ],
+      "id": "07e5922f-4f28-452b-85c9-90922fef2929",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "vaZyGOXK49Zthwyu",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "newsletter-persona@epitech.eu",
+        "toEmail": "={{ $('Execute a SQL query').item.json.email }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1248,
+        96
+      ],
+      "id": "42b0d88b-2c00-4b29-867a-ddd58f1771ca",
+      "name": "Send an Email",
+      "webhookId": "1b3c2a60-b099-4482-b066-b0fc7d546076",
+      "credentials": {
+        "smtp": {
+          "id": "f3h87mkOzPuzFsOu",
+          "name": "SMTP account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query": {
+      "main": [
+        [
+          {
+            "node": "RSS Hacker Network",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "RSS Le monde",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "RSS WSJ Economy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Hacker Network": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "RSS WSJ Economy": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "RSS Le monde": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Send an Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "de7e83cd-09ca-4a57-a53b-8a6bcf85849f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "bb8f412a4b887d437a57eaa00c589e888e1af46203ee2154befec241ede7d4d4"
+  },
+  "nodeGroups": [],
+  "id": "z38rCr1xM4yzmku0",
+  "tags": []
+}

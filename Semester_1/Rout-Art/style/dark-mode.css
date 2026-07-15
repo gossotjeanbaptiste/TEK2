@@ -1,0 +1,202 @@
+/* ==========================================================================
+   DARK MODE NAVIGATION TOGGLE - Bouton de basculement thème clair/sombre dans la nav
+   ========================================================================== */
+
+.theme-toggle-nav {
+    position: relative;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.theme-toggle-nav::before {
+    content: '🌙';
+    margin-right: 0.5rem;
+}
+
+:root[data-theme="dark"] .theme-toggle-nav::before {
+    content: '☀️';
+}
+
+.theme-toggle-nav:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+    transform: translateY(-2px);
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+    .theme-toggle-nav {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .theme-toggle-nav::before {
+        margin-right: 0.3rem;
+    }
+}
+
+/* ==========================================================================
+   ADAPTATIONS GLOBALES POUR LE DARK MODE
+   ========================================================================== */
+
+/* Adaptation du body pour le dark mode */
+:root[data-theme="dark"] body {
+    background-color: var(--secondary-color-rgb);
+    color: var(--text-color);
+}
+
+/* Adaptation des images en dark mode */
+:root[data-theme="dark"] img {
+    filter: brightness(0.9) contrast(1.1);
+}
+
+:root[data-theme="dark"] .logo img {
+    filter: brightness(1.1) contrast(0.9);
+}
+
+/* Inversion des icônes en dark mode */
+:root[data-theme="dark"] .card-icon img,
+:root[data-theme="dark"] .icon-car,
+:root[data-theme="dark"] .icon-moto,
+:root[data-theme="dark"] [src*="icon-car"],
+:root[data-theme="dark"] [src*="icon-moto"],
+:root[data-theme="dark"] [alt*="Icône"] {
+    filter: brightness(0) saturate(100%) invert(1) brightness(2);
+}
+
+/* Exceptions pour les icônes qui ne doivent pas être inversées */
+:root[data-theme="dark"] .social-links img,
+:root[data-theme="dark"] [src*="facebook"],
+:root[data-theme="dark"] [src*="instagram"] {
+    filter: brightness(0.9) contrast(1.1);
+}
+
+/* Adaptation des liens */
+:root[data-theme="dark"] a {
+    color: var(--accent-color);
+}
+
+:root[data-theme="dark"] a:hover {
+    color: var(--text-color-rgb);
+}
+
+/* Adaptation des formulaires */
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] select {
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    border-color: var(--gray-border);
+}
+
+:root[data-theme="dark"] input:focus,
+:root[data-theme="dark"] textarea:focus,
+:root[data-theme="dark"] select:focus {
+    border-color: var(--accent-color);
+    box-shadow: var(--shadow-focus);
+}
+
+/* Adaptation des cartes et sections */
+:root[data-theme="dark"] .card,
+:root[data-theme="dark"] .section {
+    background-color: var(--light-gray);
+}
+
+/* Adaptation spécifique du header */
+:root[data-theme="dark"] .main-header {
+    background: linear-gradient(135deg, var(--primary-dark-color), var(--secondary-color));
+    border-bottom: 2px solid var(--gray-border);
+    box-shadow: var(--shadow-card);
+}
+
+:root[data-theme="dark"] .header-content {
+    background-color: transparent;
+}
+
+/* Navigation en dark mode */
+:root[data-theme="dark"] .nav-btn {
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    border: 1px solid var(--gray-border);
+}
+
+:root[data-theme="dark"] .nav-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-color: var(--primary-color);
+}
+
+:root[data-theme="dark"] .nav-btn.active {
+    background-color: var(--primary-contrast);
+    color: var(--white-color);
+    border-color: var(--primary-contrast);
+}
+
+/* Hamburger menu en dark mode */
+:root[data-theme="dark"] .hamburger-menu span {
+    background-color: var(--text-color);
+}
+
+/* Adaptation du footer */
+:root[data-theme="dark"] .main-footer {
+    background: linear-gradient(135deg, var(--primary-dark-color), var(--secondary-color));
+    border-top: 2px solid var(--gray-border);
+    color: var(--text-color);
+}
+
+:root[data-theme="dark"] .footer-content {
+    background-color: transparent;
+}
+
+:root[data-theme="dark"] .footer-links a {
+    color: var(--accent-color);
+    border-bottom: 1px solid transparent;
+    transition: var(--transition-all);
+}
+
+:root[data-theme="dark"] .footer-links a:hover,
+:root[data-theme="dark"] .footer-links a.active {
+    color: var(--text-color-rgb);
+    border-bottom-color: var(--accent-color);
+}
+
+/* Hero section en dark mode */
+:root[data-theme="dark"] .hero-section {
+    background-color: var(--white-60);
+}
+
+:root[data-theme="dark"] .hero-content h1 {
+    color: var(--text-color);
+    text-shadow: 2px 2px 4px var(--black-30);
+}
+
+:root[data-theme="dark"] .hero-content p {
+    color: var(--text-color-rgb);
+    text-shadow: 1px 1px 2px var(--black-30);
+}
+
+/* Overlay pour les images hero en dark mode */
+:root[data-theme="dark"] .hero-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--black-20);
+    pointer-events: none;
+}
+
+/* Adaptation des bordures */
+:root[data-theme="dark"] .border,
+:root[data-theme="dark"] hr {
+    border-color: var(--gray-border);
+}
+
+:root[data-theme="dark"] .content-section h3 {
+    color: var(--text-color-rgb);
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
