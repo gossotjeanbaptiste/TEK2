@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:lake",
+	"config": {
+		"barrier": {
+			"type": "minecraft:simple_state_provider",
+			"state": {
+				"Name": "echoing_void:void_stone"
+			}
+		},
+		"fluid": {
+			"type": "minecraft:simple_state_provider",
+			"state": {
+				"Name": "echoing_void:void_liquid"
+			}
+		}
+	}
+}

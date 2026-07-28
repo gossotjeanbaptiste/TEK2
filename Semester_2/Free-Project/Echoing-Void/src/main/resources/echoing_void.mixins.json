@@ -1,0 +1,23 @@
+{
+	"required": true,
+	"package": "name.modid.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"mixins": [
+		"LivingEntityMixin",
+		"BrewingStandIngredientsSlotMixin",
+		"EndCityPiecesMixin",
+		"GrindstoneMenuMixin",
+		"PlayerMixin",
+		"AbstractArrowMixin",
+		"InventoryMixin",
+		"ItemEntityMixin",
+		"AnvilMenuMixin",
+		"BottleItemMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

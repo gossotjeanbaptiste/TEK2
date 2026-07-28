@@ -1,0 +1,43 @@
+{
+	"feature": "echoing_void:void_island",
+	"placement": [
+		{
+			"type": "minecraft:rarity_filter",
+			"chance": 3
+		},
+		{
+			"type": "minecraft:count",
+			"count": {
+				"type": "minecraft:weighted_list",
+				"distribution": [
+					{
+						"data": 2,
+						"weight": 3
+					},
+					{
+						"data": 3,
+						"weight": 1
+					}
+				]
+			}
+		},
+		{
+			"type": "minecraft:in_square"
+		},
+		{
+			"type": "minecraft:height_range",
+			"height": {
+				"type": "minecraft:uniform",
+				"min_inclusive": {
+					"absolute": 60
+				},
+				"max_inclusive": {
+					"absolute": 68
+				}
+			}
+		},
+		{
+			"type": "minecraft:biome"
+		}
+	]
+}

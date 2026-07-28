@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"N": "minecraft:netherite_ingot",
+		"V": "echoing_void:void_stone",
+		"E": "minecraft:end_stone",
+		"S": "echoing_void:enderite_upgrade_smithing_template"
+	},
+	"pattern": [
+		"NSN",
+		"VEV",
+		"NNN"
+	],
+	"result": {
+		"count": 2,
+		"id": "echoing_void:enderite_upgrade_smithing_template"
+	}
+}

@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "echoing_void:item/watchling_egg",
+		"layer1": "echoing_void:item/watchling_eye_egg"
+	}
+}

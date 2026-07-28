@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "echoing_void",
+	"version": "${version}",
+	"name": "Echoing Void",
+	"description": "A Fabric mod that bring the Minecraft Dungeons Echoing Void ambiance to Minecraft.",
+	"authors": [
+		"JustWireless"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/echoing_void/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"name.modid.EchoingVoid"
+		],
+		"client": [
+			"name.modid.client.EchoingVoidClient"
+		],
+		"jei_mod_plugin": [
+			"name.modid.client.compat.EchoingVoidJeiPlugin"
+		]
+	},
+	"mixins": [
+		"echoing_void.mixins.json",
+		{
+			"config": "echoing_void.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.1.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}

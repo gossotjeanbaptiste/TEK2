@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"P": "minecraft:ender_pearl",
+		"E": "minecraft:end_stone",
+		"B": "minecraft:brewing_stand",
+		"V": "echoing_void:void_stone"
+	},
+	"pattern": [
+		" P ",
+		"EBV",
+		" P "
+	],
+	"result": {
+		"id": "echoing_void:end_brewing_stand"
+	}
+}

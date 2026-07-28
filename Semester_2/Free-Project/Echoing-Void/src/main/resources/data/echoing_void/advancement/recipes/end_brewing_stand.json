@@ -1,0 +1,32 @@
+{
+	"parent": "minecraft:recipes/root",
+	"criteria": {
+		"has_void_stone": {
+			"conditions": {
+				"items": [
+					{
+						"items": "echoing_void:void_stone"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
+		"has_the_recipe": {
+			"conditions": {
+				"recipe": "echoing_void:end_brewing_stand"
+			},
+			"trigger": "minecraft:recipe_unlocked"
+		}
+	},
+	"requirements": [
+		[
+			"has_the_recipe",
+			"has_void_stone"
+		]
+	],
+	"rewards": {
+		"recipes": [
+			"echoing_void:end_brewing_stand"
+		]
+	}
+}

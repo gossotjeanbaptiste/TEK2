@@ -1,0 +1,56 @@
+{
+	"music.end.broken_citadel": {
+		"sounds": [
+			{
+				"name": "echoing_void:music/broken_citadel",
+				"stream": true,
+				"volume": 0.5
+			}
+		]
+	},
+	"music.end.end_wilds": {
+		"sounds": [
+			{
+				"name": "echoing_void:music/end_wilds",
+				"stream": true,
+				"volume": 0.5
+			}
+		]
+	},
+	"music.end.ethereal_blocks": {
+		"sounds": [
+			{
+				"name": "echoing_void:music/ethereal_blocks",
+				"stream": true,
+				"volume": 0.5
+			}
+		]
+	},
+	"music.end.obsidian_gate_tower": {
+		"sounds": [
+			{
+				"name": "echoing_void:music/obsidian_gate_tower",
+				"stream": true,
+				"volume": 0.5
+			}
+		]
+	},
+	"music.end.ship": {
+		"sounds": [
+			{
+				"name": "echoing_void:music/ship",
+				"stream": true,
+				"volume": 0.5
+			}
+		]
+	},
+	"music.end.tower": {
+		"sounds": [
+			{
+				"name": "echoing_void:music/tower",
+				"stream": true,
+				"volume": 0.5
+			}
+		]
+	}
+}

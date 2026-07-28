@@ -1,0 +1,12 @@
+{
+	"schemaVersion": 1,
+	"type": "nuit:end",
+	"properties": {
+		"layer": 0
+	},
+	"conditions": {
+		"dimensions": {
+			"entries": ["minecraft:the_end"]
+		}
+	}
+}

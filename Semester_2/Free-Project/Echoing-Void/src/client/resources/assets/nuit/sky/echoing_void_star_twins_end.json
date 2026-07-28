@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"type": "nuit:square-textured",
+	"texture": "echoing_void:textures/sky/star_twins.png",
+	"blend": {
+		"type": "add"
+	},
+	"properties": {
+		"layer": 1,
+		"fade": {
+			"duration": 24000,
+			"keyFrames": {
+				"0": 1.0
+			}
+		},
+		"rotation": {
+			"speed": 0.1,
+			"axis": {
+				"0": [0.0, -0.2, 0.0]
+			},
+			"skyboxRotation": false
+		},
+		"sunSkyTint": false,
+		"visibleUnderwater": false
+	},
+	"conditions": {
+		"dimensions": {
+			"entries": ["minecraft:the_end"]
+		}
+	}
+}

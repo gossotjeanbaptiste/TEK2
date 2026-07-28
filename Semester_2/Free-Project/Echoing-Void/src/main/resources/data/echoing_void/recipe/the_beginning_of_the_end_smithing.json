@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:smithing_transform",
+	"template": "echoing_void:enderite_upgrade_smithing_template",
+	"base": "minecraft:netherite_sword",
+	"addition": "echoing_void:enderite_ingot",
+	"result": {
+		"id": "echoing_void:the_beginning_of_the_end"
+	}
+}

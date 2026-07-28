@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"O": "minecraft:obsidian",
+		"C": "minecraft:crying_obsidian",
+		"E": "minecraft:end_stone"
+	},
+	"pattern": [
+		" O ",
+		"CEC",
+		" O "
+	],
+	"result": {
+		"id": "echoing_void:void_stone"
+	}
+}

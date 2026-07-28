@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/bow",
+	"textures": {
+		"layer0": "echoing_void:item/call_of_the_void"
+	}
+}

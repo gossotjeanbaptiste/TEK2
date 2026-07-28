@@ -1,0 +1,197 @@
+{
+	"watchling.idle": {
+		"sounds": [
+			"echoing_void:watchling/idle1",
+			"echoing_void:watchling/idle2",
+			"echoing_void:watchling/idle3"
+		]
+	},
+	"watchling.hurt": {
+		"sounds": [
+			"echoing_void:watchling/hurt1",
+			"echoing_void:watchling/hurt2"
+		]
+	},
+	"watchling.death": {
+		"sounds": [
+			"echoing_void:watchling/death1",
+			"echoing_void:watchling/death2",
+			"echoing_void:watchling/death3"
+		]
+	},
+	"watchling.attack": {
+		"sounds": [
+			"echoing_void:watchling/attack1",
+			"echoing_void:watchling/attack2",
+			"echoing_void:watchling/attack3",
+			"echoing_void:watchling/attack4",
+			"echoing_void:watchling/attack5"
+		]
+	},
+	"watchling.heavy_attack": {
+		"sounds": [
+			"echoing_void:watchling/heavy_attack1",
+			"echoing_void:watchling/heavy_attack2"
+		]
+	},
+	"watchling.stun": {
+		"sounds": [
+			"echoing_void:watchling/stun1",
+			"echoing_void:watchling/stun2",
+			"echoing_void:watchling/stun3"
+		]
+	},
+	"watchling.teleport_start": {
+		"sounds": [
+			"echoing_void:watchling/teleport1"
+		]
+	},
+	"watchling.teleport_end": {
+		"sounds": [
+			"echoing_void:watchling/teleport2"
+		]
+	},
+	"void_poisoned.activate": {
+		"sounds": [
+			"echoing_void:void_poisoned/activate1",
+			"echoing_void:void_poisoned/activate2",
+			"echoing_void:void_poisoned/activate3",
+			"echoing_void:void_poisoned/activate4",
+			"echoing_void:void_poisoned/activate5"
+		]
+	},
+	"void_poisoned.deactivate": {
+		"sounds": [
+			"echoing_void:void_poisoned/deactivate1",
+			"echoing_void:void_poisoned/deactivate2",
+			"echoing_void:void_poisoned/deactivate3",
+			"echoing_void:void_poisoned/deactivate4"
+		]
+	},
+	"blastling.idle": {
+		"sounds": [
+			"echoing_void:blastling/idle1",
+			"echoing_void:blastling/idle2",
+			"echoing_void:blastling/idle3",
+			"echoing_void:blastling/idle4"
+		]
+	},
+	"blastling.hurt": {
+		"sounds": [
+			"echoing_void:blastling/hurt1",
+			"echoing_void:blastling/hurt2",
+			"echoing_void:blastling/hurt3",
+			"echoing_void:blastling/hurt4"
+		]
+	},
+	"blastling.death": {
+		"sounds": [
+			"echoing_void:blastling/death1",
+			"echoing_void:blastling/death2",
+			"echoing_void:blastling/death3"
+		]
+	},
+	"blastling.stun": {
+		"sounds": [
+			"echoing_void:blastling/stun1",
+			"echoing_void:blastling/stun2",
+			"echoing_void:blastling/stun3"
+		]
+	},
+	"blastling.ranged_attack_animation": {
+		"sounds": [
+			"echoing_void:blastling/ranged_attack_animation1",
+			"echoing_void:blastling/ranged_attack_animation2",
+			"echoing_void:blastling/ranged_attack_animation3",
+			"echoing_void:blastling/ranged_attack_animation4"
+		]
+	},
+	"blastling.ranged_attack_impact": {
+		"sounds": [
+			"echoing_void:blastling/ranged_attack_impact1",
+			"echoing_void:blastling/ranged_attack_impact2",
+			"echoing_void:blastling/ranged_attack_impact3",
+			"echoing_void:blastling/ranged_attack_impact4"
+		]
+	},
+	"blastling.range_attack_proj": {
+		"sounds": [
+			"echoing_void:blastling/range_attack_proj_1",
+			"echoing_void:blastling/range_attack_proj_2",
+			"echoing_void:blastling/range_attack_proj_3",
+			"echoing_void:blastling/range_attack_proj_4"
+		]
+	},
+	"the_beginning_of_the_end.attack": {
+		"sounds": [
+			"echoing_void:the_beginning_of_the_end/attack1",
+			"echoing_void:the_beginning_of_the_end/attack2",
+			"echoing_void:the_beginning_of_the_end/attack3"
+		]
+	},
+	"the_beginning_of_the_end.combo": {
+		"sounds": [
+			"echoing_void:the_beginning_of_the_end/combo1",
+			"echoing_void:the_beginning_of_the_end/combo2",
+			"echoing_void:the_beginning_of_the_end/combo3"
+		]
+	},
+	"the_beginning_of_the_end.equip": {
+		"sounds": [
+			"echoing_void:the_beginning_of_the_end/equip"
+		]
+	},
+	"the_beginning_of_the_end.pick_up": {
+		"sounds": [
+			"echoing_void:the_beginning_of_the_end/pick_up"
+		]
+	},
+	"the_beginning_of_the_end.drop": {
+		"sounds": [
+			"echoing_void:the_beginning_of_the_end/drop"
+		]
+	},
+	"call_of_the_void.shot": {
+		"sounds": [
+			"echoing_void:call_of_the_void/shot1",
+			"echoing_void:call_of_the_void/shot2",
+			"echoing_void:call_of_the_void/shot3"
+		]
+	},
+	"call_of_the_void.charged_shot": {
+		"sounds": [
+			"echoing_void:call_of_the_void/charged_shot1",
+			"echoing_void:call_of_the_void/charged_shot2",
+			"echoing_void:call_of_the_void/charged_shot3"
+		]
+	},
+	"call_of_the_void.impact": {
+		"sounds": [
+			"echoing_void:call_of_the_void/impact1",
+			"echoing_void:call_of_the_void/impact2",
+			"echoing_void:call_of_the_void/impact3"
+		]
+	},
+	"call_of_the_void.charge_impact": {
+		"sounds": [
+			"echoing_void:call_of_the_void/charge_impact1",
+			"echoing_void:call_of_the_void/charge_impact2",
+			"echoing_void:call_of_the_void/charge_impact3"
+		]
+	},
+	"call_of_the_void.equip": {
+		"sounds": [
+			"echoing_void:call_of_the_void/equip"
+		]
+	},
+	"call_of_the_void.pick_up": {
+		"sounds": [
+			"echoing_void:call_of_the_void/pick_up"
+		]
+	},
+	"call_of_the_void.drop": {
+		"sounds": [
+			"echoing_void:call_of_the_void/drop"
+		]
+	}
+}
