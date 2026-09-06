@@ -34,5 +34,6 @@
 	"item.echoing_void.blastling_spawn_egg": "Blastling Spawn Egg",
 	"item.echoing_void.the_beginning_of_the_end": "The Beginning and The End",
 	"item.echoing_void.call_of_the_void": "Call of the Void",
-	"container.echoing_void.end_brewing_stand": "End Brewing Stand"
+	"container.echoing_void.end_brewing_stand": "End Brewing Stand",
+	"message.echoing_void.nuit_performance_tip": "The End sky uses a custom shader effect. If your PC struggles with shaders, keep %s enabled to avoid performance drops."
 }

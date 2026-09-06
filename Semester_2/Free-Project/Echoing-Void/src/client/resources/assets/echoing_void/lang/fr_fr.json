@@ -34,5 +34,6 @@
 	"item.echoing_void.blastling_spawn_egg": "Œuf d'invocation d'Explosature",
 	"item.echoing_void.the_beginning_of_the_end": "Le Début de la Fin",
 	"item.echoing_void.call_of_the_void": "L'Appel du Vide",
-	"container.echoing_void.end_brewing_stand": "Alambic de l'End"
+	"container.echoing_void.end_brewing_stand": "Alambic de l'End",
+	"message.echoing_void.nuit_performance_tip": "Le ciel de l'End utilise un effet de shader personnalisé. Si vous avez un petit PC qui ne supporte pas bien les shaders, laissez %s activé pour éviter des baisses de performances."
 }

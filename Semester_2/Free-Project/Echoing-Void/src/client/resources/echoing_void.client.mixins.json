@@ -2,7 +2,9 @@
 	"required": true,
 	"package": "name.modid.client.mixin",
 	"compatibilityLevel": "JAVA_25",
-	"client": [],
+	"client": [
+		"LevelRendererEnderSkyMixin"
+	],
 	"injectors": {
 		"defaultRequire": 1
 	},

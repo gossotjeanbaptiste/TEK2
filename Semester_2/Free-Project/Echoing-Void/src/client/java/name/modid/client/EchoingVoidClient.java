@@ -1,13 +1,16 @@
 package name.modid.client;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.block.FluidModel;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.network.chat.Component;
 
 import name.modid.EchoingVoid;
 import name.modid.client.render.BlastlingFlameModel;
@@ -38,5 +41,15 @@ public class EchoingVoidClient implements ClientModInitializer {
 				new Material(EchoingVoid.id("block/void_liquid_flow")),
 				new Material(EchoingVoid.id("block/void_liquid_overlay")),
 				null));
+
+		ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
+			if (client.player != null) {
+				Component prefix = Component.literal("Echoing Void").withStyle(ChatFormatting.DARK_PURPLE, ChatFormatting.BOLD);
+				Component nuit = Component.literal("Nuit").withStyle(ChatFormatting.LIGHT_PURPLE);
+				Component tip = Component.translatable("message.echoing_void.nuit_performance_tip", nuit).withStyle(ChatFormatting.GRAY);
+				client.player.sendSystemMessage(
+					prefix.copy().append(Component.literal(": ").withStyle(ChatFormatting.DARK_GRAY)).append(tip));
+			}
+		});
 	}
 }

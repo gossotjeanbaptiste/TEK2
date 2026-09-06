@@ -56,7 +56,8 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
-	// Nuit (formerly FabricSkyboxes) - client-side custom sky rendering
+	// Nuit (formerly FabricSkyboxes) - client-side custom sky rendering. Required (see
+	// fabric.mod.json depends), not bundled: players install it separately from Modrinth.
 	implementation "maven.modrinth:nuit:${project.nuit_version}"
 
 	if (jeiAvailable) {
