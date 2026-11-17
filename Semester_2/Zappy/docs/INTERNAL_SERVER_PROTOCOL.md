@@ -5,12 +5,12 @@ Ce document décrit le protocole interne du serveur Zappy : format des buffers, 
 ## 1. Concepts clés
 
 ### 1.1 Types principaux
-- `server_t` : état global du serveur.
-- `client_t` : état d'une connexion socket.
-- `player_t` : état d'un joueur IA en jeu.
-- `tile_t` : ressources d'une case de la carte.
-- `egg_t` : œuf créé par la commande `Fork`.
-- `args_t` : paramètres de la simulation (`width`, `height`, `clients_nb`, `freq`, `teams`, ...).
+- `t_server` : état global du serveur.
+- `t_client` : état d'une connexion socket.
+- `t_player` : état d'un joueur IA en jeu.
+- `t_tile` : ressources d'une case de la carte.
+- `t_egg` : œuf créé par la commande `Fork`.
+- `t_args` : paramètres de la simulation (`width`, `height`, `clients_nb`, `freq`, `teams`, ...).
 
 ### 1.2 Rôles des connexions
 - IA : client qui joue dans le monde Zappy.
@@ -19,7 +19,7 @@ Ce document décrit le protocole interne du serveur Zappy : format des buffers, 
 ## 2. Buffers
 
 ### 2.1 Buffer de lecture
-Chaque `client_t` contient :
+Chaque `t_client` contient :
 - `char read_buffer[BUFFER_SIZE];`
 - `int read_pos;`
 
@@ -33,7 +33,7 @@ Le parser interne traite les lignes terminées par `\n` :
 - conserve les fragments incomplets pour la prochaine lecture
 
 ### 2.2 Buffer d'écriture
-Chaque `client_t` contient :
+Chaque `t_client` contient :
 - `char write_buffer[BUFFER_SIZE];`
 - `int write_pos;`
 
@@ -50,7 +50,7 @@ La fonction `handle_client_write()` :
 ## 3. Machine à états des clients
 
 ### 3.1 États définis
-Dans `client_t` :
+Dans `t_client` :
 - `CLIENT_STATE_HANDSHAKE`
 - `CLIENT_STATE_IA`
 - `CLIENT_STATE_GUI`
@@ -58,7 +58,7 @@ Dans `client_t` :
 Pour l'équipe IA, on peut interpréter ces états comme :
 - `PENDING` = `CLIENT_STATE_HANDSHAKE`
 - `AUTHENTICATED` = `CLIENT_STATE_IA` ou `CLIENT_STATE_GUI`
-- `IN_GAME` = client IA avec un `player_t` associé dans `server->players`
+- `IN_GAME` = client IA avec un `t_player` associé dans `server->players`
 
 ### 3.2 Transition standard
 1. connexion TCP acceptée
@@ -82,7 +82,7 @@ Pour l'équipe IA, on peut interpréter ces états comme :
 ## 4. Séquencement d'authentification
 
 ### 4.1 Arrivée d'un client
-- `accept_client()` crée une entrée `client_t`
+- `accept_client()` crée une entrée `t_client`
 - socket en mode non bloquant
 - `state = CLIENT_STATE_HANDSHAKE`
 
@@ -95,7 +95,7 @@ Pour l'équipe IA, on peut interpréter ces états comme :
 - `try_set_ia()` :
   - bascule l'état en `CLIENT_STATE_IA`
   - associe la connexion à une équipe
-  - appuie sur `spawn_player_from_egg()` pour créer `player_t`
+  - appuie sur `spawn_player_from_egg()` pour créer `t_player`
   - envoie `CLIENT-NUM 0\n`
 
 ### 4.4 Traitement GUI
@@ -106,7 +106,7 @@ Pour l'équipe IA, on peut interpréter ces états comme :
 ## 5. Gestion des commandes IA
 
 ### 5.1 File de commandes
-Chaque `player_t` a :
+Chaque `t_player` a :
 - `char commands[10][64];`
 - `int command_count;`
 - `long next_action_time_ms;`

@@ -7,179 +7,145 @@
 
 #include "gui/Menu.hpp"
 #include "gui/MapRenderer.hpp"
+#include "gui/TeamColors.hpp"
+#include "gui/Lang.hpp"
+#include <algorithm>
+#include <vector>
 
 Menu::Menu() : _active(false) {}
 
 void Menu::toggle() { _active = !_active; }
 bool Menu::isActive() const { return _active; }
 
-static Color getFixedResourceColor(int index, const Color resourceColors[])
+bool Menu::isMouseCaptured() const
 {
-    if (index == 0) return ORANGE;
-    if (resourceColors != nullptr && resourceColors[index].a > 0)
-        return resourceColors[index];
-        
-    Color fallbacks[] = {
-        ORANGE,    // Food
-        RED,       // Linemate
-        PURPLE,    // Deraumere
-        BLUE,      // Sibur
-        GREEN,     // Mendiane
-        MAGENTA,   // Phiras
-        YELLOW     // Thystame
-    };
-    return fallbacks[index];
+    if (!_active)
+        return false;
+    return CheckCollisionPointRec(GetMousePosition(), _teamsRect);
 }
 
-void Menu::draw(const World &world, const Color resourceColors[], const Camera3D &camera) const
+void Menu::draw(const World &world)
 {
     if (!_active)
         return;
-
-    drawTileInspector(world, resourceColors, camera, 20, GetScreenHeight() - 200);
-
+    // Ressources globales et case survolée : voir InfoPanel (toujours
+    // visible en haut à gauche). Le menu M ne garde que les équipes.
     int panelWidth = 320;
-    
-    drawGlobalResources(world, resourceColors, GetScreenWidth() - panelWidth - 20, 20);
-    drawTeams(world, GetScreenWidth() - panelWidth - 20, 320);
+    drawTeams(world, GetScreenWidth() - panelWidth - _rightMargin, 20);
 }
 
-void Menu::drawGlobalResources(const World &world, const Color resourceColors[], int posX, int posY) const
+void Menu::drawTeams(const World &world, int posX, int posY)
 {
     int menuWidth = 320;
-    int menuHeight = 280;
 
-    DrawRectangle(posX, posY, menuWidth, menuHeight, { 15, 15, 25, 230 });
-    DrawRectangleLines(posX, posY, menuWidth, menuHeight, RAYWHITE);
+    // Joueurs regroupés par équipe, triés par id pour un ordre stable.
+    std::unordered_map<std::string, std::vector<const Player *>> byTeam;
+    for (const auto &pair : world.players)
+        byTeam[pair.second.team].push_back(&pair.second);
+    for (auto &pair : byTeam)
+        std::sort(pair.second.begin(), pair.second.end(),
+                  [](const Player *a, const Player *b) { return a->id < b->id; });
 
-    DrawText("RESSOURCES GLOBALES", posX + 20, posY + 15, 16, GOLD);
-    DrawLine(posX + 20, posY + 40, posX + menuWidth - 20, posY + 40, GRAY);
-
-    std::unordered_map<Resource, int> totals;
-    for (int i = 0; i < RESOURCE_COUNT; i++) totals[(Resource)i] = 0;
-
-    for (const auto &row : world.tiles) { 
-        for (const auto &tile : row) {
-            for (int i = 0; i < RESOURCE_COUNT; i++) {
-                totals[(Resource)i] += tile.resources[i]; 
-            }
-        }
-    }
-
-    std::string names[] = { "Nourriture", "Linemate", "Deraumere", "Sibur", "Mendiane", "Phiras", "Thystame" };
-    int offset = 55;
-
-    for (int i = 0; i < RESOURCE_COUNT; i++) {
-        Resource r = (Resource)i;
-        std::string text = names[i] + " : " + std::to_string(totals[r]);
-        
-        Color boxColor = getFixedResourceColor(i, resourceColors);
-        
-        DrawRectangle(posX + 20, posY + offset + 4, 12, 12, boxColor);
-        DrawText(text.c_str(), posX + 42, posY + offset, 15, WHITE);
-        offset += 30;
-    }
-}
-
-void Menu::drawTeams(const World &world, int posX, int posY) const
-{
-    int menuWidth = 320;
-    int menuHeight = 240;
-
-    DrawRectangle(posX, posY, menuWidth, menuHeight, { 15, 15, 25, 230 });
-    DrawRectangleLines(posX, posY, menuWidth, menuHeight, RAYWHITE);
-
-    DrawText("ÉQUIPES & JOUEURS", posX + 20, posY + 15, 16, GOLD);
-    DrawLine(posX + 20, posY + 40, posX + menuWidth - 20, posY + 40, GRAY);
-
-    std::unordered_map<std::string, int> teamCounts;
+    // Hauteur adaptée au contenu (listes dépliées comprises).
+    int menuHeight = 67;
     for (const auto &teamName : world.teams) {
-        teamCounts[teamName] = 0;
+        menuHeight += 25;
+        if (_expandedTeams.count(teamName))
+            menuHeight += static_cast<int>(byTeam[teamName].size()) * 22 + 6;
     }
+    if (world.teams.empty())
+        menuHeight += 25;
+    int maxHeight = GetScreenHeight() - posY - 20;
+    if (menuHeight > maxHeight)
+        menuHeight = maxHeight;
 
-    for (const auto &pair : world.players) {
-        const Player &player = pair.second;
-        teamCounts[player.team]++;
-    }
+    _teamsRect = {static_cast<float>(posX), static_cast<float>(posY),
+                  static_cast<float>(menuWidth), static_cast<float>(menuHeight)};
+
+    DrawRectangle(posX, posY, menuWidth, menuHeight, { 15, 15, 25, 230 });
+    DrawRectangleLines(posX, posY, menuWidth, menuHeight, RAYWHITE);
+
+    DrawText(Lang::T("ÉQUIPES & JOUEURS", "TEAMS & PLAYERS"), posX + 20,
+             posY + 15, 16, GOLD);
+    DrawLine(posX + 20, posY + 40, posX + menuWidth - 20, posY + 40, GRAY);
+
+    Vector2 mouse   = GetMousePosition();
+    bool    clicked = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
 
     int offset = 55;
     if (world.teams.empty()) {
-        DrawText("Aucune équipe...", posX + 20, posY + offset, 15, LIGHTGRAY);
-    } else {
-        for (const auto &teamName : world.teams) {
-            std::string text = teamName + " : " + std::to_string(teamCounts[teamName]) + " joueurs";
-            DrawText(text.c_str(), posX + 20, posY + offset, 15, WHITE);
-            offset += 25;
-            if (offset > menuHeight - 30) break;
-        }
-    }
-}
-
-void Menu::drawTileInspector(const World &world, const Color resourceColors[], const Camera3D &camera, int posX, int posY) const
-{
-    Ray ray = GetMouseRay(GetMousePosition(), camera);
-    const Tile *hoveredTile = nullptr;
-
-    for (const auto &row : world.tiles) {
-        for (const auto &tile : row) {
-            float xPos = tile.x * MapRenderer::TILE_SIZE;
-            float zPos = tile.y * MapRenderer::TILE_SIZE;
-            float half = MapRenderer::TILE_SIZE / 2.0f;
-
-            Vector3 p1 = { xPos - half, 0.0f, zPos - half };
-            Vector3 p2 = { xPos + half, 0.0f, zPos - half };
-            Vector3 p3 = { xPos + half, 0.0f, zPos + half };
-            Vector3 p4 = { xPos - half, 0.0f, zPos + half };
-
-            RayCollision col = GetRayCollisionQuad(ray, p1, p2, p3, p4);
-            if (col.hit) {
-                hoveredTile = &tile;
-                break;
-            }
-        }
-        if (hoveredTile) break;
-    }
-
-    int width = 260;
-    int height = 180;
-    DrawRectangle(posX, posY, width, height, { 10, 10, 15, 240 });
-    DrawRectangleLines(posX, posY, width, height, GOLD);
-
-    DrawText("INSPECTEUR DE CASE", posX + 15, posY + 12, 14, GOLD);
-    
-    if (!hoveredTile) {
-        DrawText("Survolez une case", posX + 15, posY + 50, 15, LIGHTGRAY);
-        DrawText("avec la souris...", posX + 15, posY + 75, 15, LIGHTGRAY);
+        DrawText(Lang::T("Aucune équipe...", "No team..."), posX + 20,
+                 posY + offset, 15, LIGHTGRAY);
         return;
     }
+    for (const auto &teamName : world.teams) {
+        if (offset > menuHeight - 25)
+            break;
+        const auto &members  = byTeam[teamName];
+        bool        expanded = _expandedTeams.count(teamName) > 0;
 
-    std::string coord = "Case X: " + std::to_string(hoveredTile->x) + " Y: " + std::to_string(hoveredTile->y);
-    DrawText(coord.c_str(), posX + 15, posY + 35, 14, SKYBLUE);
-    DrawLine(posX + 15, posY + 52, posX + width - 15, posY + 52, GRAY);
-
-    std::string names[] = { "Nourriture", "Linemate", "Deraumere", "Sibur", "Mendiane", "Phiras", "Thystame" };
-    int itemOffset = 60;
-    int columnX = 0;
-
-    for (int i = 0; i < RESOURCE_COUNT; i++) {
-        int textX = posX + 15 + (columnX * 120);
-        int textY = posY + itemOffset;
-
-        std::string resText = names[i].substr(0, 4) + ". : " + std::to_string(hoveredTile->resources[i]);
-        
-        Color boxColor = getFixedResourceColor(i, resourceColors);
-
-        DrawRectangle(textX, textY + 3, 8, 8, boxColor);
-        DrawText(resText.c_str(), textX + 14, textY, 13, WHITE);
-
-        columnX++;
-        if (columnX > 1) {
-            columnX = 0;
-            itemOffset += 22;
+        // Ligne d'équipe : cliquer déplie/replie la liste de ses joueurs.
+        Rectangle row = {static_cast<float>(posX + 12),
+                         static_cast<float>(posY + offset - 2),
+                         static_cast<float>(menuWidth - 24), 22.0f};
+        bool hovered = CheckCollisionPointRec(mouse, row);
+        if (hovered)
+            DrawRectangleRec(row, {255, 255, 255, 25});
+        if (hovered && clicked) {
+            if (expanded)
+                _expandedTeams.erase(teamName);
+            else
+                _expandedTeams.insert(teamName);
+            expanded = !expanded;
         }
-    }
-    
-    if (hoveredTile->isIncanting) {
-        DrawText("INCANTATION EN COURS !", posX + 15, posY + 155, 12, RED);
+
+        int alive = 0;
+        for (const Player *p : members)
+            alive += p->alive ? 1 : 0;
+
+        Color teamColor = teamColorFromIndex(world.teamIndex(teamName));
+        DrawText(expanded ? "v" : ">", posX + 20, posY + offset, 15, LIGHTGRAY);
+        DrawRectangle(posX + 34, posY + offset + 2, 12, 12, teamColor);
+        std::string text = teamName + " : " + std::to_string(alive)
+                         + Lang::T(" joueurs", " players");
+        DrawText(text.c_str(), posX + 54, posY + offset, 15, WHITE);
+        offset += 25;
+
+        if (!expanded)
+            continue;
+
+        // Lignes des joueurs : cliquer (dé)sélectionne le joueur à suivre.
+        for (const Player *p : members) {
+            if (offset > menuHeight - 20)
+                break;
+            Rectangle prow = {static_cast<float>(posX + 30),
+                              static_cast<float>(posY + offset - 2),
+                              static_cast<float>(menuWidth - 46), 20.0f};
+            bool ph      = CheckCollisionPointRec(mouse, prow);
+            bool watched = (_watchId == p->id);
+            if (watched)
+                DrawRectangleRec(prow, {255, 203, 0, 60});
+            else if (ph)
+                DrawRectangleRec(prow, {255, 255, 255, 25});
+            if (ph && clicked) {
+                _watchId = watched ? -1 : p->id;
+                watched  = !watched;
+            }
+
+            std::string label = "#" + std::to_string(p->id)
+                              + Lang::T("  niv ", "  lvl ") + std::to_string(p->level);
+            if (!p->alive)
+                label += Lang::T("  (mort)", "  (dead)");
+            DrawText(label.c_str(), posX + 40, posY + offset, 14,
+                     p->alive ? WHITE : GRAY);
+            if (watched)
+                DrawText(Lang::T("[SUIVI]", "[WATCHING]"), posX + menuWidth - 86,
+                         posY + offset, 13, GOLD);
+            else if (ph)
+                DrawText(Lang::T("[suivre]", "[watch]"), posX + menuWidth - 86,
+                         posY + offset, 13, LIGHTGRAY);
+            offset += 22;
+        }
+        offset += 6;
     }
 }

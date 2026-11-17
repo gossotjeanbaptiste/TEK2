@@ -1,76 +1,92 @@
 # network.py
+"""Socket TCP avec lecture ligne par ligne, sans jamais bloquer (select)."""
+
+import select
 import socket
-import sys
-
-from logger import Logger
+import time
 
 
-class NetworkClient:
-    # Garde-fou : aucun serveur sain ne reste muet aussi longtemps envers
-    # un drone vivant (la plus longue action, Incantation, dure 300/f).
-    # Évite un processus fantôme si le signal de mort se perd.
-    WATCHDOG_SECONDS = 10
+class ConnectionClosed(Exception):
+    """Le serveur a fermé la connexion."""
 
-    def __init__(self, host, port, logger=None):
+
+class LineSocket:
+    def __init__(self, host, port):
         self.host = host
         self.port = port
-        self.socket = None
-        self.buffer = ""
-        self.log = logger if logger else Logger()
+        self.sock = None
+        self.buffer = b""
 
-    def connect(self):
-        """Établit la connexion TCP."""
-        try:
-            self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.socket.connect((self.host, self.port))
-            self.socket.settimeout(self.WATCHDOG_SECONDS)
-            self.log(f"[*] Connecté au serveur {self.host}:{self.port}")
-        except Exception as e:
-            self.log(f"[-] Erreur de connexion : {e}")
-            sys.exit(1)
-
-    def read_line(self):
-        """Lit la socket de manière sécurisée et découpe strictement au retour à la ligne."""
-        while "\n" not in self.buffer:
-            try:
-                data = self.socket.recv(4096).decode("utf-8")
-            except socket.timeout:
-                self.log(f"\n[-] Aucune nouvelle du serveur depuis {self.WATCHDOG_SECONDS}s : "
-                         "le drone est probablement mort, arrêt du programme.")
-                sys.exit(0)
-            except (ConnectionResetError, BrokenPipeError):
-                self.log("\n[-] Le serveur a coupé la connexion brutalement.")
-                sys.exit(0)
-
-            if not data:
-                self.log("[-] Connexion interrompue par le serveur.")
-                sys.exit(1)
-            self.buffer += data
-
-        line, self.buffer = self.buffer.split("\n", 1)
-
-        # ⚠️ SÉCURITÉ MORT : On intercepte le signal du serveur ici
-        if "dead" in line:
-            self.log(
-                "\n[-] Signal de mort reçu du serveur. Fin de la partie, vous êtes mort de faim !")
-            sys.exit(0)
-
-        return line.strip()
-
-    def send_command(self, cmd):
-        """Envoie une chaîne brute terminée par un saut de ligne."""
-        try:
-            self.socket.sendall(f"{cmd}\n".encode("utf-8"))
-        except (ConnectionResetError, BrokenPipeError):
-            self.log("\n[-] Le serveur a fermé la connexion.")
-            sys.exit(0)
+    def connect(self, timeout=5.0):
+        self.sock = socket.create_connection((self.host, self.port),
+                                             timeout=timeout)
+        self.sock.setblocking(False)
+        self.buffer = b""
 
     def close(self):
-        """Ferme proprement la connexion et purge le tampon de lecture."""
-        if self.socket:
+        if self.sock is not None:
             try:
-                self.socket.close()
+                self.sock.close()
             except OSError:
                 pass
-            self.socket = None
-        self.buffer = ""
+        self.sock = None
+        self.buffer = b""
+
+    def _fill(self, timeout):
+        """Attend au plus `timeout` s des données. False si rien reçu."""
+        ready, _, _ = select.select([self.sock], [], [], max(0.0, timeout))
+        if not ready:
+            return False
+        try:
+            data = self.sock.recv(4096)
+        except (ConnectionResetError, OSError) as exc:
+            raise ConnectionClosed() from exc
+        if not data:
+            raise ConnectionClosed()
+        self.buffer += data
+        return True
+
+    def _pop_line(self):
+        if b"\n" not in self.buffer:
+            return None
+        line, self.buffer = self.buffer.split(b"\n", 1)
+        return line.decode(errors="replace").strip()
+
+    def poll_line(self, timeout=0.0):
+        """Retourne une ligne (sans \\n) ou None si aucune dans le délai."""
+        line = self._pop_line()
+        if line is not None:
+            return line
+        if self._fill(timeout):
+            return self._pop_line()
+        return None
+
+    def read_line(self, timeout):
+        """Attend une ligne complète jusqu'à `timeout` secondes au total."""
+        deadline = time.monotonic() + timeout
+        while True:
+            remain = deadline - time.monotonic()
+            if remain <= 0:
+                return None
+            line = self.poll_line(remain)
+            if line is not None:
+                return line
+
+    def pending_raw(self):
+        """Contenu du tampon sans \\n final (handshake dégradé)."""
+        return self.buffer.decode(errors="replace")
+
+    def clear_raw(self):
+        self.buffer = b""
+
+    def send_line(self, text):
+        data = (text + "\n").encode()
+        while data:
+            _, ready, _ = select.select([], [self.sock], [], 5.0)
+            if not ready:
+                raise ConnectionClosed()
+            try:
+                sent = self.sock.send(data)
+            except (BrokenPipeError, ConnectionResetError, OSError) as exc:
+                raise ConnectionClosed() from exc
+            data = data[sent:]

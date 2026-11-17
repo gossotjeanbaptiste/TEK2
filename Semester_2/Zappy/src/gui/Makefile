@@ -5,12 +5,12 @@
 ## zappy_gui
 ##
 
-
 CXX      = clang++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++17 -pthread -I../../include
+CXXFLAGS = -O2 -Wall -Wextra -Werror -std=c++17 -pthread -I../../include -MMD -MP
 LDFLAGS  = -L/usr/local/lib -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 SRC = $(shell find . -name "*.cpp")
-OBJ    = $(SRC:.cpp=.o)
+OBJ = $(SRC:.cpp=.o)
+DEP = $(SRC:.cpp=.d)
 TARGET = ../../zappy_gui
 
 .PHONY: all zappy_gui clean fclean re
@@ -20,11 +20,10 @@ all: zappy_gui
 zappy_gui: $(OBJ)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJ) $(LDFLAGS)
 
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+-include $(DEP)
 
 clean:
-	-rm -f $(OBJ)
+	-rm -f $(OBJ) $(DEP)
 
 fclean: clean
 	-rm -f $(TARGET)

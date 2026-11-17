@@ -1,3 +1,6 @@
+## Démos : ffmpeg téléchargé par scripts/demo/get_ffmpeg.sh
+/.tools/
+
 ## Custom .gitignore
 
 .vscode/
@@ -376,3 +379,7 @@ __marimo__/
 .streamlit/secrets.toml
 
 .vscode/
+
+# Modèles 3D au format OBJ (assets) : à versionner, contrairement aux
+# fichiers objets de compilation (*.obj) ignorés plus haut.
+!assets/**/*.obj

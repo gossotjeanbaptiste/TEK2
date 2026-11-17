@@ -7,14 +7,14 @@
 
 #include "../../include/server/server_internal.h"
 
-int notify_gui_position(server_t *server, player_t *player)
+int notify_gui_position(t_server *server, t_player *player)
 {
     char line[BUFFER_SIZE];
     int len;
-    client_t *client;
 
     for (int i = 0; i < server->nb_clients; i++) {
-        client = &server->clients[i];
+        t_client *client = &server->clients[i];
+
         if (client->state != CLIENT_STATE_GUI)
             continue;
         len = snprintf(line, sizeof(line), "ppo %d %d %d %d\n",
@@ -25,31 +25,14 @@ int notify_gui_position(server_t *server, player_t *player)
     return 1;
 }
 
-int notify_gui_player_death(server_t *server, int player_id)
+int notify_gui_new_player(t_server *server, t_player *player)
 {
     char line[BUFFER_SIZE];
     int len;
-    client_t *client;
 
     for (int i = 0; i < server->nb_clients; i++) {
-        client = &server->clients[i];
-        if (client->state != CLIENT_STATE_GUI)
-            continue;
-        len = snprintf(line, sizeof(line), "pdi %d\n", player_id);
-        if (len < 0 || !enqueue_write(client, line, len))
-            return 0;
-    }
-    return 1;
-}
+        t_client *client = &server->clients[i];
 
-int notify_gui_new_player(server_t *server, player_t *player)
-{
-    char line[BUFFER_SIZE];
-    int len;
-    client_t *client;
-
-    for (int i = 0; i < server->nb_clients; i++) {
-        client = &server->clients[i];
         if (client->state != CLIENT_STATE_GUI)
             continue;
         len = snprintf(line, sizeof(line),

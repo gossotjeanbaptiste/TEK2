@@ -5,7 +5,7 @@
 ** parse_utils
 */
 
-#include "../../include/server/server_internal.h"
+#include "../../include/server/zappy_serv.h"
 
 void print_usage(char *binary)
 {
@@ -37,7 +37,7 @@ static int is_reserved_name(char *name)
     return strcmp(name, "GRAPHIC") == 0;
 }
 
-static int has_duplicate_team(args_t *args, char *name)
+static int has_duplicate_team(t_args *args, char *name)
 {
     for (int i = 0; i < args->teams_count; i++) {
         if (strcmp(args->teams[i], name) == 0)
@@ -46,7 +46,7 @@ static int has_duplicate_team(args_t *args, char *name)
     return 0;
 }
 
-int add_team(args_t *args, char *name)
+int add_team(t_args *args, char *name)
 {
     if (is_reserved_name(name)) {
         fprintf(stderr, "Error: team name 'GRAPHIC' is reserved.\n");
@@ -60,7 +60,6 @@ int add_team(args_t *args, char *name)
         fprintf(stderr, "Error: too many teams (max %d).\n", MAX_TEAMS);
         return 0;
     }
-    args->teams[args->teams_count] = name;
-    args->teams_count++;
+    args->teams[args->teams_count++] = name;
     return 1;
 }

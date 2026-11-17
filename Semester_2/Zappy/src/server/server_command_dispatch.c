@@ -9,8 +9,22 @@
 #include <stdio.h>
 #include "../../include/server/server_internal.h"
 
-static int dispatch_simple(server_t *server, client_t *client,
-    player_t *player, const char *cmd)
+int run_forward(t_server *server, t_client *client, t_player *player);
+int run_right(t_server *server, t_client *client, t_player *player);
+int run_left(t_server *server, t_client *client, t_player *player);
+int run_inventory(t_server *server, t_client *client, t_player *player);
+int run_look(t_server *server, t_client *client, t_player *player);
+int run_connect_nbr(t_server *server, t_client *client, t_player *player);
+int run_take(t_server *server, t_client *client, t_player *player, int res);
+int run_set(t_server *server, t_client *client, t_player *player, int res);
+int run_broadcast(t_server *server, t_client *client, t_player *player,
+    const char *message);
+int run_eject(t_server *server, t_client *client, t_player *player);
+int run_fork(t_server *server, t_client *client, t_player *player);
+int run_incantation(t_server *server, t_client *client, t_player *player);
+
+static int dispatch_simple(t_server *server, t_client *client,
+    t_player *player, const char *cmd)
 {
     if (strcmp(cmd, "Forward") == 0)
         return run_forward(server, client, player);
@@ -31,8 +45,8 @@ static int dispatch_simple(server_t *server, client_t *client,
     return -1;
 }
 
-static int dispatch_with_arg(server_t *server, client_t *client,
-    player_t *player, const char *cmd)
+static int dispatch_with_arg(t_server *server, t_client *client,
+    t_player *player, const char *cmd)
 {
     char verb[64];
     char arg[BUFFER_SIZE];
@@ -42,8 +56,9 @@ static int dispatch_with_arg(server_t *server, client_t *client,
 
     if (count == 1 && strcmp(verb, "Connect_nbr") == 0)
         return run_connect_nbr(server, client, player);
-    if (count >= 1 && strcmp(verb, "Broadcast") == 0 && msg_start)
+    if (count >= 1 && strcmp(verb, "Broadcast") == 0 && msg_start) {
         return run_broadcast(server, client, player, msg_start + 1);
+    }
     count = sscanf(cmd, "%63s %63s", verb, arg);
     res = (count == 2) ? resource_index(arg) : -1;
     if (count == 2 && strcmp(verb, "Take") == 0 && res >= 0)
@@ -53,10 +68,10 @@ static int dispatch_with_arg(server_t *server, client_t *client,
     return -1;
 }
 
-int execute_player_command(server_t *server, player_t *player)
+int execute_player_command(t_server *server, t_player *player)
 {
     const char *cmd = player->commands[0];
-    client_t *client = get_client_by_fd(server, player->client_fd);
+    t_client *client = get_client_by_fd(server, player->client_fd);
     int result;
 
     if (player->command_count == 0)

@@ -7,23 +7,14 @@
 
 #include "../../include/server/server_internal.h"
 
-static int finish_if_incant_done(server_t *server, player_t *player, long now)
-{
-    client_t *client;
-
-    if (player->incant_end_ms > now)
-        return 1;
-    client = get_client_by_fd(server, player->client_fd);
-    if (!client || !finish_incantation(server, client, player))
-        return -1;
-    return 1;
-}
-
-static int process_one_player(server_t *server, player_t *player, long now)
+static int process_one_player(t_server *server, t_player *player, long now)
 {
     if (player->incanting) {
-        if (finish_if_incant_done(server, player, now) == -1)
-            return -1;
+        if (player->incant_end_ms <= now) {
+            t_client *client = get_client_by_fd(server, player->client_fd);
+            if (!client || !finish_incantation(server, client, player))
+                return -1;
+        }
         return player->command_count > 0;
     }
     if (player->command_count == 0)
@@ -35,7 +26,7 @@ static int process_one_player(server_t *server, player_t *player, long now)
     return player->command_count > 0;
 }
 
-int process_pending_actions(server_t *server)
+int process_pending_actions(t_server *server)
 {
     long now = get_now_ms();
     int has_pending = 0;

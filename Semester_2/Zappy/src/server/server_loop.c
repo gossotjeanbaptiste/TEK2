@@ -7,91 +7,109 @@
 
 #include "../../include/server/server_internal.h"
 
-static void consider_deadline(long deadline, long now, int *timeout)
+static int compute_timeout(t_server *server)
 {
+    int timeout = 126000 / server->args->freq;
+    long now = get_now_ms();
     long wait;
 
-    if (deadline <= 0)
-        return;
-    wait = deadline - now;
-    if (wait < 0)
-        wait = 0;
-    if (*timeout == -1 || wait < *timeout)
-        *timeout = (int)wait;
-}
-
-static int compute_timeout(server_t *server)
-{
-    int timeout = -1;
-    long now = get_now_ms();
-    player_t *player;
-
     for (int i = 0; i < server->nb_players; i++) {
-        player = &server->players[i];
-        if (player->command_count > 0)
-            consider_deadline(player->next_action_time_ms, now, &timeout);
-        if (player->incanting)
-            consider_deadline(player->incant_end_ms, now, &timeout);
-        consider_deadline(player->next_food_decay_ms, now, &timeout);
+        t_player *player = &server->players[i];
+
+        if (player->command_count == 0)
+            continue;
+        wait = player->next_action_time_ms - now;
+        if (wait < 0)
+            wait = 0;
+        if (wait < timeout)
+            timeout = (int)wait;
     }
-    if (server->nb_players > 0)
-        consider_deadline(server->last_resource_spawn_ms
-            + 20000 / server->args->freq, now, &timeout);
     return timeout;
 }
 
-static void populate_pollfds(server_t *server)
+static void run_food_decay(t_server *server)
 {
-    memset(server->pollfds, 0,
-        sizeof(struct pollfd) * (server->nb_clients + 1));
-    server->pollfds[0].fd = server->server_fd;
-    server->pollfds[0].events = POLLIN;
-    for (int i = 0; i < server->nb_clients; i++) {
-        server->pollfds[i + 1].fd = server->clients[i].fd;
-        server->pollfds[i + 1].events = POLLIN;
-        if (server->clients[i].write_pos > 0)
-            server->pollfds[i + 1].events |= POLLOUT;
+    long now = get_now_ms();
+    long interval = 126000 / server->args->freq;
+
+    if (interval <= 0)
+        interval = 1;
+    if (server->last_food_decay_ms == 0)
+        server->last_food_decay_ms = now;
+    while (now - server->last_food_decay_ms >= interval) {
+        process_food_decay(server);
+        server->last_food_decay_ms += interval;
     }
 }
 
-static void handle_io_client(server_t *server, int i, int revents)
+static void update_poll_events(t_server *server, int i)
 {
-    if (server->clients[i].fd == -1)
-        return;
-    if (revents & POLLIN)
+    server->pollfds[i + 1].events = POLLIN;
+    if (server->clients[i].write_pos > 0)
+        server->pollfds[i + 1].events |= POLLOUT;
+}
+
+static int handle_one_client(t_server *server, int i)
+{
+    if (server->pollfds[i + 1].revents & POLLIN) {
         if (!handle_client_read(server, i)) {
             remove_client(server, i);
-            return;
+            return 0;
         }
-    if (revents & POLLOUT)
-        if (!handle_client_write(server, i))
+    }
+    if (server->pollfds[i + 1].revents & POLLOUT) {
+        if (!handle_client_write(server, i)) {
             remove_client(server, i);
+            return 0;
+        }
+    }
+    update_poll_events(server, i);
+    return 1;
 }
 
-static void check_all_poll_events(server_t *server)
+static void handle_all_clients(t_server *server)
 {
-    int current_nb = server->nb_clients;
-
-    if (server->pollfds[0].revents & POLLIN)
-        accept_client(server);
-    for (int i = 0; i < current_nb; i++)
-        handle_io_client(server, i, server->pollfds[i + 1].revents);
-    compact_clients(server);
+    for (int i = 0; i < server->nb_clients; i++) {
+        if (!handle_one_client(server, i))
+            continue;
+    }
 }
 
-void server_loop(server_t *server)
+static void flush_pending_writes(t_server *server)
+{
+    for (int i = 0; i < server->nb_clients; i++) {
+        for (int t = 0; t < 100 && server->clients[i].write_pos > 0; t++) {
+            if (!handle_client_write(server, i))
+                break;
+        }
+    }
+}
+
+static void arm_poll_events(t_server *server)
+{
+    for (int i = 0; i < server->nb_clients; i++)
+        update_poll_events(server, i);
+}
+
+void server_loop(t_server *server)
 {
     int poll_count;
 
     while (1) {
-        populate_pollfds(server);
+        arm_poll_events(server);
         poll_count = poll(server->pollfds, server->nb_clients + 1,
             compute_timeout(server));
         if (poll_count == -1)
             break;
-        check_all_poll_events(server);
-        process_food_decay(server);
-        process_pending_actions(server);
+        if (server->pollfds[0].revents & POLLIN)
+            accept_client(server);
+        handle_all_clients(server);
         respawn_world_resources(server);
+        process_pending_actions(server);
+        run_food_decay(server);
+        if (server->game_over) {
+            flush_pending_writes(server);
+            break;
+        }
     }
 }

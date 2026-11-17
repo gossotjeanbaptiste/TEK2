@@ -6,9 +6,9 @@
 */
 
 #include <unistd.h>
-#include "../../include/server/server_internal.h"
+#include "../../include/server/zappy_serv.h"
 
-void destroy_server(server_t *server)
+void destroy_server(t_server *server)
 {
     if (!server)
         return;

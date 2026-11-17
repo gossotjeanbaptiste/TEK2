@@ -5,22 +5,23 @@
 ## zappy_server
 ##
 
-CC = epiclang
+CC = clang
 CFLAGS = -Wall -Wextra -Werror -std=c11
 SRC = $(shell find . -name "*.c")
 OBJ = $(SRC:.c=.o)
-TARGET = zappy_server
+TARGET = ../../zappy_server
 
-.PHONY: all clean fclean
+.PHONY: all zappy_server clean fclean
 
 all: $(TARGET)
+
+zappy_server: $(TARGET)
 
 %.o: %.c
 		$(CC) $(CFLAGS) $(INCL) -c $< -o $@
 
 $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET)
-	mv $(TARGET) ../../
 
 clean:
 	-rm -f *.o

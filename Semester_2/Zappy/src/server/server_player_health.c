@@ -7,17 +7,7 @@
 
 #include "../../include/server/server_internal.h"
 
-static long food_decay_interval_ms(server_t *server)
-{
-    long interval = 0;
-
-    if (!server || !server->args || server->args->freq <= 0)
-        return 126000;
-    interval = (126L * 1000L) / server->args->freq;
-    return (interval < 1) ? 1 : interval;
-}
-
-static int consume_food_from_inventory(player_t *player)
+static int consume_food_from_inventory(t_player *player)
 {
     if (!player || player->inventory[RESOURCE_FOOD] <= 0)
         return 0;
@@ -26,7 +16,7 @@ static int consume_food_from_inventory(player_t *player)
     return 1;
 }
 
-int player_lose_food(server_t *server, player_t *player, int amount)
+int player_lose_food(t_server *server, t_player *player, int amount)
 {
     if (!server || !player)
         return 0;
@@ -38,48 +28,36 @@ int player_lose_food(server_t *server, player_t *player, int amount)
     return 1;
 }
 
-int is_player_dead(player_t *player)
+int is_player_dead(t_player *player)
 {
     return (player && player->food <= 0) ? 1 : 0;
 }
 
-void notify_player_dead(server_t *server, client_t *client)
+void notify_player_dead(t_server *server, t_client *client)
 {
     if (!server || !client)
         return;
-    if (!enqueue_write(client, "dead\n", 5))
-        remove_client(server, (int)(client - server->clients));
+    enqueue_write(client, "dead\n", 5);
 }
 
-int remove_dead_player(server_t *server, int player_index)
+int remove_dead_player(t_server *server, int player_index)
 {
-    player_t *player = &server->players[player_index];
-    client_t *client = get_client_by_fd(server, player->client_fd);
+    t_player *player = &server->players[player_index];
+    t_client *client = get_client_by_fd(server, player->client_fd);
 
     notify_player_dead(server, client);
-    notify_gui_player_death(server, player->id);
+    notify_gui(server, "pdi %d\n", player->id);
     for (int i = player_index; i < server->nb_players - 1; i++)
         server->players[i] = server->players[i + 1];
     server->nb_players--;
     return 1;
 }
 
-void process_food_decay(server_t *server)
+void process_food_decay(t_server *server)
 {
-    long now;
-    long interval;
-
-    if (!server)
-        return;
-    now = get_now_ms();
-    interval = food_decay_interval_ms(server);
     for (int i = 0; i < server->nb_players; i++) {
-        if (server->players[i].next_food_decay_ms <= 0)
-            server->players[i].next_food_decay_ms = now + interval;
-        while (now >= server->players[i].next_food_decay_ms) {
-            player_lose_food(server, &server->players[i], 1);
-            server->players[i].next_food_decay_ms += interval;
-        }
+        player_lose_food(server, &server->players[i], 1);
+        notify_gui_inventory(server, &server->players[i]);
         if (is_player_dead(&server->players[i])) {
             remove_dead_player(server, i);
             i--;

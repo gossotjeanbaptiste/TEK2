@@ -48,15 +48,18 @@ class ToricNavigator:
     def _vision_row_bounds(self, index):
         if index <= 0:
             return 0, 0
+
         row = 1
         while (row + 1) * (row + 1) <= index:
             row += 1
+
         first_index = row * row
         center_index = first_index + row
         return first_index, center_index
 
     def action_from_vision_index(self, index):
         _, center_index = self._vision_row_bounds(index)
+
         if index == center_index:
             return "Forward"
         if index < center_index:
@@ -66,23 +69,31 @@ class ToricNavigator:
     def best_visible_action(self, look_result, wanted_resources):
         if not isinstance(look_result, list):
             return None
+
         if isinstance(wanted_resources, str):
             wanted_resources = [wanted_resources]
+
         for resource_name in wanted_resources:
             for index, tile in enumerate(look_result):
                 if index == 0:
                     continue
+
                 if resource_name not in str(tile).split():
                     continue
+
                 return self.action_from_vision_index(index)
+
         return None
 
     def best_visible_target(self, look_result, resource_name="food"):
         if not isinstance(look_result, list):
             return None
+
         for index, tile in enumerate(look_result):
             if index == 0:
                 continue
+
             if resource_name in str(tile).split():
                 return index
+
         return None

@@ -8,9 +8,9 @@
 #include <string.h>
 #include "../../include/server/server_internal.h"
 
-int enqueue_write(client_t *client, const char *data, int len)
+int enqueue_write(t_client *client, const char *data, int len)
 {
-    int avail = BUFFER_SIZE - client->write_pos;
+    int avail = WRITE_BUFFER_SIZE - client->write_pos;
 
     if (len > avail)
         return 0;
@@ -19,9 +19,9 @@ int enqueue_write(client_t *client, const char *data, int len)
     return 1;
 }
 
-static int enqueue_tile_line(server_t *server, client_t *client, int x, int y)
+static int enqueue_tile_line(t_server *server, t_client *client, int x, int y)
 {
-    tile_t *tile = get_tile(server, x, y);
+    t_tile *tile = get_tile(server, x, y);
     char line[BUFFER_SIZE];
     int len;
 
@@ -42,25 +42,18 @@ static int enqueue_tile_line(server_t *server, client_t *client, int x, int y)
     return enqueue_write(client, line, len);
 }
 
-static int enqueue_tile_row(server_t *server, client_t *client, int y)
-{
-    for (int x = 0; x < server->args->width; x++) {
-        if (!enqueue_tile_line(server, client, x, y))
-            return 0;
-    }
-    return 1;
-}
-
-static int enqueue_tile_dump(server_t *server, client_t *client)
+static int enqueue_tile_dump(t_server *server, t_client *client)
 {
     for (int y = 0; y < server->args->height; y++) {
-        if (!enqueue_tile_row(server, client, y))
-            return 0;
+        for (int x = 0; x < server->args->width; x++) {
+            if (!enqueue_tile_line(server, client, x, y))
+                return 0;
+        }
     }
     return 1;
 }
 
-static int enqueue_team_names(server_t *server, client_t *client)
+static int enqueue_team_names(t_server *server, t_client *client)
 {
     char line[BUFFER_SIZE];
     int len;
@@ -76,7 +69,29 @@ static int enqueue_team_names(server_t *server, client_t *client)
     return enqueue_write(client, "\n", 1);
 }
 
-int enqueue_gui_dump(server_t *server, client_t *client)
+static int enqueue_entity_dump(t_server *server, t_client *client)
+{
+    char line[BUFFER_SIZE];
+    int len;
+
+    for (int i = 0; i < server->nb_players; i++) {
+        t_player *p = &server->players[i];
+
+        len = snprintf(line, sizeof(line), "pnw %d %d %d %d %d %s\n",
+            p->id, p->x, p->y, p->dir, p->level, p->team_name);
+        if (len < 0 || !enqueue_write(client, line, len))
+            return 0;
+    }
+    for (int i = 0; i < server->nb_eggs; i++) {
+        len = snprintf(line, sizeof(line), "enw %d -1 %d %d\n",
+            server->eggs[i].id, server->eggs[i].x, server->eggs[i].y);
+        if (len < 0 || !enqueue_write(client, line, len))
+            return 0;
+    }
+    return 1;
+}
+
+int enqueue_gui_dump(t_server *server, t_client *client)
 {
     char line[BUFFER_SIZE];
     int len = snprintf(line, sizeof(line), "msz %d %d\n",
@@ -86,5 +101,7 @@ int enqueue_gui_dump(server_t *server, client_t *client)
         return 0;
     if (!enqueue_team_names(server, client))
         return 0;
-    return enqueue_tile_dump(server, client);
+    if (!enqueue_tile_dump(server, client))
+        return 0;
+    return enqueue_entity_dump(server, client);
 }

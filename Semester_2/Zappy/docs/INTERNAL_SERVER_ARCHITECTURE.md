@@ -84,7 +84,7 @@ for each client:
          |
          v
 +----------------------+      accept_client()
-| client_t initialisé   |<----------------------+
+| t_client initialisé   |<----------------------+
 | state = HANDSHAKE     |                       |
 +--------+-------------+                       |
          |                                     |
@@ -113,7 +113,7 @@ for each client:
                                           v          
                                   +---------------+ 
                                   | IN_GAME       |
-                                  | player_t live |
+                                  | t_player live |
                                   +---------------+
 ```
 
@@ -220,4 +220,4 @@ Client IA                         Serveur                       Client GUI
 ## 7. Recommandations pour les équipes
 - **Équipe IA** : envoyer les commandes ligne par ligne, puis attendre `ok\n` ou `ko\n`.
 - **Équipe GUI** : se connecter avec `GRAPHIC`, parser `msz`, `tna`, `bct`, puis écouter `pnw`, `ppo`, `seg`.
-- **Équipe core** : garder la file de chaque `player_t` et le `next_action_time_ms` synchronisés avec `freq`.
+- **Équipe core** : garder la file de chaque `t_player` et le `next_action_time_ms` synchronisés avec `freq`.

@@ -1,10 +1,3 @@
-##
-## EPITECH PROJECT, 2026
-## Makefile
-## File description:
-## Compile the project
-##
-
 CC = clang
 CFLAGS = -Wall -Wextra -Werror -std=c11 -I../include
 
@@ -28,8 +21,7 @@ TEST2_SRC = ../src/server/server_command_move.c \
             ../src/server/server_command_fork.c \
             ../src/server/server_players.c \
             ../src/server/server_notify.c \
-            test_command.c \
-            test_command_lifecycle.c
+            test_command.c
 
 TEST2_TARGET = test_command
 

@@ -27,7 +27,7 @@ class Network {
         std::string popLine();
  
         bool isConnected() const;
- 
+
     private:
         void flushSendBuffer();
 

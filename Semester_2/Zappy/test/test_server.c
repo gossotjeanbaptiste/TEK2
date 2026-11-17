@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2026
-** zappy
-** File description:
-** test_server
-*/
-
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,26 +28,28 @@ static void test_resource_index(void)
 
 static void test_enqueue_write(void)
 {
-    client_t client;
-
+    t_client client;
     memset(&client, 0, sizeof(client));
+
     assert(enqueue_write(&client, "ok\n", 3) == 1);
     assert(client.write_pos == 3);
     assert(memcmp(client.write_buffer, "ok\n", 3) == 0);
+
     client.write_pos = BUFFER_SIZE - 1;
     assert(enqueue_write(&client, "ab", 2) == 0);
 }
 
 static void test_queue_player_command(void)
 {
-    player_t player;
-    char command[16];
-
+    t_player player;
     memset(&player, 0, sizeof(player));
+
     assert(queue_player_command(&player, "Forward") == 1);
     assert(player.command_count == 1);
     assert(strcmp(player.commands[0], "Forward") == 0);
+
     for (int i = 1; i < 10; i++) {
+        char command[16];
         snprintf(command, sizeof(command), "Cmd%d", i);
         assert(queue_player_command(&player, command) == 1);
     }
@@ -64,24 +59,23 @@ static void test_queue_player_command(void)
 
 static void test_get_tile(void)
 {
-    args_t args = {0};
-    server_t server = {0};
-    tile_t *tile;
-
+    t_args args = {0};
     args.width = 3;
     args.height = 2;
     args.freq = DEFAULT_FREQ;
+    t_server server = {0};
     server.args = &args;
-    server.world = calloc(args.width * args.height, sizeof(tile_t));
+    server.world = calloc(args.width * args.height, sizeof(t_tile));
     assert(server.world != NULL);
-    tile = get_tile(&server, 4, -1);
+
+    t_tile *tile = get_tile(&server, 4, -1);
     assert(tile == &server.world[1 * args.width + 1]);
     free(server.world);
 }
 
 /* Stubs for symbols in server_command_queue.c that are not part of the minimal
    test set. */
-player_t *find_player_by_fd(server_t *server, int client_fd)
+t_player *find_player_by_fd(t_server *server, int client_fd)
 {
     (void)server;
     (void)client_fd;
@@ -100,6 +94,7 @@ int main(void)
     test_enqueue_write();
     test_queue_player_command();
     test_get_tile();
+
     printf("All tests passed.\n");
     return 0;
 }

@@ -10,14 +10,14 @@
 #include <sys/socket.h>
 #include "../../include/server/server_internal.h"
 
-static int dispatch_line(server_t *server, client_t *client, int index)
+static int dispatch_line(t_server *server, t_client *client, int index)
 {
     if (client->state == CLIENT_STATE_HANDSHAKE)
         return try_set_team(server, index, client->read_buffer);
     return process_player_command(server, client, client->read_buffer);
 }
 
-static int consume_lines(server_t *server, client_t *client, int index)
+static int consume_lines(t_server *server, t_client *client, int index)
 {
     int remain;
 
@@ -35,9 +35,9 @@ static int consume_lines(server_t *server, client_t *client, int index)
     return 1;
 }
 
-int handle_client_read(server_t *server, int index)
+int handle_client_read(t_server *server, int index)
 {
-    client_t *client = &server->clients[index];
+    t_client *client = &server->clients[index];
     ssize_t received = recv(client->fd,
         client->read_buffer + client->read_pos,
         BUFFER_SIZE - client->read_pos - 1, 0);

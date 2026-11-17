@@ -5,9 +5,11 @@
 ** parse_args
 */
 
-#include "../../include/server/server_internal.h"
+#include "../../include/server/zappy_serv.h"
 
-static void init_args(args_t *args)
+extern int parse_flag(char **argv, int i, int argc, t_args *args, int *skip);
+
+static void init_args(t_args *args)
 {
     args->port = -1;
     args->width = -1;
@@ -23,38 +25,22 @@ static int is_valid_map_dim(int value)
     return value > 0 && value <= MAX_MAP_DIM;
 }
 
-static int validate_map_dim(int value, char flag)
+static int validate_args(t_args *args)
 {
-    if (value == -1) {
-        fprintf(stderr, "Error: missing -%c\n", flag);
-        return 0;
-    }
-    if (!is_valid_map_dim(value)) {
-        fprintf(stderr, "Error: -%c must be between 1 and %d.\n",
-            flag, MAX_MAP_DIM);
-        return 0;
-    }
-    return 1;
-}
-
-static int validate_args(args_t *args)
-{
-    if (args->port == -1) {
-        fprintf(stderr, "Error: missing -p\n");
-        return 0;
-    }
-    if (!validate_map_dim(args->width, 'x'))
-        return 0;
-    if (!validate_map_dim(args->height, 'y'))
-        return 0;
-    if (args->clients_nb == -1) {
-        fprintf(stderr, "Error: missing -c\n");
-        return 0;
-    }
-    if (args->teams_count == 0) {
-        fprintf(stderr, "Error: missing -n\n");
-        return 0;
-    }
+    if (args->port == -1)
+        return fprintf(stderr, "Error: missing -p\n"), 0;
+    if (args->width == -1)
+        return fprintf(stderr, "Error: missing -x\n"), 0;
+    if (!is_valid_map_dim(args->width))
+        return fprintf(stderr, "Error: width must be between 1 and %d.\n", MAX_MAP_DIM), 0;
+    if (args->height == -1)
+        return fprintf(stderr, "Error: missing -y\n"), 0;
+    if (!is_valid_map_dim(args->height))
+        return fprintf(stderr, "Error: height must be between 1 and %d.\n", MAX_MAP_DIM), 0;
+    if (args->clients_nb == -1)
+        return fprintf(stderr, "Error: missing -c\n"), 0;
+    if (args->teams_count == 0)
+        return fprintf(stderr, "Error: missing -n\n"), 0;
     return 1;
 }
 
@@ -63,52 +49,28 @@ static int is_flag(char *str)
     return str[0] == '-' && str[1] != '\0' && str[2] == '\0';
 }
 
-static int check_token(argv_cursor_t *cursor)
-{
-    char *tok = cursor->argv[cursor->index];
-
-    if (!is_flag(tok)) {
-        fprintf(stderr, "Error: unexpected token '%s'.\n", tok);
-        return 0;
-    }
-    if (cursor->index + 1 >= cursor->argc && tok[1] != 'n') {
-        fprintf(stderr, "Error: flag '%s' missing value.\n", tok);
-        return 0;
-    }
-    return 1;
-}
-
-static int handle_flag(argv_cursor_t *cursor, args_t *args, int *skip)
-{
-    argv_cursor_t value_cursor = {
-        cursor->argv, cursor->argc, cursor->index + 1};
-
-    if (!parse_flag(&value_cursor, args, skip))
-        return 0;
-    if (cursor->argv[cursor->index][1] != 'n')
-        (*skip)++;
-    return 1;
-}
-
-static int loop_args(int argc, char **argv, args_t *args)
+static int loop_args(int argc, char **argv, t_args *args)
 {
     int skip = 0;
-    argv_cursor_t cursor = {argv, argc, 0};
 
-    for (cursor.index = 1; cursor.index < argc; cursor.index++) {
-        if (skip > 0) {
-            skip--;
-            continue;
+    for (int i = 1; i < argc; i++) {
+        if (skip > 0) { skip--; continue; }
+        if (!is_flag(argv[i])) {
+            fprintf(stderr, "Error: unexpected token '%s'.\n", argv[i]);
+            return 0;
         }
-        if (!check_token(&cursor))
+        if (i + 1 >= argc) {
+            fprintf(stderr, "Error: flag '%s' missing value.\n", argv[i]);
             return 0;
-        if (!handle_flag(&cursor, args, &skip))
+        }
+        if (!parse_flag(argv, i + 1, argc, args, &skip))
             return 0;
+        i++;
     }
     return 1;
 }
 
-int parse_args(int argc, char **argv, args_t *args)
+int parse_args(int argc, char **argv, t_args *args)
 {
     init_args(args);
     if (argc < 2) {

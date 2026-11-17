@@ -85,11 +85,19 @@ void Protocol::parseBct(std::istringstream &ss)
 
 void Protocol::parseTna(std::istringstream &ss)
 {
+    // Le sujet envoie une ligne "tna N" par équipe, mais le serveur du repo
+    // les met toutes sur une seule ligne ("tna t1 t2") : on lit tous les
+    // noms. Sinon seule la première équipe était connue, les autres
+    // tombaient sur la couleur par défaut et toutes les gemmes se
+    // ressemblaient.
     std::string name;
-    if (!(ss >> name)) return;
-    for (const auto &t : _world.teams)
-        if (t == name) return;
-    _world.teams.push_back(name);
+    while (ss >> name) {
+        bool known = false;
+        for (const auto &t : _world.teams)
+            known = known || (t == name);
+        if (!known)
+            _world.teams.push_back(name);
+    }
 }
 
 void Protocol::parsePnw(std::istringstream &ss)
@@ -106,6 +114,7 @@ void Protocol::parsePnw(std::istringstream &ss)
     p.level       = l;
     p.team        = team;
     p.alive       = true;
+    _world.fxEvents.push_back({FxType::Spawn, id, x, y, l});
 }
 
 void Protocol::parsePpo(std::istringstream &ss)
@@ -129,6 +138,8 @@ void Protocol::parsePlv(std::istringstream &ss)
     int id  = parseId(idToken);
     auto it = _world.players.find(id);
     if (it == _world.players.end()) return;
+    if (level > it->second.level)
+        _world.fxEvents.push_back({FxType::LevelUp, id, it->second.x, it->second.y, level});
     it->second.level = level;
 }
 
@@ -150,7 +161,12 @@ void Protocol::parsePdi(std::istringstream &ss)
 {
     std::string idToken;
     if (!(ss >> idToken)) return;
-    _world.players.erase(parseId(idToken));
+    int id  = parseId(idToken);
+    auto it = _world.players.find(id);
+    if (it == _world.players.end()) return;
+    it->second.alive = false;
+    _world.animEvents.push_back({id, AnimAction::Death});
+    _world.fxEvents.push_back({FxType::Death, id, it->second.x, it->second.y, 0});
 }
 
 void Protocol::parseSgt(std::istringstream &ss)
@@ -182,6 +198,24 @@ void Protocol::parsePex(std::istringstream &ss)
     if (!(ss >> idToken)) return;
     int id = parseId(idToken);
     _world.lastMessage = "Player #" + std::to_string(id) + " expelled everyone from their tile!";
+
+    auto srcIt = _world.players.find(id);
+    if (srcIt == _world.players.end()) return;
+
+    static const AnimAction EJECT_MOVES[4] = {
+        AnimAction::KickLeft, AnimAction::KickRight,
+        AnimAction::PunchLeft, AnimAction::PunchRight
+    };
+    _world.animEvents.push_back({id, EJECT_MOVES[std::rand() % 4]});
+    _world.fxEvents.push_back({FxType::Eject, id, srcIt->second.x, srcIt->second.y, 0});
+
+    int srcX = srcIt->second.x;
+    int srcY = srcIt->second.y;
+    for (const auto &pair : _world.players) {
+        if (pair.first == id) continue;
+        if (pair.second.x == srcX && pair.second.y == srcY)
+            _world.animEvents.push_back({pair.first, AnimAction::HitReceiveEject});
+    }
 }
 
 void Protocol::parsePbc(std::istringstream &ss)
@@ -190,44 +224,58 @@ void Protocol::parsePbc(std::istringstream &ss)
     if (!(ss >> idToken)) return;
     std::getline(ss, message);
     if (!message.empty() && message[0] == ' ') message.erase(0, 1);
-    
+
     int id = parseId(idToken);
     _world.lastMessage = "Player #" + std::to_string(id) + " broadcasted: " + message;
+    _world.animEvents.push_back({id, AnimAction::Wave});
+    _world.fxEvents.push_back({FxType::Broadcast, id, 0, 0, 0});
 }
 
 void Protocol::parsePic(std::istringstream &ss)
 {
     int x, y, level;
     if (!(ss >> x >> y >> level)) return;
-    
+
     std::string idToken;
     std::vector<int> participantIds;
     while (ss >> idToken) {
         participantIds.push_back(parseId(idToken));
     }
-    
+
     Tile &t = _world.tileAt(x, y);
     t.isIncanting = true;
     t.incantationLevel = level;
+
+    for (int pid : participantIds)
+        _world.animEvents.push_back({pid, AnimAction::Roll});
+    _world.fxEvents.push_back({FxType::IncantStart, -1, t.x, t.y, level});
 }
 
 void Protocol::parsePie(std::istringstream &ss)
 {
     int x, y, result;
     if (!(ss >> x >> y >> result)) return;
-    
+
     Tile &t = _world.tileAt(x, y);
     t.isIncanting = false;
-    
-    _world.lastMessage = "Incantation at (" + std::to_string(x) + "," + 
+    _world.fxEvents.push_back({FxType::IncantEnd, -1, t.x, t.y, result});
+
+    _world.lastMessage = "Incantation at (" + std::to_string(x) + "," +
                          std::to_string(y) + ") ended with code " + std::to_string(result);
+
+    for (const auto &pair : _world.players) {
+        if (pair.second.x == x && pair.second.y == y)
+            _world.animEvents.push_back({pair.first, AnimAction::RollEnd});
+    }
 }
 
 void Protocol::parsePfk(std::istringstream &ss)
 {
     std::string idToken;
     if (!(ss >> idToken)) return;
-    // Emplacement pour déclencher une animation "ponte" sur le joueur si nécessaire
+    int id = parseId(idToken);
+    _world.animEvents.push_back({id, AnimAction::SwordSlash});
+    _world.fxEvents.push_back({FxType::Fork, id, 0, 0, 0});
 }
 
 void Protocol::parsePdr(std::istringstream &ss)
@@ -235,6 +283,9 @@ void Protocol::parsePdr(std::istringstream &ss)
     std::string idToken;
     int resourceId;
     if (!(ss >> idToken >> resourceId)) return;
+    int id = parseId(idToken);
+    _world.animEvents.push_back({id, AnimAction::Interact});
+    _world.fxEvents.push_back({FxType::Drop, id, 0, 0, resourceId});
 }
 
 void Protocol::parsePgt(std::istringstream &ss)
@@ -242,6 +293,9 @@ void Protocol::parsePgt(std::istringstream &ss)
     std::string idToken;
     int resourceId;
     if (!(ss >> idToken >> resourceId)) return;
+    int id = parseId(idToken);
+    _world.animEvents.push_back({id, AnimAction::Interact});
+    _world.fxEvents.push_back({FxType::Pickup, id, 0, 0, resourceId});
 }
 
 void Protocol::parseEnw(std::istringstream &ss)
@@ -259,18 +313,27 @@ void Protocol::parseEnw(std::istringstream &ss)
     egg.x = x;
     egg.y = y;
     _world.eggs[eggId] = egg;
+    _world.fxEvents.push_back({FxType::EggLaid, playerId, x, y, 0});
 }
 
 void Protocol::parseEbo(std::istringstream &ss)
 {
     std::string eggToken;
     if (!(ss >> eggToken)) return;
-    _world.eggs.erase(parseId(eggToken));
+    eraseEgg(parseId(eggToken), FxType::EggHatch);
 }
 
 void Protocol::parseEdi(std::istringstream &ss)
 {
     std::string eggToken;
     if (!(ss >> eggToken)) return;
-    _world.eggs.erase(parseId(eggToken));
+    eraseEgg(parseId(eggToken), FxType::EggDie);
+}
+
+void Protocol::eraseEgg(int eggId, FxType fx)
+{
+    auto it = _world.eggs.find(eggId);
+    if (it == _world.eggs.end()) return;
+    _world.fxEvents.push_back({fx, -1, it->second.x, it->second.y, 0});
+    _world.eggs.erase(it);
 }

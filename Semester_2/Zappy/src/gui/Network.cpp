@@ -121,7 +121,9 @@ void Network::poll()
             close(_fd);
             _fd = -1;
             _connected = false;
-            return;
+            // Pas de return : les dernières lignes reçues (ex. « seg », que
+            // le serveur envoie juste avant de fermer) doivent être lues.
+            break;
         }
         // n < 0
         if (errno == EAGAIN || errno == EWOULDBLOCK)
@@ -132,7 +134,7 @@ void Network::poll()
         close(_fd);
         _fd = -1;
         _connected = false;
-        return;
+        break;
     }
 
     size_t pos;

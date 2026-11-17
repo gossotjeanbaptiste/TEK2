@@ -5,7 +5,7 @@
 ** socket
 */
 
-#include "../../include/server/server_internal.h"
+#include "../../include/server/zappy_serv.h"
 
 static int create_socket(void)
 {

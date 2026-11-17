@@ -5,35 +5,46 @@
 ** server_command_queue
 */
 
+#include <stdlib.h>
 #include <string.h>
 #include "../../include/server/server_internal.h"
 
-static long time_unit_to_ms(server_t *server, long unit)
+/*
+** ZAPPY_SUBJECT_TIMES=1 : durées des commandes du sujet (en unités de
+** temps 1/f) au lieu d'une unité pour toutes. Utilisé par les démos lentes
+** pour que les déplacements soient visibles à l'écran.
+*/
+static int use_subject_times(void)
 {
-    long duration;
+    static int cached = -1;
+    const char *env;
 
-    if (!server || !server->args || server->args->freq <= 0)
-        return 1000;
-    duration = (unit * 1000L) / server->args->freq;
-    return (duration < 1) ? 1 : duration;
+    if (cached < 0) {
+        env = getenv("ZAPPY_SUBJECT_TIMES");
+        cached = (env && env[0] && strcmp(env, "0") != 0) ? 1 : 0;
+    }
+    return cached;
 }
 
-long command_duration_ms(server_t *server, const char *cmd)
+static int command_units(const char *cmd)
 {
-    if (!cmd)
-        return time_unit_to_ms(server, 1);
-    if (strncmp(cmd, "Connect_nbr", 11) == 0)
-        return 0;
-    if (strcmp(cmd, "Inventory") == 0)
-        return time_unit_to_ms(server, 1);
-    if (strcmp(cmd, "Fork") == 0)
-        return time_unit_to_ms(server, 42);
-    if (strcmp(cmd, "Incantation") == 0)
-        return time_unit_to_ms(server, 300);
-    return time_unit_to_ms(server, 7);
+    if (strncmp(cmd, "Fork", 4) == 0)
+        return 42;
+    if (strncmp(cmd, "Inventory", 9) == 0
+        || strncmp(cmd, "Connect_nbr", 11) == 0
+        || strncmp(cmd, "Incantation", 11) == 0)
+        return 1;
+    return 7;
 }
 
-int queue_player_command(player_t *player, const char *cmd)
+long command_duration_ms(t_server *server, const char *cmd)
+{
+    int units = use_subject_times() ? command_units(cmd) : 1;
+
+    return (long)units * 1000 / server->args->freq;
+}
+
+int queue_player_command(t_player *player, const char *cmd)
 {
     int idx = player->command_count;
 
@@ -45,22 +56,19 @@ int queue_player_command(player_t *player, const char *cmd)
     return 1;
 }
 
-int process_player_command(server_t *server, client_t *client,
+int process_player_command(t_server *server, t_client *client,
     const char *cmd)
 {
-    player_t *player;
-    long delay;
+    t_player *player = find_player_by_fd(server, client->fd);
 
-    if (!server || !client || !cmd)
-        return 0;
-    player = find_player_by_fd(server, client->fd);
     if (!player)
         return 0;
+    if (player->incanting)
+        return enqueue_write(client, "ko\n", 3);
     if (!queue_player_command(player, cmd))
         return enqueue_write(client, "ko\n", 3);
-    if (player->command_count == 1 && !player->incanting) {
-        delay = command_duration_ms(server, player->commands[0]);
-        player->next_action_time_ms = get_now_ms() + delay;
-    }
+    if (player->command_count == 1)
+        player->next_action_time_ms = get_now_ms()
+            + command_duration_ms(server, cmd);
     return 1;
 }

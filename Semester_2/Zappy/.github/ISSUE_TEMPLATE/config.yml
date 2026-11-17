@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "📋 Guide des Issues"
+    url: "https://github.com/EpitechPGE2-2025/G-YEP-400-NCY-4-1-zappy-1/blob/main/docs/ISSUES_GUIDE.md"
+    about: "Consulte le guide pour bien créer et remplir une issue."
+  - name: "🔀 Guide des Pull Requests"
+    url: "https://github.com/EpitechPGE2-2025/G-YEP-400-NCY-4-1-zappy-1/blob/main/docs/PULL_REQUEST_GUIDE.md"
+    about: "Consulte le guide pour créer une PR propre et complète."

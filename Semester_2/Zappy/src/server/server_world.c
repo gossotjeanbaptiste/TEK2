@@ -20,7 +20,7 @@ int wrap_coord(int coord, int max)
     return wrapped;
 }
 
-tile_t *get_tile(server_t *server, int x, int y)
+t_tile *get_tile(t_server *server, int x, int y)
 {
     int wrapped_x;
     int wrapped_y;
@@ -34,56 +34,55 @@ tile_t *get_tile(server_t *server, int x, int y)
     return &server->world[wrapped_y * server->args->width + wrapped_x];
 }
 
-static void clear_tile_resources(server_t *server, int x, int y)
-{
-    tile_t *tile = get_tile(server, x, y);
+static const double RESOURCE_DENSITY[RESOURCE_COUNT] = {
+    0.5, 0.3, 0.15, 0.1, 0.1, 0.08, 0.05
+};
 
-    if (!tile)
-        return;
-    for (int r = 0; r < RESOURCE_COUNT; r++)
-        tile->resources[r] = 0;
+static int resource_target(t_server *server, int resource)
+{
+    int tiles = server->args->width * server->args->height;
+    int target = (int)(tiles * RESOURCE_DENSITY[resource]);
+
+    return target < 1 ? 1 : target;
 }
 
-static void clear_world_resources(server_t *server)
+static int count_resource_on_map(t_server *server, int resource)
 {
-    for (int y = 0; y < server->args->height; y++)
-        for (int x = 0; x < server->args->width; x++)
-            clear_tile_resources(server, x, y);
+    int tiles = server->args->width * server->args->height;
+    int total = 0;
+
+    for (int i = 0; i < tiles; i++)
+        total += server->world[i].resources[resource];
+    return total;
 }
 
-static void spread_one_resource(server_t *server, int resource)
+void top_up_world_resources(t_server *server)
 {
-    int base_count = (server->args->width * server->args->height) / 10 + 1;
-    tile_t *tile;
-    int x;
-    int y;
+    int tiles = server->args->width * server->args->height;
+    int missing;
 
-    for (int i = 0; i < base_count; i++) {
-        x = rand() % server->args->width;
-        y = rand() % server->args->height;
-        tile = get_tile(server, x, y);
-        if (tile)
-            tile->resources[resource]++;
+    for (int r = 0; r < RESOURCE_COUNT; r++) {
+        missing = resource_target(server, r) - count_resource_on_map(server, r);
+        for (int i = 0; i < missing; i++) {
+            int t = rand() % tiles;
+
+            server->world[t].resources[r]++;
+            notify_gui_tile(server, t % server->args->width,
+                t / server->args->width);
+        }
     }
 }
 
-static void init_world_resources(server_t *server)
-{
-    clear_world_resources(server);
-    for (int r = 0; r < RESOURCE_COUNT; r++)
-        spread_one_resource(server, r);
-}
-
-int init_world(server_t *server)
+int init_world(t_server *server)
 {
     int tiles = server->args->width * server->args->height;
 
     if (tiles <= 0)
         return 0;
     srand((unsigned)time(NULL));
-    server->world = calloc(tiles, sizeof(tile_t));
+    server->world = calloc(tiles, sizeof(t_tile));
     if (!server->world)
         return 0;
-    init_world_resources(server);
+    top_up_world_resources(server);
     return 1;
 }

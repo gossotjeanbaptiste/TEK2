@@ -11,15 +11,16 @@
 #include <sys/socket.h>
 #include "../../include/server/server_internal.h"
 
-client_t *get_client_by_fd(server_t *server, int fd)
+t_client *get_client_by_fd(t_server *server, int fd)
 {
-    for (int i = 0; i < server->nb_clients; i++)
+    for (int i = 0; i < server->nb_clients; i++) {
         if (server->clients[i].fd == fd)
             return &server->clients[i];
+    }
     return NULL;
 }
 
-void reset_client(client_t *client)
+void reset_client(t_client *client)
 {
     client->fd = -1;
     client->state = CLIENT_STATE_HANDSHAKE;
@@ -31,9 +32,9 @@ void reset_client(client_t *client)
     client->write_buffer[0] = '\0';
 }
 
-int handle_client_write(server_t *server, int index)
+int handle_client_write(t_server *server, int index)
 {
-    client_t *client = &server->clients[index];
+    t_client *client = &server->clients[index];
     ssize_t sent = send(client->fd, client->write_buffer,
         client->write_pos, 0);
 

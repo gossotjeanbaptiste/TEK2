@@ -1,0 +1,4 @@
+# Scripts lancés sous Linux/WSL : toujours en LF, même extraits sous Windows
+*.sh text eol=lf
+*.py text eol=lf
+Makefile text eol=lf

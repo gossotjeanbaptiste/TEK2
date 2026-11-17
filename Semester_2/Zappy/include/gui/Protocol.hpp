@@ -56,4 +56,6 @@ private:
     void parseEnw(std::istringstream &ss);
     void parseEbo(std::istringstream &ss);
     void parseEdi(std::istringstream &ss);
+
+    void eraseEgg(int eggId, FxType fx);
 };

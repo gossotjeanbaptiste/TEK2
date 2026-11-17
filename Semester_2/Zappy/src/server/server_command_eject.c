@@ -7,8 +7,8 @@
 
 #include "../../include/server/server_internal.h"
 
-static void eject_player_in_direction(server_t *server, player_t *ejector,
-    player_t *target)
+static void eject_player_in_direction(t_server *server, t_player *ejector,
+    t_player *target)
 {
     if (ejector->dir == DIR_NORTH)
         target->y = wrap_coord(target->y - 1, server->args->height);
@@ -21,36 +21,15 @@ static void eject_player_in_direction(server_t *server, player_t *ejector,
     notify_gui_position(server, target);
 }
 
-static void remove_egg_at(server_t *server, int index)
+int run_eject(t_server *server, t_client *client, t_player *player)
 {
-    for (int j = index; j + 1 < server->nb_eggs; j++)
-        server->eggs[j] = server->eggs[j + 1];
-    server->nb_eggs--;
-}
-
-static void destroy_eggs_on_tile(server_t *server, int x, int y)
-{
-    for (int i = 0; i < server->nb_eggs; i++) {
-        if (server->eggs[i].x != x || server->eggs[i].y != y)
-            continue;
-        remove_egg_at(server, i);
-        i--;
-    }
-}
-
-int run_eject(server_t *server, client_t *client, player_t *player)
-{
-    player_t *other;
-
-    if (!server || !player)
-        return 0;
+    notify_gui(server, "pex %d\n", player->id);
     for (int i = 0; i < server->nb_players; i++) {
-        other = &server->players[i];
+        t_player *other = &server->players[i];
         if (other->client_fd != player->client_fd &&
             other->x == player->x && other->y == player->y) {
             eject_player_in_direction(server, player, other);
         }
     }
-    destroy_eggs_on_tile(server, player->x, player->y);
     return finish_ok_command(server, client, player);
 }
