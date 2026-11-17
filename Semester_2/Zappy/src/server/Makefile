@@ -6,7 +6,7 @@
 ##
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -std=c11
+CFLAGS = -O3 -Wall -Wextra -Werror -std=c11
 SRC = $(shell find . -name "*.c")
 OBJ = $(SRC:.c=.o)
 TARGET = ../../zappy_server

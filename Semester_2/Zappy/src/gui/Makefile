@@ -6,7 +6,7 @@
 ##
 
 CXX      = clang++
-CXXFLAGS = -O2 -Wall -Wextra -Werror -std=c++17 -pthread -I../../include -MMD -MP
+CXXFLAGS = -O3 -Wall -Wextra -Werror -std=c++17 -pthread -I../../include -MMD -MP
 LDFLAGS  = -L/usr/local/lib -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 SRC = $(shell find . -name "*.cpp")
 OBJ = $(SRC:.cpp=.o)
